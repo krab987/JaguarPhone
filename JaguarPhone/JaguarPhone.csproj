@@ -7,4 +7,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpressMvvm" Version="22.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JaguarCustomControls\JaguarCustomControls.csproj" />
+    <ProjectReference Include="..\JaguarLibrary\JaguarLibraryControls.csproj" />
+  </ItemGroup>
+
 </Project>

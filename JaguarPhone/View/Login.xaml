@@ -1,0 +1,27 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JaguarPhone.View"
+        xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
+        xmlns:JaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibraryControls" x:Class="JaguarPhone.View.Login"
+        mc:Ignorable="d"
+        Title="Login" Height="800         " Width="600">
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="214*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="120*"/>
+            <RowDefinition Height="95*"/>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="375*"/>
+        </Grid.RowDefinitions>
+        <JaguarLibraryControls:TextBoxWater x:Name="tb_Login" HorizontalAlignment="Center" Grid.Row="1" Width="340" VerticalAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="26" Height="45" Cursor="Hand" WaterMark="Введіть Логін" />
+        <JaguarLibraryControls:TextBoxWater x:Name="tb_Password" HorizontalAlignment="Center" Grid.Row="2" Width="340" VerticalAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="26" Height="45" Cursor="Hand" WaterMark="Введіть Пароль" />
+
+    </Grid>
+</Window>
