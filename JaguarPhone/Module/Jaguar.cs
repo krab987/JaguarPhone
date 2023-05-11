@@ -53,4 +53,5 @@ namespace JaguarPhone.Module
         }
         public static Admin Admin { get => _admin; }
     }
+
 }
