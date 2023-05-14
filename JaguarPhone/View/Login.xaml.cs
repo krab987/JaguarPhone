@@ -23,5 +23,6 @@ namespace JaguarPhone.View
         {
             InitializeComponent();
         }
+
     }
 }

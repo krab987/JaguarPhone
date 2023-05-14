@@ -7,13 +7,13 @@ namespace TestJaguarPhone
     public class TestAdmin
     {
         Jaguar jaguar = new Jaguar();
-        User user = new User("test", "Test", 96954235, TelModel.Galaxy_Note_20, "Plt");
+        User user = new User("test", "Test", "0995658965", TelModel.Galaxy_Note_20);
 
         [TestMethod]
         public void AdminAddTariffFalse()
         {
             // act
-            bool actual = Jaguar.Admin.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false,
+            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false,
                 Jaguar.AllSuperPower[0]));
             // assert
             Assert.IsFalse(actual);
@@ -23,7 +23,7 @@ namespace TestJaguarPhone
         public void AdminAddTariffTrue()
         {
             // act
-            bool actual = Jaguar.Admin.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false,
+            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false,
                 Jaguar.AllSuperPower[0]));
             // assert
             Assert.IsTrue(actual);
@@ -36,7 +36,7 @@ namespace TestJaguarPhone
             user.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false,
                 Jaguar.AllSuperPower[0]));
             // act
-            bool actual = Jaguar.Admin.AddCustomerTariff("Çםאימלעוסü Jaguar!");
+            bool actual = Jaguar.SuperAdmin.AddCustomerTariff("Çםאימלעוסü Jaguar!");
             // assert
             Assert.IsFalse(actual);
         }
@@ -48,7 +48,7 @@ namespace TestJaguarPhone
             user.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false,
                 Jaguar.AllSuperPower[0]));
             // act
-            bool actual = Jaguar.Admin.AddCustomerTariff("Can");
+            bool actual = Jaguar.SuperAdmin.AddCustomerTariff("Can");
             // assert
             Assert.IsFalse(actual);
         }
@@ -57,7 +57,7 @@ namespace TestJaguarPhone
         public void RemoveTariffFalse()
         {
             // act
-            bool actual = Jaguar.Admin.RemoveTariff("NNM");
+            bool actual = Jaguar.SuperAdmin.RemoveTariff("NNM");
             // assert
             Assert.IsFalse(actual);
         }
@@ -66,7 +66,7 @@ namespace TestJaguarPhone
         public void RemoveTariffTrue()
         {
             // act
-            bool actual = Jaguar.Admin.RemoveTariff("Çםאימלעוסü Jaguar!");
+            bool actual = Jaguar.SuperAdmin.RemoveTariff("Çםאימלעוסü Jaguar!");
             // assert
             Assert.IsTrue(actual);
         }
@@ -75,7 +75,7 @@ namespace TestJaguarPhone
         public void CorrectTariffFalse()
         {
             // act
-            bool actual = Jaguar.Admin.CorrectTariff("nn", "Òאנטפ Íמגטי", 500, 30, true, 100, 50, true);
+            bool actual = Jaguar.SuperAdmin.CorrectTariff("nn", "Òאנטפ Íמגטי", 500, 30, true, 100, 50, true);
             // assert
             Assert.IsFalse(actual);
         }
@@ -84,7 +84,7 @@ namespace TestJaguarPhone
         public void CorrectTariffTrue()
         {
             // act
-            bool actual = Jaguar.Admin.CorrectTariff("Çםאימלעוסü Jaguar!", "Òאנטפ Íמגטי", 500, 30, true, 100, 50, true);
+            bool actual = Jaguar.SuperAdmin.CorrectTariff("Çםאימלעוסü Jaguar!", "Òאנטפ Íמגטי", 500, 30, true, 100, 50, true);
             // assert
             Assert.IsTrue(actual);
         }
@@ -95,7 +95,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.AddService(new Service("fff", 20, " dd"));
+            bool actual = Jaguar.SuperAdmin.AddService(new Service("fff", 20, " dd"));
             // assert
             Assert.IsFalse(actual);
         }
@@ -106,7 +106,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.AddService(new Service("ddd", 20, " dd"));
+            bool actual = Jaguar.SuperAdmin.AddService(new Service("ddd", 20, " dd"));
             // assert
             Assert.IsTrue(actual);
         }
@@ -117,7 +117,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.RemoveService("NNM");
+            bool actual = Jaguar.SuperAdmin.RemoveService("NNM");
             // assert
             Assert.IsFalse(actual);
         }
@@ -128,7 +128,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.RemoveService("fff");
+            bool actual = Jaguar.SuperAdmin.RemoveService("fff");
             // assert
             Assert.IsTrue(actual);
         }
@@ -139,7 +139,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.CorrectService("gff", "ff", 10, " ");
+            bool actual = Jaguar.SuperAdmin.CorrectService("gff", "ff", 10, " ");
             // assert
             Assert.IsFalse(actual);
         }
@@ -150,7 +150,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllServices.Add(new Service("fff", 10, " "));
             // act
-            bool actual = Jaguar.Admin.CorrectService("fff", "ff", 10, " ");
+            bool actual = Jaguar.SuperAdmin.CorrectService("fff", "ff", 10, " ");
             // assert
             Assert.IsTrue(actual);
         }
@@ -161,7 +161,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.AddSuperPower(new SuperPower("fff", 10, 200, false));
+            bool actual = Jaguar.SuperAdmin.AddSuperPower(new SuperPower("fff", 10, 200, false));
             // assert
             Assert.IsFalse(actual);
         }
@@ -172,7 +172,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.AddSuperPower(new SuperPower("ddd", 10, 200, false));
+            bool actual = Jaguar.SuperAdmin.AddSuperPower(new SuperPower("ddd", 10, 200, false));
             // assert
             Assert.IsTrue(actual);
         }
@@ -183,7 +183,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.RemoveSuperPower("NNM");
+            bool actual = Jaguar.SuperAdmin.RemoveSuperPower("NNM");
             // assert
             Assert.IsFalse(actual);
         }
@@ -194,7 +194,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.RemoveSuperPower("fff");
+            bool actual = Jaguar.SuperAdmin.RemoveSuperPower("fff");
             // assert
             Assert.IsTrue(actual);
         }
@@ -205,7 +205,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.CorrectSuperPower("f", "ddd", 10, 200, false);
+            bool actual = Jaguar.SuperAdmin.CorrectSuperPower("f", "ddd", 10, 200, false);
             // assert
             Assert.IsFalse(actual);
         }
@@ -216,7 +216,7 @@ namespace TestJaguarPhone
             // arrange
             Jaguar.AllSuperPower.Add(new SuperPower("fff", 10, 200, false));
             // act
-            bool actual = Jaguar.Admin.CorrectSuperPower("fff", "ddd", 10, 200, false);
+            bool actual = Jaguar.SuperAdmin.CorrectSuperPower("fff", "ddd", 10, 200, false);
             // assert
             Assert.IsTrue(actual);
         }

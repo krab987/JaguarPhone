@@ -1,0 +1,26 @@
+{
+  "Name": "Vitalii",
+  "LastName": "Krabovich",
+  "Balance": 0,
+  "Telephone": 960345222,
+  "DateConnecing": "2023-05-15",
+  "TelModel": 4,
+  "Tariff": {
+    "Name": "\u0417\u043D\u0430\u0439\u043E\u043C\u0442\u0435\u0441\u044C Jaguar!",
+    "Price": 0,
+    "GbInternet": 0.1,
+    "CallsJaguar": false,
+    "CallsOther": 20,
+    "Sms": 0,
+    "Tv": false,
+    "TSuperPower": {
+      "Name": "\u041D\u0435\u043C\u0430\u0454",
+      "GbInternet": 0,
+      "CallsOther": 0,
+      "Tv": false
+    },
+    "PrestigeTariff": 0
+  },
+  "ListServices": [],
+  "Activities": []
+}

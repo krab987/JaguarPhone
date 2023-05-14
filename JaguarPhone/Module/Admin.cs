@@ -1,24 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using JaguarPhone.Module.Enums;
 using JaguarPhone.Module.Interfaces;
 
 namespace JaguarPhone.Module
 {
-    public class Admin: IUser
+    public class Admin: AllUSer, IUser
     {
-        private string name;
-
-        public Admin(string name)
-        {
-            this.name = name;
-        }
-
-        public string Name
-        {
-            get => name;
-            set => name = value ?? throw new ArgumentNullException(nameof(value));
-        }
-
         public bool AddTariff(Tariff tariff)
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Equals(tariff)))
@@ -127,10 +118,13 @@ namespace JaguarPhone.Module
             return false;
         }
 
-
-        public override string ToString()
+        public Admin(string name, string lastName, string telephone, TelModel telModel) : base(name, lastName, telephone, telModel)
         {
-            return $"Name: {name}";
         }
+        public Admin(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, List<Service> listServices, List<string> activities) : base(name, lastName, balance, telephone, dateConnecing, telModel, esimSupport, tariff, listServices, activities)
+        {
+        }
+        public Admin(){ }
+
     }
 }

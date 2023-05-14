@@ -8,7 +8,7 @@ namespace JaguarPhone.Module.Enums
 {
     public enum TelModel
     {
-        Other,
+        Інша,
         iPhone_X,
         iPhone_11,
         Google_Pixel,
