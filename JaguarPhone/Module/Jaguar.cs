@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using JaguarPhone.Module.Enums;
 using JaguarPhone.Module.Interfaces;
-using Newtonsoft.Json;
+using static System.String;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace JaguarPhone.Module
@@ -31,12 +32,13 @@ namespace JaguarPhone.Module
         {
             _allSuperPower.Add(new SuperPower("Немає", 0, 0, false));
             _allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false, _allSuperPower[0]));
-            _superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", TelModel.Motorola_Razr);
+            _superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", "", TelModel.Motorola_Razr);
             _allUsers.Add(_superAdmin);
         }
 
         public static void SaveUser()
         {
+            //File.WriteAllText(_userFile, Empty);
             var users = _allUsers.Where(el => el is User).Cast<User>().ToList();
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
             jsonOptions.WriteIndented = true;
@@ -83,25 +85,22 @@ namespace JaguarPhone.Module
             if (File.Exists(_adminFile))
             {
                 var adminJson = File.ReadAllText(_adminFile);
-                var jsonOptions = new JsonSerializerOptions();
-                var admins = JsonSerializer.Deserialize<List<Admin>>(adminJson, jsonOptions);
+                var admins = JsonSerializer.Deserialize<List<Admin>>(adminJson)!;
 
-                foreach (var admin in admins)
-                {
-                    Console.WriteLine("Adding admin " + admin.Telephone);
-                    if (!_allUsers.Contains(admin))
-                        _allUsers.Add(admin);
-                }
+                if (admins.Count !=0)
+                    foreach (var admin in admins)
+                    {
+                        if (!_allUsers.Contains(admin))
+                            _allUsers.Add(admin);
+                    }
             }
             if (File.Exists(_userFile))
             {
                 var userJson = File.ReadAllText(_userFile);
-                var jsonOptions = new JsonSerializerOptions();
-                var users = JsonSerializer.Deserialize<List<User>>(userJson, jsonOptions);
+                var users = JsonSerializer.Deserialize<List<User>>(userJson);
 
                 foreach (var user in users)
                 {
-                    Console.WriteLine("Adding user " + user.Telephone);
                     if (!_allUsers.Contains(user))
                         _allUsers.Add(user);
                 }
@@ -177,6 +176,8 @@ namespace JaguarPhone.Module
             set => _allUsers = value ?? throw new ArgumentNullException(nameof(value));
         }
         public static SuperAdmin SuperAdmin { get => _superAdmin; }
-    }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public static int CurUserIndex { get; set; } = -1;
+    }
 }

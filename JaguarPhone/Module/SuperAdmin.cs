@@ -7,7 +7,7 @@ using JaguarPhone.Module.Interfaces;
 
 namespace JaguarPhone.Module
 {
-    public class SuperAdmin: Admin, IUser
+    public class SuperAdmin: Admin
     {
 
         public void GrantAdmin(int telephone)
@@ -23,8 +23,14 @@ namespace JaguarPhone.Module
             }
         }
 
-        public SuperAdmin(string name, string lastName, string telephone, TelModel telModel) : base(name, lastName, telephone, telModel) { }
-        public SuperAdmin(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, List<Service> listServices, List<string> activities) : base(name, lastName, balance, telephone, dateConnecing, telModel, esimSupport, tariff, listServices, activities) { }
-        public SuperAdmin(){ }
+        public SuperAdmin(string name, string lastName, string telephone, string password, TelModel telModel) : base(name, lastName, telephone, password, telModel)
+        {
+        }
+        public SuperAdmin(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, List<Service> listServices, List<string> activities) : base(name, lastName, balance, telephone, dateConnecing, telModel, esimSupport, tariff, listServices, activities)
+        {
+        }
+        public SuperAdmin()
+        {
+        }
     }
 }

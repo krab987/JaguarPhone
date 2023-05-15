@@ -23,7 +23,6 @@ namespace JaguarPhone.Module
         {
             return $"{nameof(name)}: {name}, {nameof(price)}: {price}, {nameof(about)}: {about}";
         }
-
         protected bool Equals(Service other)
         {
             return name == other.name;

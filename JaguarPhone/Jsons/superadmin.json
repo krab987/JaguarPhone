@@ -3,6 +3,7 @@
   "LastName": "Krabovich",
   "Balance": 0,
   "Telephone": 960345222,
+  "Password": "12345vv",
   "DateConnecing": "2023-05-15",
   "TelModel": 4,
   "Tariff": {

@@ -1,8 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using DevExpress.Mvvm;
 using JaguarPhone.Module;
 using JaguarPhone.View;
@@ -22,35 +18,8 @@ namespace JaguarPhone.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    Regist regist = new Regist();
-                    regist.ShowDialog();
-                });
-            }
-        }
-
-        public ICommand Login
-        {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-
-                    SqlConnection myConnection = new SqlConnection();
-
-
-                    SqlConnectionStringBuilder myBuilder = new SqlConnectionStringBuilder();
-
-                    myBuilder.UserID = "sa";
-
-                    myBuilder.Password = "admin@123";
-
-                    myBuilder.InitialCatalog = "test";
-
-                    myBuilder.DataSource = "RAVI";
-
-                    myBuilder.ConnectTimeout = 30;
-
-                    myConnection.ConnectionString = myBuilder.ConnectionString;
+                    Regist registForm = new Regist();
+                    registForm.ShowDialog();
                 });
             }
         }

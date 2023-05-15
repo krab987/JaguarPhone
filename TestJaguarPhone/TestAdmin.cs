@@ -7,7 +7,7 @@ namespace TestJaguarPhone
     public class TestAdmin
     {
         Jaguar jaguar = new Jaguar();
-        User user = new User("test", "Test", "0995658965", TelModel.Galaxy_Note_20);
+        User user = new User("test", "Test", "0995658965","123FFf", TelModel.Galaxy_Note_20);
 
         [TestMethod]
         public void AdminAddTariffFalse()

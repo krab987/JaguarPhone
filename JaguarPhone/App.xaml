@@ -1,9 +1,51 @@
 ﻿<Application x:Class="JaguarPhone.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:JaguarPhone"
-             StartupUri="View/Login.xaml">
+             xmlns:jaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibrary"
+             StartupUri="/View/JaguarPhone.xaml">
     <Application.Resources>
-         
+        <Style x:Key="{x:Type PasswordBox}"
+               TargetType="{x:Type PasswordBox}">
+            <Setter Property="jaguarLibraryControls:PasswordBoxWater.IsMonitoring"
+                    Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                SnapsToDevicePixels="true">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <TextBlock Text= "Введіть Пароль"
+                                           Margin="4, 2, 0, 0"
+                                           Foreground="Gray" 
+                                           Visibility="Collapsed"
+                                           Name="txtPrompt" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="jaguarLibraryControls:PasswordBoxWater.PasswordLength" Value="0">
+                                <Setter Property="Visibility" TargetName="txtPrompt" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
+
+    
+    
+    

@@ -1,70 +1,60 @@
-﻿//using System;
-//using System.Windows.Controls;
-//using static System.Net.Mime.MediaTypeNames;
-//using System.Windows.Media;
-//using System.Windows;
-//using static System.String;
+﻿using System;
+using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Media;
+using System.Windows;
+using static System.String;
 
-//namespace JaguarLibraryControls
-//{
-//    public class PasswordBoxWater : PasswordBox
-//    {
-//        private string waterMark;
-//        private bool waterMarkEnabled = true;
-//        private Brush tempForeground;
+namespace JaguarLibraryControls
+{
+    public class PasswordBoxWater: DependencyObject
+    {
+        public static bool GetIsMonitoring(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsMonitoringProperty);
+        }
+        public static void SetIsMonitoring(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsMonitoringProperty, value);
+        }
+        public static readonly DependencyProperty IsMonitoringProperty =
+            DependencyProperty.RegisterAttached("IsMonitoring", typeof(bool), typeof(PasswordBoxWater), new UIPropertyMetadata(false, OnIsMonitoringChanged));
 
-//        protected override void OnInitialized(EventArgs e)
-//        {
-//            if (WaterMarkEnabled)
-//                ShowWaterMark();
-//            base.OnInitialized(e);
-//        }
+        public static int GetPasswordLength(DependencyObject obj)
+        {
+            return (int)obj.GetValue(PasswordLengthProperty);
+        }
+        public static void SetPasswordLength(DependencyObject obj, int value)
+        {
+            obj.SetValue(PasswordLengthProperty, value);
+        }
+        public static readonly DependencyProperty PasswordLengthProperty =
+            DependencyProperty.RegisterAttached("PasswordLength", typeof(int), typeof(PasswordBoxWater), new UIPropertyMetadata(0));
 
-//        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-//        {
-//            if (Equals(e.Property.Name, "IsFocused"))
-//            {
-//                if (IsFocused == false && WaterMarkEnabled)
-//                    ShowWaterMark();
-//                else
-//                    RemoveWaterMark();
-//            }
-
-//            base.OnPropertyChanged(e);
-//        }
-
-//        private void RemoveWaterMark()
-//        {
-//            if (Text == WaterMark)
-//            {
-//                Text = "";
-//                Foreground = tempForeground;
-//            }
-//        }
-//        private void ShowWaterMark()
-//        {
-//            if (IsNullOrWhiteSpace(Text))
-//            {
-//                Text = WaterMark;
-//                tempForeground = this.Foreground.Clone();
-//                Foreground = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
-//            }
-//        }
-
-//        public string WaterMark
-//        {
-//            get => waterMark;
-//            set
-//            {
-//                waterMark = value ?? throw new ArgumentNullException(nameof(value));
-//                if (WaterMarkEnabled)
-//                    ShowWaterMark();
-//            }
-//        }
-//        public bool WaterMarkEnabled
-//        {
-//            get => waterMarkEnabled;
-//            set => waterMarkEnabled = value;
-//        }
-//    }
-//}
+        private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var pb = d as PasswordBox;
+            if (pb == null)
+            {
+                return;
+            }
+            if ((bool)e.NewValue)
+            {
+                pb.PasswordChanged += PasswordChanged;
+            }
+            else
+            {
+                pb.PasswordChanged -= PasswordChanged;
+            }
+        }
+        static void PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var pb = sender as PasswordBox;
+            if (pb == null)
+            {
+                return;
+            }
+            SetPasswordLength(pb, pb.Password.Length);
+        }
+    }
+}

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JaguarPhone.Module
@@ -13,6 +14,7 @@ namespace JaguarPhone.Module
         private string lastName;
         private int balance;
         private int telephone;
+        private string password;
         private DateOnly dateConnecing;
         private TelModel telModel;
         private bool esimSupport;
@@ -20,15 +22,15 @@ namespace JaguarPhone.Module
         private List<Service> listServices;
         private List<string> activities;
 
-        public AllUSer(string name, string lastName, string telephone, TelModel telModel)
+        public AllUSer(string name, string lastName, string telephone, string password, TelModel telModel)
         {
             this.name = name;
             this.lastName = lastName;
 
             if (telephone.Length != 10)
                 throw new Exception("Номер телефону має складатися з 10 чисел та починатися з 0");
-            this.telephone = Convert.ToInt32(telephone);
-
+            Telephone = Convert.ToInt32(telephone);
+            Password = password;
             this.telModel = telModel;
             balance = 0;
             dateConnecing = DateOnly.FromDateTime(DateTime.Now);
@@ -94,7 +96,6 @@ namespace JaguarPhone.Module
         {
             return $"Name: {name}, LastName: {lastName}, Balance: {balance}, Telephone: {telephone}, DateConnecing: {dateConnecing}, TelModel: {telModel}, EsimSupport: {esimSupport}, Tariff: {_tariff}, ListServices: {listServices}";
         }
-
         public string Name
         {
             get => name;
@@ -110,11 +111,22 @@ namespace JaguarPhone.Module
             get => balance;
             set => balance = value;
         }
-
         public int Telephone
         {
             get => telephone;
             set => telephone = value;
+        }
+        public string Password
+        {
+            get => password;
+            set
+            {
+                if (!Regex.IsMatch(value, @"^(?=.*[a-zA-Z])(?=.*\d)") ||  value.Length < 6  || value.Length > 256){
+                    throw new ArgumentException(
+                        "Пароль повинен містити принаймні одну літеру і одну цифру, і бути від 6 до 256 символів.");
+                }
+                password = value;
+            }
         }
 
         public DateOnly DateConnecing
@@ -122,29 +134,41 @@ namespace JaguarPhone.Module
             get => dateConnecing;
             set => dateConnecing = value;
         }
-
         public TelModel TelModel
         {
             get => telModel;
             set => telModel = value;
         }
-
         public Tariff Tariff
         {
             get => _tariff;
             set => _tariff = value ?? throw new ArgumentNullException(nameof(value));
         }
-
         public List<Service> ListServices
         {
             get => listServices;
             set => listServices = value ?? throw new ArgumentNullException(nameof(value));
         }
-
         public List<string> Activities
         {
             get => activities;
             set => activities = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        protected bool Equals(AllUSer other)
+        {
+            return telephone == other.telephone;
+        }
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((AllUSer)obj);
+        }
+        public override int GetHashCode()
+        {
+            return telephone;
         }
     }
 }

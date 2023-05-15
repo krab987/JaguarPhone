@@ -13,5 +13,6 @@ namespace JaguarPhone
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

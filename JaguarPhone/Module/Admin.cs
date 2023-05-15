@@ -118,7 +118,26 @@ namespace JaguarPhone.Module
             return false;
         }
 
-        public Admin(string name, string lastName, string telephone, TelModel telModel) : base(name, lastName, telephone, telModel)
+        public bool AddUser(User user)
+        {
+            foreach (var el in Jaguar.AllUsers.Where(el => el.Equals(user)))
+            {
+                return false;
+            }
+            Jaguar.AllUsers.Add(user);
+            return true;
+        }
+        public bool RemoveUser(string name)
+        {
+            foreach (var el in Jaguar.AllUsers.Where(el => el.Name == name))
+            {
+                Jaguar.AllUsers.Remove(el);
+                return true;
+            }
+            return false;
+        }
+
+        public Admin(string name, string lastName, string telephone, string password, TelModel telModel) : base(name, lastName, telephone, password, telModel)
         {
         }
         public Admin(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, List<Service> listServices, List<string> activities) : base(name, lastName, balance, telephone, dateConnecing, telModel, esimSupport, tariff, listServices, activities)

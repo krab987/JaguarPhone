@@ -7,7 +7,19 @@ namespace TestJaguarPhone
     public class TestUser
     {
         Jaguar jaguar = new Jaguar();
-        User user = new User("test", "Test", "96954235", TelModel.Galaxy_Note_20);
+        User user = new User("test", "Test", "96954235","1234Ff", TelModel.Galaxy_Note_20);
+
+        [TestMethod]
+        public void us1()
+        {
+            // Act
+            user.Password = "123456QERt";
+            //user.Password = "1234";
+            //user.Password = "qwerty";
+            //user.Password = "1234vv";
+
+        }
+
 
         [TestMethod]
         public void ConnectTariffFalse()

@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JaguarPhone.View"
-        xmlns:JaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibraryControls" xmlns:Enums="clr-namespace:JaguarPhone.Module.Enums" xmlns:VisualBasic="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic.Core"
         xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
         xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+        xmlns:jaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibrary"
+        xmlns:Enums="clr-namespace:JaguarPhone.Module.Enums"
         x:Class="JaguarPhone.View.Regist"
         mc:Ignorable="d"
-        Title="Regist" Height="800" Width="600">
+        Title="Regist" Height="800" Width="600" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <viewModel:MainViewModel></viewModel:MainViewModel>
+        <viewModel:MainViewModel />
     </Window.DataContext>
     <Window.Resources>
         <ObjectDataProvider x:Key="telModel" MethodName="GetValues"
@@ -36,14 +36,13 @@
             <RowDefinition Height="275*"/>
         </Grid.RowDefinitions>
 
-        <JaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" WaterMark="Ім'я" Height="17" WaterMarkEnabled="True" Text="" Name="firstNameRegist"/>
-        <JaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" WaterMark="По батькові" Name="lastNameRegist"/>
-        <JaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" WaterMark="Телефон" Name="telephoneRegist"/>
-        <ComboBox HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="120" Text="Модель телефону" ItemsSource="{Binding Mode=OneWay, Source={StaticResource telModel}}" SelectedIndex="0" Name="telModelRegist" >
-        </ComboBox>
+        <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" WaterMark="Ім'я" Height="17" WaterMarkEnabled="True" Text="" Name="firstNameRegist"/>
+        <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" WaterMark="По батькові" Name="lastNameRegist"/>
+        <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Height="17" WaterMark="Телефон" Name="telephoneRegist"/>
+        <ComboBox HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="120" Text="Модель телефону" SelectedIndex="0" Name="telModelRegist" ItemsSource="{Binding Source={jaguarLibraryControls:EnumBindingSource {x:Type Enums:TelModel}}}" />
         <Label Content="Марка телефону" HorizontalAlignment="Center" Margin="0,46,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Button Content="Зареєструватись" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Center" Height="30" Width="100" Click="Regist_Click"/>
-        <PasswordBox HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="120" Name="passwordOneRegist"/>
+        <PasswordBox HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="120" Name="passwordOneRegist" PasswordChar="●" RenderTransformOrigin="0.5,0.5"/>
         <PasswordBox HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Width="120" Name="passwordTwoRegist"/>
 
     </Grid>

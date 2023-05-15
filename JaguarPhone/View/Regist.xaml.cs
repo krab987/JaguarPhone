@@ -1,9 +1,7 @@
 ﻿using JaguarPhone.Module;
-using System.Collections.Generic;
-using System.Text.Json;
 using System;
-using System.IO;
 using System.Windows;
+using JaguarPhone.Module.Enums;
 
 namespace JaguarPhone.View
 {
@@ -16,41 +14,26 @@ namespace JaguarPhone.View
         {
             InitializeComponent();
         }
-
+        private AllUSer currentUser;
         private void Regist_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    SqlConnection con = new SqlConnection();
-            //    SqlConnectionStringBuilder conBuilder = new SqlConnectionStringBuilder();
+            try
+            {
+                if (passwordOneRegist.Password != passwordTwoRegist.Password)
+                    throw new Exception("Паролі не співпали");
 
-            //    conBuilder.UserID = "register";
-            //    conBuilder.Password = "regist";
-            //    conBuilder.InitialCatalog = "JaguarPhoneDB";
-            //    //conBuilder.DataSource = "RAVI";
-            //    conBuilder.ConnectTimeout = 30;
-
-            //    //SqlConnection con = new SqlConnection(conBuilder.ConnectionString);
-            //    con.ConnectionString = conBuilder.ConnectionString;
-            //    con.Open();
-
-            //    MessageBox.Show($"{con.ConnectionString}"); 
-            //    MessageBox.Show($"{con.State}"); 
-
-
-            //    string loginRegist = telephoneRegist.Text;
-            //    string passRegist = passwordTwoRegist.Password;
-
-            //    string addData = $"create login {loginRegist} with password = {passRegist} ";
-            //    SqlCommand cmd = new SqlCommand(addData, con);
-            //    cmd.ExecuteNonQuery();
-            //    con.Close();
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    MessageBox.Show($"Error {ex}");
-            //}
+                Admin currentUser = new Admin();
+                currentUser.AddUser(new User(
+                    firstNameRegist.Text, lastNameRegist.Text, telephoneRegist.Text,
+                     passwordTwoRegist.Password, (TelModel)telModelRegist.SelectedItem));
+                MessageBox.Show($"Користувач {telephoneRegist.Text} успішно доданий", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                Jaguar.SaveUser();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
-
     }
 }

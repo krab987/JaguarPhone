@@ -8,14 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DevExpress.Mvvm.CodeGenerators" Version="22.1.1" />
     <PackageReference Include="DevExpressMvvm" Version="22.1.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\JaguarCustomControls\JaguarCustomControls.csproj" />
-    <ProjectReference Include="..\JaguarLibrary\JaguarLibraryControls.csproj" />
+    <ProjectReference Include="..\JaguarLibrary\JaguarLibrary.csproj" />
   </ItemGroup>
 
 </Project>
