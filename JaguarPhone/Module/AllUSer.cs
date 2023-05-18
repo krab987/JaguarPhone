@@ -25,12 +25,14 @@ namespace JaguarPhone.Module
         private Tariff _tariff;
         private ObservableCollection<Service> listServices;
         private ObservableCollection<string> activities;
+
         private DateOnly dateTariff;
+        private SuperPower tSuperPower;
 
         public AllUSer(string name, string lastName, string telephone, string password, TelModel telModel)
         {
             this.name = name;
-            this.lastName = lastName;
+            LastName = lastName;
 
             if (telephone.Length != 10)
                 throw new Exception("Номер телефону має складатися з 10 чисел та починатися з 0");
@@ -39,6 +41,7 @@ namespace JaguarPhone.Module
             this.telModel = telModel;
             balance = 0;
             dateConnecing = DateOnly.FromDateTime(DateTime.Now);
+            DateTariff = DateOnly.FromDateTime(DateTime.Now);
             esimSupport = telModel != TelModel.Інша;
             listServices = new ObservableCollection<Service>();
             activities = new ObservableCollection<string>();
@@ -57,7 +60,6 @@ namespace JaguarPhone.Module
             ListServices = listServices;
             Activities = activities;
         }
-
         public AllUSer(){ }
 
         public bool AddTariff(Tariff tariff)
@@ -112,7 +114,7 @@ namespace JaguarPhone.Module
         public int Balance
         {
             get => balance;
-            set => balance = value;
+            set => SetField(ref balance, value, "Balance");
         }
         public int Telephone
         {
@@ -167,6 +169,11 @@ namespace JaguarPhone.Module
         {
             get => dateTariff;
             set => SetField(ref dateTariff, value, "DateTariff");
+        }
+        public SuperPower TSuperPower
+        {
+            get => tSuperPower;
+            set => tSuperPower = value ?? throw new ArgumentNullException(nameof(value));
         }
 
         protected bool Equals(AllUSer other)

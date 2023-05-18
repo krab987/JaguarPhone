@@ -16,14 +16,24 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32*"/>
-            <RowDefinition Height="185*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="775*"/>
         </Grid.RowDefinitions>
-        <local:AdminTariff Grid.Row="1" Visibility="Collapsed"/>
-        <controls:AdminServicesSuperpowers Grid.Row="1" Visibility="Collapsed"/>
-        <controls:AllUser Grid.Row="1"></controls:AllUser>
-        <Menu>
-            
+        <local:AdminTariff Grid.Row="1"  Visibility="Collapsed" Margin="0,15,0,0" />
+        <controls:AdminServicesSuperpowers Grid.Row="1" Visibility="Collapsed" Margin="0,15,0,0"/>
+        <controls:AllUser Grid.RowSpan="2" HorizontalAlignment="Center" Width="1600" Height="783" VerticalAlignment="Bottom"/>
+        <Menu HorizontalContentAlignment="Right" VerticalContentAlignment="Top">
+            <MenuItem Header="Профіль">
+                <MenuItem Header="Редагувати"></MenuItem>>
+                <MenuItem Header="Вийти"></MenuItem>>
+
+                <DocumentViewer/>
+            </MenuItem>
+            <MenuItem Header="Особистий Кабінет" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="Адміністратор">
+                <MenuItem Header="Тарифи"></MenuItem>
+                <MenuItem Header="Сервіси/Суперсили"></MenuItem>
+            </MenuItem>
         </Menu>
     </Grid>
 </Window>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JaguarPhone": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}

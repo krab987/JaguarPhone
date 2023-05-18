@@ -7,13 +7,66 @@
 
 
     <Application.Resources>
-        <Style TargetType="{x:Type Window}">
+        <!--<Style TargetType="Window">
             <Setter Property="FontFamily" Value="Times New Roman" />
             <Setter Property="FontSize" Value="24" />
         </Style>
-        <Style TargetType="{x:Type UserControl}">
+        <Style TargetType="UserControl">
             <Setter Property="FontFamily" Value="Times New Roman" />
             <Setter Property="FontSize" Value="24" />
+        </Style>-->
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Padding" Value="20,5,20,5" />
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFFC072" Offset="0" />
+                        <GradientStop Color="DarkOrange" Offset="0.494" />
+                        <GradientStop Color="#FFFFC072" Offset="1" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="6" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="35"></Setter>
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="FontFamily" Value="Times New Roman"></Setter>
+            <Setter Property="FontSize" Value="22"></Setter>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="ToolTip.ShowsToolTipOnKeyboardFocus" Value="True" />
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="22" />
+        </Style>
+        <Style x:Key="Shadow" TargetType="Border">
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect>
+                        <DropShadowEffect.BlurRadius>50</DropShadowEffect.BlurRadius>
+                        <DropShadowEffect.Color><Color>#FFBFBFBF</Color></DropShadowEffect.Color>
+                        <DropShadowEffect.Opacity>0.7</DropShadowEffect.Opacity>
+
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <!--<Border.Effect>
+                <DropShadowEffect Color="#FFBFBFBF" BlurRadius="80" Opacity="0.7" ShadowDepth="4.8" Direction="312">
+                </DropShadowEffect>
+            </Border.Effect>-->
         </Style>
         <Style x:Key="{x:Type PasswordBox}" TargetType="{x:Type PasswordBox}">
             <Setter Property="jaguarLibraryControls:PasswordBoxWater.IsMonitoring" Value="True" />
@@ -27,7 +80,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="true">
                             <Grid>
-                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 <TextBlock
                                     Name="txtPrompt"
                                     Margin="4,2,0,0"
@@ -38,8 +92,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                <Setter TargetName="Bd" Property="Background"
+                                        Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                             </Trigger>
                             <Trigger Property="jaguarLibraryControls:PasswordBoxWater.PasswordLength" Value="0">
                                 <Setter TargetName="txtPrompt" Property="Visibility" Value="Visible" />
@@ -50,11 +106,6 @@
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type ListView}">
-            <Setter Property="ToolTip.ShowsToolTipOnKeyboardFocus" Value="True" />
-        </Style>
+        
     </Application.Resources>
 </Application>
-
-
-

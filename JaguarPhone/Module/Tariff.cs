@@ -18,7 +18,6 @@ namespace JaguarPhone.Module
         private uint sms;
         private bool tv;
         private ObservableCollection<SuperPower> listSuperpower = new();
-        private SuperPower tSuperPower;
         private readonly PrestigeTariffs prestigeTariff;
 
         public Tariff(string name, uint price, double gbInternet, bool callsJaguar, uint callsOther, uint sms, bool tv)
@@ -95,12 +94,6 @@ namespace JaguarPhone.Module
             set => listSuperpower = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
-        public SuperPower TSuperPower
-        {
-            get => tSuperPower;
-            set => tSuperPower = value ?? throw new ArgumentNullException(nameof(value));
-        }
         public PrestigeTariffs PrestigeTariff => prestigeTariff;
 
         protected bool Equals(Tariff other)

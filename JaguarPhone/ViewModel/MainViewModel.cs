@@ -4,6 +4,7 @@ using System.Windows.Input;
 using DevExpress.Mvvm;
 using JaguarPhone.Module;
 using JaguarPhone.View;
+using JaguarPhone.View.Controls;
 
 namespace JaguarPhone.ViewModel
 {
@@ -27,17 +28,23 @@ namespace JaguarPhone.ViewModel
             Task.Factory.StartNew(() =>
             {
                 DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
+                if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
+                    DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
             });
-        }
-        private DateOnly datePayTariff;
-        public DateOnly DatePayTariff
-        {
-            get => datePayTariff;
-            set
+            Task.Factory.StartNew(() =>
             {
-                datePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
-                RaisePropertyChanged(() => DatePayTariff); // обнова змінної при кожному set
-            }
+                Account = Jaguar.CurUser.Tariff;
+                foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
+                {
+                    if (Jaguar.CurUser.TSuperPower == el)
+                    {
+                        Account.CallsOther += el.CallsOther;
+                        Account.GbInternet += el.GbInternet;
+                        if (el.Tv)
+                            Account.Tv = el.Tv;
+                    }
+                }
+            });
         }
 
         public ICommand OpenRegist
@@ -51,6 +58,28 @@ namespace JaguarPhone.ViewModel
                 });
             }
         }
+
+        private DateOnly datePayTariff;
+        public DateOnly DatePayTariff
+        {
+            get => datePayTariff;
+            set
+            {
+                datePayTariff = value;
+                RaisePropertyChanged(() => DatePayTariff); // обнова змінної при кожному set
+            }
+        }
+        private Tariff account;
+        public Tariff Account
+        {
+            get => account;
+            set
+            {
+                account = value;
+                RaisePropertyChanged(() => Account); // обнова змінної при кожному set
+            }
+        }
+
 
         //private int clicks;
         //public int Clicks

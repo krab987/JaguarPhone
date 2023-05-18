@@ -17,8 +17,8 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="19*" />
-            <RowDefinition Height="161*" />
+            <RowDefinition Height="13*" />
+            <RowDefinition Height="137*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="53*" />
@@ -26,25 +26,19 @@
             <ColumnDefinition Width="104*" />
         </Grid.ColumnDefinitions>
         <Label
-            Width="52"
-            Height="26"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Тарифи" />
+            Content="Тарифи" Height="36" Width="81" />
         <Label
             Grid.Column="1"
-            Width="78"
-            Height="25"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Редагування" />
+            Content="Редагування" Height="36" Width="125" />
         <Label
             Grid.Column="2"
-            Width="192"
-            Height="25"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Тарифи-пропозиції користувачів" />
+            Content="Тарифи-пропозиції користувачів" Height="36" Width="316" />
         <ListView
             x:Name="listTariffView"
             HorizontalContentAlignment="Center"
@@ -53,132 +47,17 @@
             Foreground="#FF000000"
             ItemsSource="{Binding AllTariffs}"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectionMode="Single" Margin="0,79,0,0" Grid.RowSpan="2"
-            ToolTip="{Binding SelectedItem.GetInfo, ElementName=listTariffView}">
-        </ListView>
-        <Grid Grid.Column="1" Margin="0,79,0,0" Grid.RowSpan="2">
+            SelectionMode="Single"
+            ToolTip="{Binding SelectedItem.GetInfo, ElementName=listTariffView}" Grid.Row="1"/>
+        <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="426*" />
-                <RowDefinition Height="245*" />
+                <RowDefinition Height="69*" />
+                <RowDefinition Height="42*" />
+                <RowDefinition Height="26*"/>
             </Grid.RowDefinitions>
-            <Button
-                Grid.Row="1"
-                Margin="10,175,0,25"
-                Content="Редагувати тариф" HorizontalAlignment="Left" Width="398" Click="ModifyTariff_Click" />
-            <Button
-                Grid.Row="1"
-                Margin="0,175,10,25"
-                Content="Додати тариф" HorizontalAlignment="Right" Width="392" Click="AddTariff_Click" />
-            <TextBox x:Name="name_tb"
-                Width="218"
-                Height="30"
-                Margin="0,32,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Foreground="Black"
-                Text="{Binding SelectedItem.Name, ElementName=listTariffView}"
-                TextWrapping="Wrap" />
-            <TextBox x:Name="price_tb"
-                Width="218"
-                Height="30"
-                Margin="0,79,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Foreground="Black"
-                Text="{Binding SelectedItem.Price, ElementName=listTariffView}"
-                TextWrapping="Wrap" />
-            <TextBox x:Name="internet_tb"
-                Width="218"
-                Height="30"
-                Margin="0,128,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Text="{Binding SelectedItem.GbInternet, ElementName=listTariffView}"
-                TextWrapping="Wrap" />
-            <TextBox x:Name="callsOther_tb"
-                Width="218"
-                Height="26"
-                Margin="0,238,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Text="{Binding SelectedItem.CallsOther, ElementName=listTariffView}"
-                TextWrapping="Wrap" />
-            <TextBox x:Name="sms_tb"
-                Width="218"
-                Height="20"
-                Margin="0,352,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Text="{Binding SelectedItem.Sms, ElementName=listTariffView}"
-                TextWrapping="Wrap" />
-            <CheckBox x:Name="callsJag_tb"
-                Width="218"
-                Height="16"
-                Margin="0,287,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Content=""
-                IsChecked="{Binding SelectedItem.CallsJaguar, ElementName=listTariffView}" />
-            <CheckBox x:Name="tv_tb"
-                Width="218"
-                Height="18"
-                Margin="0,402,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                Content=""
-                IsChecked="{Binding SelectedItem.Tv, ElementName=listTariffView}" />
-            <Label
-                Width="30"
-                Height="26"
-                Margin="262,29,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Ім'я" />
-            <Label
-                Width="35"
-                Height="26"
-                Margin="257,76,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Ціна" />
-            <Label
-                Width="80"
-                Height="26"
-                Margin="212,125,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Інтернет (ГБ)" />
-            <Label
-                Width="164"
-                Height="26"
-                Margin="130,238,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Двінки на інших операторів" />
-            <Label
-                Width="36"
-                Height="26"
-                Margin="257,349,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="СМС" />
-            <Label
-                Width="88"
-                Height="26"
-                Margin="206,282,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="Дзвінки Ягуар" />
-            <Label
-                Width="23"
-                Height="26"
-                Margin="269,396,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Content="ТВ" />
-            <Grid Grid.Row="1" Margin="0,0,0,80">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="3*" />
                     <RowDefinition Height="9*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -201,7 +80,7 @@
                     Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Content="☚" Click="AddSuperpower_Click" Margin="0,20,0,0" FontSize="24" Padding="20,1,20,1" />
+                    Content="☚" Click="AddSuperpower_Click" Margin="0,20,0,0" FontSize="22" Padding="20,5,20,1" />
                 <ListView x:Name="listTariffSuperpower"
                     Grid.Row="1"
                     ItemsSource="{Binding SelectedItem.ListSuperpower, ElementName=listTariffView}"
@@ -225,11 +104,126 @@
                 </ListView>
                 <Button Grid.Column="1" Content="☛" HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Padding="20,1,20,1" Grid.IsSharedSizeScope="True" Click="RemoveSuperpower_Click"/>
             </Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="82*"/>
+                    <ColumnDefinition Width="82*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="name_tb"
+                    Width="218"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    Text="{Binding SelectedItem.Name, ElementName=listTariffView}"
+                    TextWrapping="Wrap" Grid.Column="1" />
+                <TextBox x:Name="price_tb"
+                    Width="218"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    Text="{Binding SelectedItem.Price, ElementName=listTariffView}"
+                    TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" />
+                <TextBox x:Name="internet_tb"
+                    Width="218"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding SelectedItem.GbInternet, ElementName=listTariffView}"
+                    Grid.Column="1" Grid.Row="2" />
+                <TextBox x:Name="callsOther_tb"
+                    Width="218"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding SelectedItem.CallsOther, ElementName=listTariffView}"
+                    TextWrapping="Wrap" Margin="10,0,0,0" Height="25" Grid.Column="1" Grid.Row="3" />
+                <TextBox x:Name="sms_tb"
+                    Width="218"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding SelectedItem.Sms, ElementName=listTariffView}"
+                    TextWrapping="Wrap" Height="26" Grid.Column="1" Grid.Row="5" />
+                <CheckBox x:Name="callsJag_tb"
+                    Width="218"
+                    Height="16"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content=""
+                    IsChecked="{Binding SelectedItem.CallsJaguar, ElementName=listTariffView}" Grid.Column="1" Grid.Row="4" />
+                <CheckBox x:Name="tv_tb"
+                    Width="218"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    Content=""
+                    IsChecked="{Binding SelectedItem.Tv, ElementName=listTariffView}" Height="18" VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" />
+                <Label
+                    Margin="352,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Ім'я" Height="36" Width="46" />
+                <Label
+                    Margin="344,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Ціна" Height="34" Width="54" Grid.Row="1" />
+                <Label
+                    Margin="263,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Інтернет (ГБ)" Height="36" Width="136" Grid.Row="2" />
+                <Label
+                    Margin="126,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Двінки на інших операторів" Height="35" Width="272" Grid.Row="3" />
+                <Label
+                    Margin="338,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="СМС" Height="36" Width="60" Grid.Row="5" />
+                <Label
+                    Margin="252,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="Дзвінки Ягуар" Height="35" Width="146" Grid.Row="4" />
+                <Label
+                    Margin="360,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="ТВ" Height="36" Width="38" Grid.Row="6" />
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*"/>
+                    <ColumnDefinition Width="51*"/>
+                    <ColumnDefinition Width="51*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                        Content="Редагувати тариф" HorizontalAlignment="Center" Click="ModifyTariff_Click" VerticalAlignment="Center" />
+                <Button
+                    Content="Додати тариф" HorizontalAlignment="Center" Click="AddTariff_Click" VerticalAlignment="Center" Grid.Column="1"  />
+                <Button Content="Видалити тариф" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveTariff_Click" Grid.Column="2"/>
+            </Grid>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="531*"/>
-                <RowDefinition Height="140*"/>
+                <RowDefinition Height="111*"/>
+                <RowDefinition Height="26*"/>
             </Grid.RowDefinitions>
             <ListView x:Name="listCheckTariffsView" ItemsSource="{Binding CheckTariffs}"
                       Grid.RowSpan="2" ToolTip="{Binding SelectedItem.GetInfo, ElementName=listCheckTariffsView}">
@@ -239,7 +233,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="Підтвердити й додати до тарифів" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Padding="20,5,20,5" Grid.IsSharedSizeScope="True" Height="28" Width="224" Click="ConfirmAddTariff_Click"/>
+            <Button Content="Підтвердити й додати до тарифів" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Padding="20,5,20,5" Grid.IsSharedSizeScope="True" Click="ConfirmAddTariff_Click" Height="38" Width="352"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -29,10 +29,10 @@ namespace JaguarPhone.Module
 
         public Jaguar()
         {
-            _allSuperPower.Add(new SuperPower("Немає", 0, 0, false));
-            _allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false));
-            _superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", "", TelModel.Motorola_Razr);
-            _allUsers.Add(_superAdmin);
+            //_allSuperPower.Add(new SuperPower("Немає", 0, 0, false));
+            //_allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false));
+            //_superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", "", TelModel.Motorola_Razr);
+            //_allUsers.Add(_superAdmin);
         }
 
         public static void SaveUser()

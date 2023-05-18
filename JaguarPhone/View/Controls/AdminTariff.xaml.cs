@@ -82,6 +82,7 @@ namespace JaguarPhone.View
         }
         private void ConfirmAddTariff_Click(object sender, RoutedEventArgs e)
         {
+            
             try
             {
                 if (listCheckTariffsView.SelectedItem == null)
@@ -95,6 +96,20 @@ namespace JaguarPhone.View
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
 
+            }
+        }
+
+        private void RemoveTariff_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (listTariffView.SelectedItem == null)
+                    throw new Exception("Оберіть тариф із наявних");
+                Jaguar.AllTariffs.Remove((Tariff)listTariffView.SelectedItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
