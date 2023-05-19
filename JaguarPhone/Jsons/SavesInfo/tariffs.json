@@ -1,18 +1,35 @@
 [
   {
     "Name": "\u0417\u043D\u0430\u0439\u043E\u043C\u0442\u0435\u0441\u044C Jaguar!",
-    "Price": 0,
-    "GbInternet": 0.1,
-    "CallsJaguar": false,
-    "CallsOther": 20,
+    "Price": 30,
+    "GbInternet": 0.2,
+    "CallsJaguar": true,
+    "CallsOther": 0,
     "Sms": 0,
     "Tv": false,
-    "TSuperPower": {
-      "Name": "\u041D\u0435\u043C\u0430\u0454",
-      "GbInternet": 0,
-      "CallsOther": 0,
-      "Tv": false
-    },
+    "ListSuperpower": [],
     "PrestigeTariff": 0
+  },
+  {
+    "Name": "\u0421\u043C\u0430\u0447\u043D\u0438\u0439",
+    "Price": 125,
+    "GbInternet": 25,
+    "CallsJaguar": true,
+    "CallsOther": 100,
+    "Sms": 10,
+    "Tv": false,
+    "ListSuperpower": [],
+    "PrestigeTariff": 1
+  },
+  {
+    "Name": "\u041F\u043B\u0430\u043D\u0448\u0435\u0442",
+    "Price": 140,
+    "GbInternet": 40,
+    "CallsJaguar": false,
+    "CallsOther": 0,
+    "Sms": 15,
+    "Tv": true,
+    "ListSuperpower": [],
+    "PrestigeTariff": 1
   }
 ]

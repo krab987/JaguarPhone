@@ -13,16 +13,16 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="214*"/>
-            <RowDefinition Height="115*"/>
-            <RowDefinition Height="120*"/>
-            <RowDefinition Height="95*"/>
-            <RowDefinition Height="65*"/>
-            <RowDefinition Height="375*"/>
+            <RowDefinition Height="171*"/>
+            <RowDefinition Height="92*"/>
+            <RowDefinition Height="96*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="81*"/>
+            <RowDefinition Height="275*"/>
         </Grid.RowDefinitions>
-        <jaguarLibraryControls:TextBoxWater Name="telephoneLogin" HorizontalAlignment="Center" Grid.Row="1" Width="340" VerticalAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="26" Height="45" Cursor="Hand" WaterMark="Введіть Логін" WaterMarkEnabled="True" />
-        <Button Content="Вхід" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="55" Width="270" FontFamily="Times New Roman" FontSize="26" Click="Login_Click"/>
-        <Button Content="Я не зареєстрований користувач" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Height="20" Width="230" Command="{Binding OpenRegist, Mode=OneWay}"/>
+        <jaguarLibraryControls:TextBoxWater Name="telephoneLogin" HorizontalAlignment="Center" Grid.Row="1" Width="340" VerticalAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="26" Height="45" Cursor="Hand" WaterMark="Введіть Логін" WaterMarkEnabled="True" Foreground="Black" />
+        <Button Content="Вхід" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="26" Click="Login_Click" Height="40" Width="230" Padding="20,5,20,5" Grid.IsSharedSizeScope="True"/>
+        <Button Content="Я не зареєстрований користувач" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Command="{Binding OpenRegist, Mode=OneWay}" Padding="20,5,20,5" Grid.IsSharedSizeScope="True"/>
         <PasswordBox Name="passwordLogin" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="340" Height="42"/>
     </Grid>
 </Window>

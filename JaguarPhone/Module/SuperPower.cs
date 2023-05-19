@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace JaguarPhone.Module
@@ -62,7 +64,20 @@ namespace JaguarPhone.Module
 
         public override string ToString()
         {
-            return $"{nameof(name)}: {name}, {nameof(gbInternet)}: {gbInternet}, {nameof(callsOther)}: {callsOther}, {nameof(tv)}: {tv}";
+            return $"{name}";
+        }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public string GetInfo => GetInfoMethod();
+        string GetInfoMethod()
+        {
+            string t = "∞";
+            string tvs = "-";
+
+            if (tv)
+                tvs = "∞";
+
+            return $"Ім'я: {name}\n Інтернет(ГБ): {gbInternet}\n Дзвінки на інших операторів: {callsOther}\n ТВ: {tvs}";
         }
     }
 }

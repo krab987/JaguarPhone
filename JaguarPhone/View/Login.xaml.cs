@@ -34,7 +34,10 @@ namespace JaguarPhone.View
                 {
                     var el = Jaguar.AllUsers[index];
                     if (el.Telephone == Int32.Parse(telephoneLogin.Text) && el.Password == passwordLogin.Password)
+                    {
+                        Jaguar.CurUser = el;
                         Jaguar.CurUserIndex = index;
+                    }
                 }
 
                 if (Jaguar.CurUserIndex == -1)

@@ -1,23 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using DevExpress.Mvvm.Native;
 using JaguarPhone.Module.Enums;
-using JaguarPhone.Module.Interfaces;
-using static System.String;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace JaguarPhone.Module
 {
     public class Jaguar
     {
-        private static List<Service> _allServices = new List<Service>();
-        private static List<SuperPower> _allSuperPower = new List<SuperPower>();
-        private static List<Tariff> _allTariffs = new List<Tariff>();
-        private static List<Tariff> _allCheckTariffs = new List<Tariff>();
-        private static List<AllUSer> _allUsers = new List<AllUSer>();
+        private static ObservableCollection<Service> _allServices = new();
+        private static ObservableCollection<SuperPower> _allSuperPower = new();
+        private static ObservableCollection<Tariff> _allTariffs = new ObservableCollection<Tariff>();
+        private static ObservableCollection<Tariff> _allCheckTariffs = new ObservableCollection<Tariff>();
+        private static ObservableCollection<AllUSer> _allUsers = new ObservableCollection<AllUSer>();
         private static SuperAdmin _superAdmin;
 
         private static string _superAdminFile = @"W:\projects\C#\CourseWork\JaguarPhone\JaguarPhone\Jsons\superadmin.json";
@@ -31,7 +30,7 @@ namespace JaguarPhone.Module
         public Jaguar()
         {
             _allSuperPower.Add(new SuperPower("Немає", 0, 0, false));
-            _allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false, _allSuperPower[0]));
+            _allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false));
             _superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", "", TelModel.Motorola_Razr);
             _allUsers.Add(_superAdmin);
         }
@@ -39,7 +38,7 @@ namespace JaguarPhone.Module
         public static void SaveUser()
         {
             //File.WriteAllText(_userFile, Empty);
-            var users = _allUsers.Where(el => el is User).Cast<User>().ToList();
+            var users = _allUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
             jsonOptions.WriteIndented = true;
             string userJson = JsonSerializer.Serialize(users, jsonOptions);
@@ -47,16 +46,16 @@ namespace JaguarPhone.Module
         }
         public static void Save()
         {
-            var admins = _allUsers.Where(el => el is Admin && el.Telephone != 960345222).Cast<Admin>().ToList();
-            var users = _allUsers.Where(el => el is User).Cast<User>().ToList();
-            // && el.Telephone != 960345222
+            var superadmin = _allUsers[0];
+            var admins = _allUsers.Where(el => el is Admin && el.Telephone != 960345222).Cast<Admin>().ToObservableCollection();
+            var users = _allUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
 
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
 
-            string superAdminJson = JsonSerializer.Serialize(SuperAdmin, jsonOptions);
+            string superAdminJson = JsonSerializer.Serialize(superadmin, jsonOptions);
             string adminJson = JsonSerializer.Serialize(admins, jsonOptions);
             string userJson = JsonSerializer.Serialize(users, jsonOptions);
             string checkTariffsjson = JsonSerializer.Serialize(_allCheckTariffs, jsonOptions);
@@ -85,7 +84,7 @@ namespace JaguarPhone.Module
             if (File.Exists(_adminFile))
             {
                 var adminJson = File.ReadAllText(_adminFile);
-                var admins = JsonSerializer.Deserialize<List<Admin>>(adminJson)!;
+                var admins = JsonSerializer.Deserialize<ObservableCollection<Admin>>(adminJson)!;
 
                 if (admins.Count !=0)
                     foreach (var admin in admins)
@@ -97,7 +96,7 @@ namespace JaguarPhone.Module
             if (File.Exists(_userFile))
             {
                 var userJson = File.ReadAllText(_userFile);
-                var users = JsonSerializer.Deserialize<List<User>>(userJson);
+                var users = JsonSerializer.Deserialize<ObservableCollection<User>>(userJson);
 
                 foreach (var user in users)
                 {
@@ -106,21 +105,9 @@ namespace JaguarPhone.Module
                 }
             }
 
-            
-            if (File.Exists(_checktariffsFile))
-            {
-                string checktariffsJson = File.ReadAllText(_checktariffsFile);
-                var checktariffs = JsonSerializer.Deserialize<List<Tariff>>(checktariffsJson);
-
-                foreach (var el in checktariffs)
-                {
-                    if (!_allCheckTariffs.Contains(el))
-                        _allCheckTariffs.Add(el);
-                }
-            }
             if (File.Exists(_servisesFile))
             {
-                var servises = JsonSerializer.Deserialize<List<Service>>(File.ReadAllText(_servisesFile));
+                var servises = JsonSerializer.Deserialize<ObservableCollection<Service>>(File.ReadAllText(_servisesFile));
 
                 foreach (var el in servises)
                 {
@@ -130,7 +117,7 @@ namespace JaguarPhone.Module
             }
             if (File.Exists(_superpowersFile))
             {
-                var superpowers = JsonSerializer.Deserialize<List<SuperPower>>(File.ReadAllText(_superpowersFile));
+                var superpowers = JsonSerializer.Deserialize<ObservableCollection<SuperPower>>(File.ReadAllText(_superpowersFile));
 
                 foreach (var el in superpowers)
                 {
@@ -138,9 +125,20 @@ namespace JaguarPhone.Module
                         _allSuperPower.Add(el);
                 }
             }
+            if (File.Exists(_checktariffsFile))
+            {
+                string checktariffsJson = File.ReadAllText(_checktariffsFile);
+                var checktariffs = JsonSerializer.Deserialize<ObservableCollection<Tariff>>(checktariffsJson);
+
+                foreach (var el in checktariffs)
+                {
+                    if (!_allCheckTariffs.Contains(el))
+                        _allCheckTariffs.Add(el);
+                }
+            }
             if (File.Exists(_tariffsFile))
             {
-                var tariffs = JsonSerializer.Deserialize<List<Tariff>>(File.ReadAllText(_tariffsFile));
+                var tariffs = JsonSerializer.Deserialize<ObservableCollection<Tariff>>(File.ReadAllText(_tariffsFile));
 
                 foreach (var el in tariffs)
                 {
@@ -150,27 +148,27 @@ namespace JaguarPhone.Module
             }
         }
 
-        public static List<Service> AllServices
+        public static ObservableCollection<Service> AllServices
         {
             get => _allServices;
             set => _allServices = value ?? throw new ArgumentNullException(nameof(value));
         }
-        public static List<SuperPower> AllSuperPower
+        public static ObservableCollection<SuperPower> AllSuperPower
         {
             get => _allSuperPower;
             set => _allSuperPower = value ?? throw new ArgumentNullException(nameof(value));
         }
-        public static List<Tariff> AllTariffs
+        public static ObservableCollection<Tariff> AllTariffs
         {
             get => _allTariffs;
             set => _allTariffs = value ?? throw new ArgumentNullException(nameof(value));
         }
-        public static List<Tariff> CheckTariffs
+        public static ObservableCollection<Tariff> CheckTariffs
         {
             get => _allCheckTariffs;
             set => _allCheckTariffs = value ?? throw new ArgumentNullException(nameof(value));
         }
-        public static List<AllUSer> AllUsers
+        public static ObservableCollection<AllUSer> AllUsers
         {
             get => _allUsers;
             set => _allUsers = value ?? throw new ArgumentNullException(nameof(value));
@@ -179,5 +177,7 @@ namespace JaguarPhone.Module
 
         [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public static int CurUserIndex { get; set; } = -1;
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public static AllUSer CurUser { get; set; } = null!;
     }
 }

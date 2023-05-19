@@ -1,8 +1,14 @@
 [
   {
-    "Name": "\u041D\u0435\u043C\u0430\u0454",
+    "Name": "\u0422\u0435\u043B\u0435\u0431\u0430\u0447\u0435\u043D\u043D\u044F",
     "GbInternet": 0,
     "CallsOther": 0,
+    "Tv": true
+  },
+  {
+    "Name": "\u0420\u0430\u0437\u043E\u043C - \u0441\u0438\u043B\u0430!",
+    "GbInternet": 4,
+    "CallsOther": 50,
     "Tv": false
   }
 ]

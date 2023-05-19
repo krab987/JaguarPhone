@@ -11,7 +11,7 @@ namespace TestJaguarPhone
         public void SetPrestigeTariffSilver()
         {
             // Arrange
-            Tariff tariff = new Tariff("Test Tariff", 100, 15, true, 50, 100, true, Jaguar.AllSuperPower[0]);
+            Tariff tariff = new Tariff("Test Tariff", 100, 15, true, 50, 100, true);
             // Act
             PrestigeTariffs actual = tariff.PrestigeTariff;
             // Exp
@@ -25,7 +25,7 @@ namespace TestJaguarPhone
         public void SetPrestigeTariffGold()
         {
             // Arrange
-            Tariff tariff = new Tariff("Test Tariff", 100, 30, true, 50, 100, true, Jaguar.AllSuperPower[0]);
+            Tariff tariff = new Tariff("Test Tariff", 100, 30, true, 50, 100, true);
             // Act
             PrestigeTariffs actual = tariff.PrestigeTariff;
             // Exp
@@ -39,7 +39,7 @@ namespace TestJaguarPhone
         public void SetPrestigeTariffPlatinum()
         {
             // Arrange
-            Tariff tariff = new Tariff("Test Tariff", 100, 150, true, 50, 100, true, Jaguar.AllSuperPower[0]);
+            Tariff tariff = new Tariff("Test Tariff", 100, 150, true, 50, 100, true);
             // Act
             PrestigeTariffs actual = tariff.PrestigeTariff;
             // Exp

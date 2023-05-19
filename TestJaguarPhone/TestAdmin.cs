@@ -13,8 +13,7 @@ namespace TestJaguarPhone
         public void AdminAddTariffFalse()
         {
             // act
-            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false,
-                Jaguar.AllSuperPower[0]));
+            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false));
             // assert
             Assert.IsFalse(actual);
         }
@@ -23,8 +22,7 @@ namespace TestJaguarPhone
         public void AdminAddTariffTrue()
         {
             // act
-            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false,
-                Jaguar.AllSuperPower[0]));
+            bool actual = Jaguar.SuperAdmin.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false));
             // assert
             Assert.IsTrue(actual);
         }
@@ -33,8 +31,7 @@ namespace TestJaguarPhone
         public void AddCustomerTariffFalse_Exist()
         {
             // arrange
-            user.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false,
-                Jaguar.AllSuperPower[0]));
+            user.AddTariff(new Tariff("Çםאימלעוסü Jaguar!", 10, 20, false, 20, 0, false));
             // act
             bool actual = Jaguar.SuperAdmin.AddCustomerTariff("Çםאימלעוסü Jaguar!");
             // assert
@@ -45,8 +42,7 @@ namespace TestJaguarPhone
         public void AddCustomerTariffFalse_Name()
         {
             // arrange
-            user.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false,
-                Jaguar.AllSuperPower[0]));
+            user.AddTariff(new Tariff("Bober", 10, 20, false, 20, 0, false));
             // act
             bool actual = Jaguar.SuperAdmin.AddCustomerTariff("Can");
             // assert

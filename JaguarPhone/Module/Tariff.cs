@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Text.Json.Serialization;
 using JaguarPhone.Module.Enums;
 
 namespace JaguarPhone.Module
@@ -12,19 +17,19 @@ namespace JaguarPhone.Module
         private uint callsOther;
         private uint sms;
         private bool tv;
+        private ObservableCollection<SuperPower> listSuperpower = new();
         private SuperPower tSuperPower;
         private readonly PrestigeTariffs prestigeTariff;
 
-        public Tariff(string name, uint price, double gbInternet, bool callsJaguar, uint callsOther, uint sms, bool tv, SuperPower tSuperPower)
+        public Tariff(string name, uint price, double gbInternet, bool callsJaguar, uint callsOther, uint sms, bool tv)
         {
-            this.name = name;
-            this.price = price;
-            this.gbInternet = gbInternet;
-            this.callsJaguar = callsJaguar;
-            this.callsOther = callsOther;
-            this.sms = sms;
-            this.tv = tv;
-            this.tSuperPower = tSuperPower;
+            Name = name;
+            Price = price;
+            GbInternet = gbInternet;
+            CallsJaguar = callsJaguar;
+            CallsOther = callsOther;
+            Sms = sms;
+            Tv = tv;
             prestigeTariff = SetPrestigeTariff();
         }
 
@@ -41,7 +46,12 @@ namespace JaguarPhone.Module
         public string Name
         {
             get => name;
-            set => name = value ?? throw new ArgumentNullException(nameof(value));
+            set
+            {
+                if (value.Length < 3)
+                    throw new Exception("Назва тарифу має бути більше 2 символів");
+                name = value;
+            }
         }
         public uint Price
         {
@@ -53,8 +63,9 @@ namespace JaguarPhone.Module
             get => gbInternet;
             set
             {
-                if(value >=0)
-                    gbInternet = value;
+                if (value < 0)
+                    throw new Exception("Кількість гігабайт інтернету не може бути від'ємною");
+                gbInternet = value;
             }
         }
         public bool CallsJaguar
@@ -77,12 +88,19 @@ namespace JaguarPhone.Module
             get => tv;
             set => tv = value;
         }
+
+        public ObservableCollection<SuperPower> ListSuperpower
+        {
+            get => listSuperpower;
+            set => listSuperpower = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public SuperPower TSuperPower
         {
             get => tSuperPower;
             set => tSuperPower = value ?? throw new ArgumentNullException(nameof(value));
         }
-
         public PrestigeTariffs PrestigeTariff => prestigeTariff;
 
         protected bool Equals(Tariff other)
@@ -103,7 +121,24 @@ namespace JaguarPhone.Module
 
         public override string ToString()
         {
-            return $"Name: {name}, Price: {price}, GbInternet: {gbInternet}, CallsJaguar: {callsJaguar}, CallsOther: {callsOther}, Sms: {sms}, Tv: {tv}, TSuperPower: {tSuperPower}, PrestigeTariffs: {prestigeTariff}";
+            return $" {name}";
         }
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public string GetInfo => GetInfoMethod();
+        string GetInfoMethod()
+        {
+            string t = "∞";
+            string callsJags = "-";
+            string tvs = "-";
+
+            if(callsJaguar)
+                callsJags = "∞";
+            if (tv)
+                tvs = "∞";
+
+            return $"Ім'я: {name}\n Ціна: {price}\n Інтернет(ГБ): {gbInternet}\n Дзвінки Ягуар: {callsJags}\n " +
+                   $"Дзвінки на інших операторів: {callsOther}\n СМС: {sms}\n ТВ: {tvs}";
+        }
+
     }
 }

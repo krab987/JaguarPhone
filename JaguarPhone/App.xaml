@@ -1,51 +1,60 @@
-﻿<Application x:Class="JaguarPhone.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:jaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibrary"
-             StartupUri="/View/JaguarPhone.xaml">
+﻿<Application
+    x:Class="JaguarPhone.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:jaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibrary"
+    StartupUri="/View/JaguarPhone.xaml">
+
+
     <Application.Resources>
-        <Style x:Key="{x:Type PasswordBox}"
-               TargetType="{x:Type PasswordBox}">
-            <Setter Property="jaguarLibraryControls:PasswordBoxWater.IsMonitoring"
-                    Value="True"/>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        <Style TargetType="{x:Type UserControl}">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="FontSize" Value="24" />
+        </Style>
+        <Style x:Key="{x:Type PasswordBox}" TargetType="{x:Type PasswordBox}">
+            <Setter Property="jaguarLibraryControls:PasswordBoxWater.IsMonitoring" Value="True" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type PasswordBox}">
-                        <Border Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                SnapsToDevicePixels="true">
+                        <Border
+                            Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
                             <Grid>
-                                <ScrollViewer x:Name="PART_ContentHost"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                <TextBlock Text= "Введіть Пароль"
-                                           Margin="4, 2, 0, 0"
-                                           Foreground="Gray" 
-                                           Visibility="Collapsed"
-                                           Name="txtPrompt" />
+                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <TextBlock
+                                    Name="txtPrompt"
+                                    Margin="4,2,0,0"
+                                    Foreground="Gray"
+                                    Text="Введіть Пароль"
+                                    Visibility="Collapsed" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled"
-                                     Value="false">
-                                <Setter TargetName="Bd"
-                                        Property="Background"
-                                        Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
-                                <Setter Property="Foreground"
-                                        Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                             </Trigger>
                             <Trigger Property="jaguarLibraryControls:PasswordBoxWater.PasswordLength" Value="0">
-                                <Setter Property="Visibility" TargetName="txtPrompt" Value="Visible"/>
+                                <Setter TargetName="txtPrompt" Property="Visibility" Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="{x:Type ListView}">
+            <Setter Property="ToolTip.ShowsToolTipOnKeyboardFocus" Value="True" />
+        </Style>
     </Application.Resources>
 </Application>
 
-    
-    
-    
+
+

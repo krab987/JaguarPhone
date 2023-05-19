@@ -2,6 +2,9 @@
 using System;
 using System.Windows;
 using JaguarPhone.Module.Enums;
+using System.ComponentModel;
+using System.IO.IsolatedStorage;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace JaguarPhone.View
 {
@@ -34,6 +37,11 @@ namespace JaguarPhone.View
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Jaguar.SaveUser();
+            base.OnClosing(e);
         }
     }
 }

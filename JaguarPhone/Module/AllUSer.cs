@@ -1,14 +1,18 @@
 ﻿using JaguarPhone.Module.Enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace JaguarPhone.Module
 {
-    public abstract class AllUSer
+    public abstract class AllUSer: INotifyPropertyChanged
     {
         private string name;
         private string lastName;
@@ -19,8 +23,9 @@ namespace JaguarPhone.Module
         private TelModel telModel;
         private bool esimSupport;
         private Tariff _tariff;
-        private List<Service> listServices;
-        private List<string> activities;
+        private ObservableCollection<Service> listServices;
+        private ObservableCollection<string> activities;
+        private DateOnly dateTariff;
 
         public AllUSer(string name, string lastName, string telephone, string password, TelModel telModel)
         {
@@ -35,11 +40,11 @@ namespace JaguarPhone.Module
             balance = 0;
             dateConnecing = DateOnly.FromDateTime(DateTime.Now);
             esimSupport = telModel != TelModel.Інша;
-            listServices = new List<Service>();
-            activities = new List<string>();
-            _tariff = Jaguar.AllTariffs[0];
+            listServices = new ObservableCollection<Service>();
+            activities = new ObservableCollection<string>();
+            Tariff = Jaguar.AllTariffs[0];
         }
-        public AllUSer(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, List<Service> listServices, List<string> activities)
+        public AllUSer(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, ObservableCollection<Service> listServices, ObservableCollection<string> activities)
         {
             this.name = name;
             this.lastName = lastName;
@@ -68,7 +73,6 @@ namespace JaguarPhone.Module
             }
             return true;
         }
-
         public bool ConnectTariff(string name)
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == name))
@@ -80,7 +84,6 @@ namespace JaguarPhone.Module
             return false;
 
         }
-
         public bool ConnectService(string name)
         {
             foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
@@ -121,10 +124,11 @@ namespace JaguarPhone.Module
             get => password;
             set
             {
-                if (!Regex.IsMatch(value, @"^(?=.*[a-zA-Z])(?=.*\d)") ||  value.Length < 6  || value.Length > 256){
-                    throw new ArgumentException(
-                        "Пароль повинен містити принаймні одну літеру і одну цифру, і бути від 6 до 256 символів.");
-                }
+                //if (!Regex.IsMatch(value, @"^(?=.*[a-zA-Z])(?=.*\d)") || value.Length < 6 || value.Length > 256)
+                //{
+                //    throw new ArgumentException(
+                //        "Пароль повинен містити принаймні одну літеру і одну цифру, і бути від 6 до 256 символів.");
+                //}
                 password = value;
             }
         }
@@ -142,17 +146,27 @@ namespace JaguarPhone.Module
         public Tariff Tariff
         {
             get => _tariff;
-            set => _tariff = value ?? throw new ArgumentNullException(nameof(value));
+            set
+            {
+                _tariff = value ?? throw new ArgumentNullException(nameof(value));
+            }
         }
-        public List<Service> ListServices
+
+        public ObservableCollection<Service> ListServices
         {
             get => listServices;
             set => listServices = value ?? throw new ArgumentNullException(nameof(value));
         }
-        public List<string> Activities
+        public ObservableCollection<string> Activities
         {
             get => activities;
             set => activities = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
+        public DateOnly DateTariff
+        {
+            get => dateTariff;
+            set => SetField(ref dateTariff, value, "DateTariff");
         }
 
         protected bool Equals(AllUSer other)
@@ -169,6 +183,20 @@ namespace JaguarPhone.Module
         public override int GetHashCode()
         {
             return telephone;
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }
