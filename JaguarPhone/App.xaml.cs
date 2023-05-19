@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
+using DevExpress.Mvvm;
+using JaguarPhone.View;
+using JaguarPhone.View.Controls;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone
 {
@@ -13,6 +15,9 @@ namespace JaguarPhone
     /// </summary>
     public partial class App : Application
     {
-        
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            Jaguar.Save();
+        }
     }
 }

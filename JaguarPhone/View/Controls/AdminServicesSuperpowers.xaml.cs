@@ -1,4 +1,5 @@
 ﻿using JaguarPhone.Module;
+using JaguarPhone.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,8 +80,10 @@ namespace JaguarPhone.View.Controls
                 SuperPower superPower = ((listsuperpowerView.SelectedItem as SuperPower)!);
                 superPower.Name = nameSP_tb.Text;
                 superPower.CallsOther = UInt32.Parse(callsOther_tb.Text);
-                superPower.GbInternet = UInt32.Parse(internetSP_tb.Text);
-                superPower.Tv = tv_tb.IsEnabled;
+                superPower.GbInternet = Double.Parse(internetSP_tb.Text);
+                if (tv_tb.IsEnabled) superPower.Tv = true;
+                else superPower.Tv = false;
+
             }
             catch (Exception ex)
             {
@@ -92,7 +95,7 @@ namespace JaguarPhone.View.Controls
             try
             {
                 Jaguar.AllSuperPower.Add(new SuperPower(
-                    nameSP_tb.Text, UInt32.Parse(internetSP_tb.Text), UInt32.Parse(callsOther_tb.Text), tv_tb.IsEnabled));
+                    nameSP_tb.Text, Double.Parse(internetSP_tb.Text), UInt32.Parse(callsOther_tb.Text), tv_tb.IsEnabled));
             }
             catch (Exception ex)
             {

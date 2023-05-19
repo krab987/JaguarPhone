@@ -5,6 +5,7 @@ using System.Linq;
 using DevExpress.Mvvm.POCO;
 using JaguarPhone.Module.Enums;
 using JaguarPhone.Module.Interfaces;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.Module
 {

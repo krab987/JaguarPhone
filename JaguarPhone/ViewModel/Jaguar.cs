@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using DevExpress.Mvvm.Native;
+using JaguarPhone.Module;
 using JaguarPhone.Module.Enums;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace JaguarPhone.Module
+namespace JaguarPhone.ViewModel
 {
     public class Jaguar
     {
@@ -18,6 +19,7 @@ namespace JaguarPhone.Module
         private static ObservableCollection<Tariff> _allCheckTariffs = new ObservableCollection<Tariff>();
         private static ObservableCollection<AllUSer> _allUsers = new ObservableCollection<AllUSer>();
         private static SuperAdmin _superAdmin;
+        private static ObservableCollection<SuperPower> _tempSuperPowers = new();
 
         private static string _superAdminFile = @"W:\projects\C#\CourseWork\JaguarPhone\JaguarPhone\Jsons\superadmin.json";
         private static string _adminFile = @"W:\projects\C#\CourseWork\JaguarPhone\JaguarPhone\Jsons\admins.json";
@@ -86,7 +88,7 @@ namespace JaguarPhone.Module
                 var adminJson = File.ReadAllText(_adminFile);
                 var admins = JsonSerializer.Deserialize<ObservableCollection<Admin>>(adminJson)!;
 
-                if (admins.Count !=0)
+                if (admins.Count != 0)
                     foreach (var admin in admins)
                     {
                         if (!_allUsers.Contains(admin))
@@ -175,9 +177,12 @@ namespace JaguarPhone.Module
         }
         public static SuperAdmin SuperAdmin { get => _superAdmin; }
 
-        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
-        public static int CurUserIndex { get; set; } = -1;
-        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public static AllUSer CurUser { get; set; } = null!;
+        public static ObservableCollection<SuperPower> TempSuperPowers
+        {
+            get => _tempSuperPowers;
+            set => _tempSuperPowers = value ?? throw new ArgumentNullException(nameof(value));
+        }
+
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using JaguarPhone.Module.Enums;
 
 namespace JaguarPhone.Module
 {
-    public class Tariff
+    public class Tariff: INotifyPropertyChanged
     {
         private string name;
         private uint price;
@@ -16,7 +17,7 @@ namespace JaguarPhone.Module
         private bool callsJaguar;
         private uint callsOther;
         private uint sms;
-        private bool tv;
+        private bool? tv;
         private ObservableCollection<SuperPower> listSuperpower = new();
         private readonly PrestigeTariffs prestigeTariff;
 
@@ -31,7 +32,7 @@ namespace JaguarPhone.Module
             Tv = tv;
             prestigeTariff = SetPrestigeTariff();
         }
-
+        public Tariff(){ }
         PrestigeTariffs SetPrestigeTariff()
         {
             PrestigeTariffs rez = PrestigeTariffs.Silver;
@@ -49,14 +50,18 @@ namespace JaguarPhone.Module
             {
                 if (value.Length < 3)
                     throw new Exception("Назва тарифу має бути більше 2 символів");
-                name = value;
+                SetField(ref name, value, "Name");
             }
         }
         public uint Price
         {
             get => price;
-            set => price = value;
+            set
+            {
+                SetField(ref price, value, "Price");
+            }
         }
+
         public double GbInternet
         {
             get => gbInternet;
@@ -64,34 +69,36 @@ namespace JaguarPhone.Module
             {
                 if (value < 0)
                     throw new Exception("Кількість гігабайт інтернету не може бути від'ємною");
-                gbInternet = value;
+                SetField(ref gbInternet, value, "GbInternet");
             }
         }
         public bool CallsJaguar
         {
             get => callsJaguar;
-            set => callsJaguar = value;
+            set => SetField(ref callsJaguar, value, "CallsJaguar");
         }
+
         public uint CallsOther
         {
             get => callsOther;
-            set => callsOther = value;
+            set => SetField(ref callsOther, value, "CallsOther");
         }
         public uint Sms
         {
             get => sms;
-            set => sms = value;
+            set => SetField(ref sms, value, "Sms");
         }
-        public bool Tv
+        public bool? Tv
         {
             get => tv;
-            set => tv = value;
+            set => SetField(ref tv, value, "Tv");
+
         }
 
         public ObservableCollection<SuperPower> ListSuperpower
         {
             get => listSuperpower;
-            set => listSuperpower = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref listSuperpower, value, "ListSuperpower");
         }
 
         public PrestigeTariffs PrestigeTariff => prestigeTariff;
@@ -126,12 +133,26 @@ namespace JaguarPhone.Module
 
             if(callsJaguar)
                 callsJags = "∞";
-            if (tv)
+            if (tv == true)
                 tvs = "∞";
 
             return $"Ім'я: {name}\n Ціна: {price}\n Інтернет(ГБ): {gbInternet}\n Дзвінки Ягуар: {callsJags}\n " +
                    $"Дзвінки на інших операторів: {callsOther}\n СМС: {sms}\n ТВ: {tvs}";
         }
 
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

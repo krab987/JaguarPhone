@@ -5,6 +5,7 @@ using JaguarPhone.Module.Enums;
 using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization.Formatters.Binary;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.View
 {

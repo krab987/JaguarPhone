@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DevExpress.Mvvm;
@@ -13,7 +14,10 @@ namespace JaguarPhone.ViewModel
         public MainViewModel()
         {
             Jaguar.Load();
+
+            // delete this to show prog
             Jaguar.CurUser = Jaguar.AllUsers[0];
+
             //Jaguar.AllServices.Add(new Service("30 хвилин на інші мережі", 25, "Отримайте 30 хвилин до вашого тарифу, щоб телефонувати на інші мережі та міські номери по Україні.\r\n\r\nВитрачайте додаткові хвилини для дзвінків на інші мобільні та міські номери по Україні. Термін дії: 4 тижні, невикористані хвилини анулюються.\r\n\r\nПакет продовжується автоматично.\r\n\r\nБудь ласка, зверніть увагу. Якщо у вашому тарифі передбачені нетарифіковані хвилини, у першу чергу використовуватимуться додаткові хвилини з пакета, потім діють умови вашого тарифу.\r\n\r\nЩоб підключити, треба мати на рахунку суму для першого платежу за послугу."));
             //Jaguar.AllServices.Add(new Service("День Онлайн 1000мб", 25, "Не шукайте Wi-Fi, якщо раптом закінчився мобільний інтернет. Підключайте додаткові 1000 МБ у пакеті День онлайн.\r\n\r\nЩоб підключити, треба мати на рахунку суму для першого платежу за послугу."));
             //Jaguar.AllTariffs.Add(new Tariff("Знайомтесь Jaguar!", 30, 0.2, true, 0, 0, false));
@@ -25,27 +29,105 @@ namespace JaguarPhone.ViewModel
             //Jaguar.CheckTariffs.Add(new Tariff("Вперед", 200, 45, true, 200, 10, true));
             //Jaguar.Save();
 
-            Task.Factory.StartNew(() =>
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
+            //    if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
+            //        DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
+            //});
+            //Task.Factory.StartNew(() =>
+            //{
+            //    Account = Jaguar.CurUser.Tariff;
+            //    foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
+            //    {
+            //        if (Equals(Jaguar.CurUser.TSuperPower, el))
+            //        {
+            //            Account.CallsOther += el.CallsOther;
+            //            Account.GbInternet += el.GbInternet;
+            //            if (el.Tv)
+            //                Account.Tv = el.Tv;
+            //        }
+            //    }
+            //});
+            //Task.Factory.StartNew(() =>
+            //{
+            //    AvailableTariffs = Jaguar.AllTariffs;
+            //    foreach (var el in Jaguar.AllTariffs)
+            //        if (Equals(Jaguar.CurUser.Tariff, el))
+            //            AvailableTariffs.Remove(el);
+            //});
+            DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
+            if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
+                DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
+            Account = Jaguar.CurUser.Tariff;
+            foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
             {
-                DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
-                if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
-                    DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
-            });
-            Task.Factory.StartNew(() =>
-            {
-                Account = Jaguar.CurUser.Tariff;
-                foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
+                if (Equals(Jaguar.CurUser.TSuperPower, el))
                 {
-                    if (Jaguar.CurUser.TSuperPower == el)
-                    {
-                        Account.CallsOther += el.CallsOther;
-                        Account.GbInternet += el.GbInternet;
-                        if (el.Tv)
-                            Account.Tv = el.Tv;
-                    }
+                    Account.CallsOther += el.CallsOther;
+                    Account.GbInternet += el.GbInternet;
+                    if (el.Tv)
+                        Account.Tv = el.Tv;
                 }
-            });
+            }
+            AvailableTariffs = Jaguar.AllTariffs;
+            //foreach (var el in Jaguar.AllTariffs)
+            //    if (Equals(Jaguar.CurUser.Tariff, el))
+            //        AvailableTariffs.Remove(el);
+
         }
+        private Tariff account;
+        private DateOnly datePayTariff;
+        private ObservableCollection<Tariff> availableTariffs;
+
+        public DateOnly DatePayTariff
+        {
+            get => datePayTariff;
+            set
+            {
+                datePayTariff = value;
+                RaisePropertyChanged(() => DatePayTariff); // обнова змінної при кожному set
+            }
+        }
+        public Tariff Account
+        {
+            get => account;
+            set
+            {
+                account = value;
+                RaisePropertyChanged(() => Account); // обнова змінної при кожному set
+            }
+        }
+        public ObservableCollection<Tariff> AvailableTariffs
+        {
+            get => availableTariffs;
+            set
+            {
+                availableTariffs = value;
+                RaisePropertyChanged(() => AvailableTariffs); // обнова змінної при кожному set
+            }
+        }
+
+
+        #region Switch UserControls
+        private object currentView;
+        public object CurrentView
+        {
+            get => currentView;
+            set
+            {
+                currentView = value;
+                RaisePropertyChanged(() => CurrentView); // обнова змінної при кожному set
+            }
+        }
+        public ICommand OpenAllUserControl => new DelegateCommand(() => CurrentView = new AllUser());
+        public ICommand OpenAdminTariffControl => new DelegateCommand(() => CurrentView = new AdminTariff());
+        public ICommand OpenAdminServSPControl => new DelegateCommand(() => CurrentView = new AdminServicesSuperpowers());
+        public ICommand OpenProfile=> new DelegateCommand(() => CurrentView = new Profile()); 
+        public ICommand OpenAllUserTariff=> new DelegateCommand(() => CurrentView = new AllUserTariff()); 
+        #endregion
+
 
         public ICommand OpenRegist
         {
@@ -58,25 +140,16 @@ namespace JaguarPhone.ViewModel
                 });
             }
         }
-
-        private DateOnly datePayTariff;
-        public DateOnly DatePayTariff
+        
+        public ICommand RefreshData
         {
-            get => datePayTariff;
-            set
+            get
             {
-                datePayTariff = value;
-                RaisePropertyChanged(() => DatePayTariff); // обнова змінної при кожному set
-            }
-        }
-        private Tariff account;
-        public Tariff Account
-        {
-            get => account;
-            set
-            {
-                account = value;
-                RaisePropertyChanged(() => Account); // обнова змінної при кожному set
+                return new DelegateCommand(() =>
+                {
+                    Jaguar.Save();
+                    Jaguar.Load();
+                });
             }
         }
 

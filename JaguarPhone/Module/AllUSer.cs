@@ -1,4 +1,5 @@
 ﻿using JaguarPhone.Module.Enums;
+using JaguarPhone.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -104,18 +105,19 @@ namespace JaguarPhone.Module
         public string Name
         {
             get => name;
-            set => name = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref name, value, "Name");
         }
         public string LastName
         {
             get => lastName;
-            set => lastName = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref lastName, value, "LastName");
         }
         public int Balance
         {
             get => balance;
             set => SetField(ref balance, value, "Balance");
         }
+
         public int Telephone
         {
             get => telephone;
@@ -148,10 +150,8 @@ namespace JaguarPhone.Module
         public Tariff Tariff
         {
             get => _tariff;
-            set
-            {
-                _tariff = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            set => SetField(ref _tariff, value, "Tariff");
+
         }
 
         public ObservableCollection<Service> ListServices
@@ -173,7 +173,8 @@ namespace JaguarPhone.Module
         public SuperPower TSuperPower
         {
             get => tSuperPower;
-            set => tSuperPower = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref tSuperPower, value, "TSuperPower");
+
         }
 
         protected bool Equals(AllUSer other)

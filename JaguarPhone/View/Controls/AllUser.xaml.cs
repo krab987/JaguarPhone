@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using JaguarPhone.Module;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.View.Controls
 {
@@ -10,6 +11,7 @@ namespace JaguarPhone.View.Controls
     /// </summary>
     public partial class AllUser : UserControl
     {
+        string currentTariffname = " ";
         public AllUser()
         {
             InitializeComponent();
@@ -30,6 +32,16 @@ namespace JaguarPhone.View.Controls
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+
+        private void ConnectTariff_Click(object sender, RoutedEventArgs e)
+        {
+            Jaguar.CurUser.ConnectTariff(currentTariffname);
+        }
+        private void tariffItem_gd_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            currentTariffname = (sender as Grid).ToolTip.ToString();
         }
     }
 }

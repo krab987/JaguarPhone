@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaguarPhone.View.Controls"
-             xmlns:Module="clr-namespace:JaguarPhone.Module" x:Class="JaguarPhone.View.Controls.AdminServicesSuperpowers"
+             xmlns:Module="clr-namespace:JaguarPhone.Module"
+             xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
+             x:Class="JaguarPhone.View.Controls.AdminServicesSuperpowers"
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1600" Background="White">
     <UserControl.DataContext>
-        <Module:Jaguar />
+        <viewModel:Jaguar />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>

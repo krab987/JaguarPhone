@@ -8,13 +8,15 @@
     xmlns:local="clr-namespace:JaguarPhone.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:module="clr-namespace:JaguarPhone.Module"
+    xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
     d:DesignHeight="750"
     d:DesignWidth="1600"
     Background="White"
     mc:Ignorable="d">
     <UserControl.DataContext>
-        <module:Jaguar />
+        <viewModel:Jaguar/>
     </UserControl.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="13*" />
@@ -214,7 +216,8 @@
                     <ColumnDefinition Width="51*"/>
                 </Grid.ColumnDefinitions>
                 <Button
-                        Content="Редагувати тариф" HorizontalAlignment="Center" Click="ModifyTariff_Click" VerticalAlignment="Center" />
+                        Content="Редагувати тариф" HorizontalAlignment="Center" Click="ModifyTariff_Click" VerticalAlignment="Center" >
+                </Button>
                 <Button
                     Content="Додати тариф" HorizontalAlignment="Center" Click="AddTariff_Click" VerticalAlignment="Center" Grid.Column="1"  />
                 <Button Content="Видалити тариф" HorizontalAlignment="Center" VerticalAlignment="Center" Click="RemoveTariff_Click" Grid.Column="2"/>

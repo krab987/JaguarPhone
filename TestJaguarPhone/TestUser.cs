@@ -1,5 +1,6 @@
 ﻿using JaguarPhone.Module.Enums;
 using JaguarPhone.Module;
+using JaguarPhone.ViewModel;
 
 namespace TestJaguarPhone
 {

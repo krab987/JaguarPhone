@@ -3,12 +3,48 @@
     "Name": "\u0422\u0435\u043B\u0435\u0431\u0430\u0447\u0435\u043D\u043D\u044F",
     "GbInternet": 0,
     "CallsOther": 0,
-    "Tv": true
+    "Tv": false
   },
   {
-    "Name": "\u0420\u0430\u0437\u043E\u043C - \u0441\u0438\u043B\u0430!",
-    "GbInternet": 4,
+    "Name": "\u002B5\u0413\u0411",
+    "GbInternet": 5,
+    "CallsOther": 0,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B100\u0445\u0432",
+    "GbInternet": 0,
+    "CallsOther": 100,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B2\u0413\u0411 \u002B40\u0445\u0432",
+    "GbInternet": 2,
+    "CallsOther": 40,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B10\u0445\u0432",
+    "GbInternet": 0,
+    "CallsOther": 10,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B50\u0445\u0432",
+    "GbInternet": 0,
     "CallsOther": 50,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
+    "GbInternet": 1,
+    "CallsOther": 20,
+    "Tv": false
+  },
+  {
+    "Name": "\u002B1\u0413\u0411",
+    "GbInternet": 1.5,
+    "CallsOther": 0,
     "Tv": false
   }
 ]

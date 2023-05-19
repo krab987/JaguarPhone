@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JaguarPhone.Module.Enums;
 using JaguarPhone.Module.Interfaces;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.Module
 {

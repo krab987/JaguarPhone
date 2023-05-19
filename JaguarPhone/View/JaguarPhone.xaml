@@ -16,23 +16,22 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="775*"/>
+            <RowDefinition Height="59*"/>
+            <RowDefinition Height="825*"/>
         </Grid.RowDefinitions>
-        <local:AdminTariff Grid.Row="1"  Visibility="Collapsed" Margin="0,15,0,0" />
-        <controls:AdminServicesSuperpowers Grid.Row="1" Visibility="Collapsed" Margin="0,15,0,0"/>
-        <controls:AllUser Grid.RowSpan="2" HorizontalAlignment="Center" Width="1600" Height="783" VerticalAlignment="Bottom"/>
-        <Menu HorizontalContentAlignment="Right" VerticalContentAlignment="Top">
-            <MenuItem Header="Профіль">
-                <MenuItem Header="Редагувати"></MenuItem>>
-                <MenuItem Header="Вийти"></MenuItem>>
 
-                <DocumentViewer/>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
+
+        <Menu Name="MenuMain" HorizontalAlignment="Center" Background="#FFF7E2D3">
+            <MenuItem Header="Профіль" VerticalAlignment="Top" Height="59">
+                <MenuItem Header="Редагувати" Command="{Binding OpenProfile, Mode=OneWay}"></MenuItem> >
+                <MenuItem Header="Змінити каристувача" Click="LogOut_Click"></MenuItem> >
             </MenuItem>
-            <MenuItem Header="Особистий Кабінет" Click="MenuItem_Click"></MenuItem>
-            <MenuItem Header="Адміністратор">
-                <MenuItem Header="Тарифи"></MenuItem>
-                <MenuItem Header="Сервіси/Суперсили"></MenuItem>
+            <MenuItem Header="Особистий Кабінет" Command="{Binding OpenAllUserControl, Mode=OneWay}"></MenuItem>
+            <MenuItem Header="Запропонувати свій тариф" Command="{Binding OpenAllUserTariff, Mode=OneWay}"></MenuItem>
+            <MenuItem Header="Адміністратор" AutomationProperties.Name="AdminMenuItem">
+                <MenuItem Header="Тарифи" Command="{Binding OpenAdminTariffControl, Mode=OneWay}"></MenuItem>
+                <MenuItem Header="Сервіси/Суперсили" Command="{Binding OpenAdminServSPControl, Mode=OneWay}"></MenuItem>
             </MenuItem>
         </Menu>
     </Grid>

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using JaguarPhone.Module;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.View
 {
@@ -54,7 +55,7 @@ namespace JaguarPhone.View
 
                 Tariff tariff = (((listTariffView.SelectedItem as Tariff)!));
                 tariff.Name = name_tb.Text;
-                tariff.GbInternet = UInt32.Parse(internet_tb.Text);
+                tariff.GbInternet = Double.Parse(internet_tb.Text);
                 tariff.CallsOther = UInt32.Parse(callsOther_tb.Text);
                 tariff.CallsJaguar = callsJag_tb.IsEnabled;
                 tariff.Tv = tv_tb.IsEnabled;
@@ -98,7 +99,6 @@ namespace JaguarPhone.View
 
             }
         }
-
         private void RemoveTariff_Click(object sender, RoutedEventArgs e)
         {
             try

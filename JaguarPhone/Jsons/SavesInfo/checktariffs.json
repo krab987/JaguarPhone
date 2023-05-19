@@ -8,7 +8,7 @@
     "Sms": 3000,
     "Tv": true,
     "ListSuperpower": [],
-    "PrestigeTariff": 1
+    "PrestigeTariff": 0
   },
   {
     "Name": "\u0412\u043F\u0435\u0440\u0435\u0434",
@@ -19,6 +19,30 @@
     "Sms": 10,
     "Tv": true,
     "ListSuperpower": [],
-    "PrestigeTariff": 1
+    "PrestigeTariff": 0
+  },
+  {
+    "Name": "\u041F\u0027\u044F\u0442\u044C \u043F\u0027\u044F\u0442\u0456\u0440\u043E\u043A",
+    "Price": 55,
+    "GbInternet": 5,
+    "CallsJaguar": true,
+    "CallsOther": 55,
+    "Sms": 0,
+    "Tv": false,
+    "ListSuperpower": [
+      {
+        "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
+        "GbInternet": 1,
+        "CallsOther": 20,
+        "Tv": false
+      },
+      {
+        "Name": "\u002B50\u0445\u0432",
+        "GbInternet": 0,
+        "CallsOther": 50,
+        "Tv": false
+      }
+    ],
+    "PrestigeTariff": 0
   }
 ]

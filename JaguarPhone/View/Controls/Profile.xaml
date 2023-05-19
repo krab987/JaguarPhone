@@ -1,0 +1,50 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JaguarPhone.View.Controls"
+             xmlns:jaguarLibraryControls="clr-namespace:JaguarLibraryControls;assembly=JaguarLibrary"
+             xmlns:Enums="clr-namespace:JaguarPhone.Module.Enums"
+             xmlns:Module="clr-namespace:JaguarPhone.Module"
+             xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
+             x:Class="JaguarPhone.View.Controls.Profile"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="1600" Background="White">
+
+    <UserControl.DataContext>
+        <viewModel:Jaguar/>
+    </UserControl.DataContext>
+
+    <Grid Margin="0,20,0,55">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <jaguarLibraryControls:TextBoxWater Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" WaterMark="Ім'я" Height="35" WaterMarkEnabled="True" Text="{Binding CurUser.Name}" x:Name="firstNameRegist" AutomationProperties.HelpText="Ім'я" Foreground="#FD000000"/>
+            <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" Height="34" WaterMark="По батькові" x:Name="lastNameRegist" AutomationProperties.HelpText="По батькові" Text="{Binding CurUser.LastName}" Foreground="Black"/>
+            <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" Height="35" WaterMark="Телефон" x:Name="telephoneRegist" AutomationProperties.HelpText="Телефон" Text="{Binding CurUser.Telephone}" Foreground="Black"/>
+            <ComboBox HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="230" Text="Модель телефону" x:Name="telModelRegist" ItemsSource="{Binding Source={jaguarLibraryControls:EnumBindingSource {x:Type Enums:TelModel}}}" Margin="0,53,0,0" SelectedItem="{Binding CurUser.TelModel}" />
+            <Label Content="Марка телефону" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="230" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+            <PasswordBox HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="230" x:Name="passwordOneRegist" PasswordChar="●" RenderTransformOrigin="0.5,0.5" Height="35"/>
+            <PasswordBox HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Width="230" x:Name="passwordTwoRegist" Height="35"/>
+            <Button Content="Редагувати" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Center" Click="ModifyProfile_Click"/>
+            <Label Content="Поле не потребує редагування? Лишіть його 😊" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,5 +1,4 @@
 ﻿using JaguarPhone.Module.Enums;
-using JaguarPhone.Module;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.View
 {
@@ -34,13 +34,10 @@ namespace JaguarPhone.View
                 {
                     var el = Jaguar.AllUsers[index];
                     if (el.Telephone == Int32.Parse(telephoneLogin.Text) && el.Password == passwordLogin.Password)
-                    {
                         Jaguar.CurUser = el;
-                        Jaguar.CurUserIndex = index;
-                    }
                 }
 
-                if (Jaguar.CurUserIndex == -1)
+                if (Jaguar.CurUser == null)
                     throw new Exception("Невірний логін або пароль");
 
                 new JaguarPhone().Show();

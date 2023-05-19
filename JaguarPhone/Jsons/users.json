@@ -2,9 +2,9 @@
   {
     "Name": "asd",
     "LastName": "ad",
-    "Balance": 0,
+    "Balance": 20,
     "Telephone": 999999999,
-    "Password": "1234Nv",
+    "Password": "1234vv",
     "DateConnecing": "2023-05-15",
     "TelModel": 0,
     "Tariff": {
@@ -20,7 +20,8 @@
     },
     "ListServices": [],
     "Activities": [],
-    "DateTariff": "2023-05-15"
+    "DateTariff": "2023-05-15",
+    "TSuperPower": null
   },
   {
     "Name": "Bober",
@@ -43,6 +44,7 @@
     },
     "ListServices": [],
     "Activities": [],
-    "DateTariff": "2023-05-16"
+    "DateTariff": "2023-05-16",
+    "TSuperPower": null
   }
 ]
