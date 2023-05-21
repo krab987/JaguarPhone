@@ -22,8 +22,9 @@ namespace JaguarPhone.View.Controls
         {
             InitializeComponent();
             foreach (var tariff in Jaguar.AllTariffs)
-                if (tariff.Name == (string)nameTariff_lbl.Content)
+                if (tariff.Name == Jaguar.CurUser.Account.Name)
                     tempTariff = tariff;
+
             var clock = new Clock();
             clock.NewDay += OnNewDay;
             TryGetTariffPack();
@@ -57,13 +58,13 @@ namespace JaguarPhone.View.Controls
             {
                 Jaguar.CurUser.Balance -= Jaguar.CurUser.Account.Price;
 
-                Jaguar.CurUser.ConnectTariff(tempTariff.Name);
+                Jaguar.CurUser.ConnectTariff(Jaguar.CurUser.Account.Name);
                 //foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == Jaguar.CurUser.Account.Name))
                 //    tempTariff = el;
 
 
                 var account = Jaguar.CurUser.Account;
-                var sp = Jaguar.CurUser.TSuperPower;
+                var sp = Jaguar.CurUser.SuperPowerCurrent;
 
                 //account.CallsOther = tempTariff.CallsOther;
                 //account.GbInternet = tempTariff.GbInternet;
@@ -76,9 +77,10 @@ namespace JaguarPhone.View.Controls
                     if (sp.Tv) account.Tv = sp.Tv; 
                 }
 
-                Jaguar.CurUser.AvailableTariffs = true;
                 Jaguar.CurUser.AvailableSP = true;
+                Jaguar.CurUser.AvailableTariffs = true;
             }
+           
 
         }
 
@@ -103,21 +105,26 @@ namespace JaguarPhone.View.Controls
         {
             try
             {
+                Tariff tarCheckBalance = new Tariff();
                 foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == currentTariffname))
                 {
-                    tempTariff = el;
-                    tempTariff = el;
-                    tempTariff.CallsJaguar = el.CallsJaguar;
-                    tempTariff.CallsOther = el.CallsOther;
-                    tempTariff.ListSuperpower = el.ListSuperpower;
-                    tempTariff.Sms = el.Sms;
-                    tempTariff.Tv = el.Tv;
-                    tempTariff.GbInternet = el.GbInternet;
+                    tarCheckBalance = el;
                 }
-                    
-
-                if (Jaguar.CurUser.Balance < tempTariff.Price)
+                if (Jaguar.CurUser.Balance < tarCheckBalance.Price)
                     throw new Exception("Недостатньо коштів для нарахування нового пакету послуг");
+
+                Jaguar.CurUser.TariffCurrent = tarCheckBalance;
+                //foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == currentTariffname))
+                //{
+                //    tempTariff = el;
+                //    //tempTariff = el;
+                //    //tempTariff.CallsJaguar = el.CallsJaguar;
+                //    //tempTariff.CallsOther = el.CallsOther;
+                //    //tempTariff.ListSuperpower = el.ListSuperpower;
+                //    //tempTariff.Sms = el.Sms;
+                //    //tempTariff.Tv = el.Tv;
+                //    //tempTariff.GbInternet = el.GbInternet;
+                //}
 
                 Jaguar.CurUser.ConnectTariff(currentTariffname);
                 Jaguar.CurUser.Balance -= Jaguar.CurUser.Account.Price;
@@ -146,9 +153,11 @@ namespace JaguarPhone.View.Controls
             try
             {
                 var account = Jaguar.CurUser.Account;
+                tempTariff = Jaguar.CurUser.TariffCurrent;
                 Tariff accCheck = tempTariff;
                 var sp = Jaguar.CurUser.TSuperPower;
                 bool? tempTariffTv = tempTariff.Tv;
+                tempSuperPower = Jaguar.CurUser.SuperPowerCurrent;
 
                 if (sp == null)
                     throw new Exception("Оберіть суперсилу");
@@ -177,7 +186,7 @@ namespace JaguarPhone.View.Controls
                     account.GbInternet += sp.GbInternet;
                     if (sp.Tv) account.Tv = sp.Tv;
 
-                    tempSuperPower = sp;
+                    Jaguar.CurUser.SuperPowerCurrent = sp;
                     Jaguar.CurUser.AvailableSP = false; 
                 }
             }

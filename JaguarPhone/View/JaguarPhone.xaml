@@ -8,7 +8,8 @@
         xmlns:viewModel="clr-namespace:JaguarPhone.ViewModel"
         xmlns:controls="clr-namespace:JaguarPhone.View.Controls"
         mc:Ignorable="d"
-        Title="JaguarPhone" Height="900" Width="1600">
+        Title="JaguarPhone" Height="900" Width="1600"
+        Icon="W:\projects\C#\CourseWork\JaguarPhone\JaguarPhone\yResources\jaguar.ico">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
@@ -16,23 +17,42 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <!--<RowDefinition Height="59*"/>-->
             <RowDefinition Height="59*"/>
             <RowDefinition Height="825*"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Grid.Row="1" Content="{Binding CurrentView}"/>
+        <ContentControl Content="{Binding CurrentView}" Grid.Row="1"/>
 
-        <Menu Name="MenuMain" HorizontalAlignment="Center" Background="#FFF7E2D3">
-            <MenuItem Header="Профіль" VerticalAlignment="Top" Height="59">
-                <MenuItem Header="Редагувати" Command="{Binding OpenProfile, Mode=OneWay}"></MenuItem> >
-                <MenuItem Header="Змінити каристувача" Click="LogOut_Click"></MenuItem> >
+        <Menu Name="MenuMain" Background="#FFF7E2D3" HorizontalAlignment="Center">
+            <MenuItem Header="Профіль">
+
+                <MenuItem Header="Редагувати" Command="{Binding OpenProfile, Mode=OneWay}"></MenuItem>
+                <MenuItem Header="Переглянути Активності">
+                    <ListView ItemsSource="{Binding CurUser.Activities, ValidatesOnNotifyDataErrors=True}" ScrollViewer.CanContentScroll="True" HorizontalContentAlignment="Stretch">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment"  Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.DataContext>
+                            <viewModel:Jaguar/>
+                        </ListView.DataContext>
+                    </ListView>
+                </MenuItem>
+                <MenuItem Header="Змінити каристувача" Click="LogOut_Click"></MenuItem>
             </MenuItem>
+
             <MenuItem Header="Особистий Кабінет" Command="{Binding OpenAllUserControl, Mode=OneWay}"></MenuItem>
             <MenuItem Header="Запропонувати свій тариф" Command="{Binding OpenAllUserTariff, Mode=OneWay}"></MenuItem>
+
             <MenuItem Header="Адміністратор" AutomationProperties.Name="AdminMenuItem">
                 <MenuItem Header="Тарифи" Command="{Binding OpenAdminTariffControl, Mode=OneWay}"></MenuItem>
                 <MenuItem Header="Сервіси/Суперсили" Command="{Binding OpenAdminServSPControl, Mode=OneWay}"></MenuItem>
             </MenuItem>
+
+            
+
         </Menu>
     </Grid>
 </Window>

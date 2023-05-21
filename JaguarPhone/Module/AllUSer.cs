@@ -23,10 +23,10 @@ namespace JaguarPhone.Module
         private DateOnly dateConnecing;
         private TelModel telModel;
         private bool esimSupport;
-        private Tariff account;
         private ObservableCollection<Service> listServices;
         private ObservableCollection<string> activities;
 
+        private Tariff account;
         private DateOnly dateTariff;
         private SuperPower tSuperPower;
 
@@ -71,7 +71,7 @@ namespace JaguarPhone.Module
             try
             {
                 Jaguar.CheckTariffs.Add(tariff);
-                Activities.Add($"Created Tariff: {tariff.Name} - {DateTime.Now}");
+                Activities.Add($"Створено тариф: {tariff.Name} - {DateTime.Now}");
             }
             catch (Exception)
             {
@@ -92,7 +92,7 @@ namespace JaguarPhone.Module
                 Account.Tv = el.Tv;
                 Account.GbInternet = el.GbInternet;
 
-                Activities.Add($"Connected Tariff: {name} - {DateTime.Now}");
+                Activities.Add($"Нараховано пакет послуг: {name} - {DateTime.Now} - баланс: {balance}");
                 
                 DateTariff = DateTariff.AddDays(28);
                 return true;
@@ -105,7 +105,7 @@ namespace JaguarPhone.Module
             foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
             {
                 ListServices.Add(el);
-                Activities.Add($"Connected Service: {name} - {DateTime.Now}");
+                Activities.Add($"Підключено сервіс: {name} - {DateTime.Now} - баланс: {balance}");
                 return true;
             }
             return false;
@@ -157,12 +157,6 @@ namespace JaguarPhone.Module
             get => telModel;
             set => telModel = value;
         }
-        public Tariff Account
-        {
-            get => account;
-            set => SetField(ref account, value, "Account");
-
-        }
 
         public ObservableCollection<Service> ListServices
         {
@@ -172,7 +166,7 @@ namespace JaguarPhone.Module
         public ObservableCollection<string> Activities
         {
             get => activities;
-            set => activities = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref activities, value, "Activities");
         }
 
         public DateOnly DateTariff
@@ -180,12 +174,23 @@ namespace JaguarPhone.Module
             get => dateTariff;
             set => SetField(ref dateTariff, value, "DateTariff");
         }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
         public SuperPower TSuperPower
         {
             get => tSuperPower;
             set => SetField(ref tSuperPower, value, "TSuperPower");
 
         }
+        public SuperPower SuperPowerCurrent { get; set; }
+        public Tariff TariffCurrent { get; set; }
+        public Tariff Account
+        {
+            get => account;
+            set => SetField(ref account, value, "Account");
+
+        }
+
 
         protected bool Equals(AllUSer other)
         {
@@ -215,7 +220,6 @@ namespace JaguarPhone.Module
             get => availableSP;
             set => SetField(ref availableSP, value, "AvailableSP");
         }
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

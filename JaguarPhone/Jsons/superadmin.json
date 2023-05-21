@@ -1,35 +1,11 @@
 {
   "Name": "\u0412\u0456\u0442\u0430\u043B\u0456\u0439",
-  "LastName": "Krabovich",
-  "Balance": 85,
+  "LastName": "\u041A\u0440\u0430\u0431\u043E\u0432\u0438\u0447",
+  "Balance": 15,
   "Telephone": 960345222,
   "Password": "",
   "DateConnecing": "0001-01-01",
   "TelModel": 3,
-  "Account": {
-    "Name": "\u0411\u0430\u0437\u0430",
-    "Price": 75,
-    "GbInternet": 1,
-    "CallsJaguar": false,
-    "CallsOther": 20,
-    "Sms": 0,
-    "Tv": true,
-    "ListSuperpower": [
-      {
-        "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
-        "GbInternet": 1,
-        "CallsOther": 20,
-        "Tv": true
-      },
-      {
-        "Name": "\u002B50\u0445\u0432",
-        "GbInternet": 0,
-        "CallsOther": 50,
-        "Tv": true
-      }
-    ],
-    "PrestigeTariff": 0
-  },
   "ListServices": [],
   "Activities": [
     "Created Tariff: \u041D\u0435\u043F\u0435\u0440\u0435\u043C\u043E\u0436\u043D\u0438\u0439 - 18.05.2023 22:59:20",
@@ -218,14 +194,64 @@
     "Connected Tariff: \u041F\u043B\u0430\u043D\u0448\u0435\u0442 - 22.04.2024 01:55:37",
     "Connected Tariff: \u041F\u043B\u0430\u043D\u0448\u0435\u0442 - 22.05.2024 01:55:50",
     "Connected Tariff: \u0411\u0430\u0437\u0430 - 22.05.2024 02:07:31",
-    "Connected Tariff: \u0411\u0430\u0437\u0430 - 22.07.2024 02:08:40"
+    "Connected Tariff: \u0411\u0430\u0437\u0430 - 22.07.2024 02:08:40",
+    "Connected Tariff: \u0411\u0430\u0437\u0430 - 20.10.2023 14:29:34",
+    "Connected Tariff: \u0411\u0430\u0437\u0430 - 20.05.2026 16:15:44",
+    "\u041D\u0430\u0440\u0430\u0445\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u043A\u0435\u0442 \u043F\u043E\u0441\u043B\u0443\u0433: \u041F\u043B\u0430\u043D\u0448\u0435\u0442 - 20.05.2023 17:53:50 - \u0431\u0430\u043B\u0430\u043D\u0441: 455",
+    "\u041D\u0430\u0440\u0430\u0445\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u043A\u0435\u0442 \u043F\u043E\u0441\u043B\u0443\u0433: \u0411\u0430\u0437\u0430 - 20.05.2023 19:25:22 - \u0431\u0430\u043B\u0430\u043D\u0441: 315",
+    "\u041D\u0430\u0440\u0430\u0445\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u043A\u0435\u0442 \u043F\u043E\u0441\u043B\u0443\u0433: \u0411\u0430\u0437\u0430 - 23.06.2023 19:27:08 - \u0431\u0430\u043B\u0430\u043D\u0441: 165",
+    "\u041D\u0430\u0440\u0430\u0445\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u043A\u0435\u0442 \u043F\u043E\u0441\u043B\u0443\u0433: \u0411\u0430\u0437\u0430 - 23.06.2023 19:27:09 - \u0431\u0430\u043B\u0430\u043D\u0441: 90",
+    "\u041D\u0430\u0440\u0430\u0445\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u043A\u0435\u0442 \u043F\u043E\u0441\u043B\u0443\u0433: \u0411\u0430\u0437\u0430 - 23.06.2023 19:27:10 - \u0431\u0430\u043B\u0430\u043D\u0441: 15"
   ],
-  "DateTariff": "2024-08-19",
-  "TSuperPower": {
-    "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
-    "GbInternet": 1,
-    "CallsOther": 20,
-    "Tv": true
+  "DateTariff": "2023-06-23",
+  "SuperPowerCurrent": null,
+  "TariffCurrent": {
+    "Name": "\u0411\u0430\u0437\u0430",
+    "Price": 75,
+    "GbInternet": 0,
+    "CallsJaguar": false,
+    "CallsOther": 0,
+    "Sms": 0,
+    "Tv": false,
+    "ListSuperpower": [
+      {
+        "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
+        "GbInternet": 1,
+        "CallsOther": 20,
+        "Tv": true
+      },
+      {
+        "Name": "\u002B50\u0445\u0432",
+        "GbInternet": 0,
+        "CallsOther": 50,
+        "Tv": true
+      }
+    ],
+    "PrestigeTariff": 0
+  },
+  "Account": {
+    "Name": "\u0411\u0430\u0437\u0430",
+    "Price": 75,
+    "GbInternet": 0,
+    "CallsJaguar": false,
+    "CallsOther": 0,
+    "Sms": 0,
+    "Tv": false,
+    "ListSuperpower": [
+      {
+        "Name": "\u002B1\u0413\u0411 \u002B20\u0445\u0432",
+        "GbInternet": 1,
+        "CallsOther": 20,
+        "Tv": true
+      },
+      {
+        "Name": "\u002B50\u0445\u0432",
+        "GbInternet": 0,
+        "CallsOther": 50,
+        "Tv": true
+      }
+    ],
+    "PrestigeTariff": 0
   },
   "AvailableTariffs": true,
   "AvailableSP": true
