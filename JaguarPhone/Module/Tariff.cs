@@ -14,14 +14,14 @@ namespace JaguarPhone.Module
         private string name;
         private uint price;
         private double gbInternet;
-        private bool callsJaguar;
+        private bool? callsJaguar;
         private uint callsOther;
         private uint sms;
         private bool? tv;
         private ObservableCollection<SuperPower> listSuperpower = new();
-        private readonly PrestigeTariffs prestigeTariff;
+        private PrestigeTariffs prestigeTariff;
 
-        public Tariff(string name, uint price, double gbInternet, bool callsJaguar, uint callsOther, uint sms, bool tv)
+        public Tariff(string name, uint price, double gbInternet, bool? callsJaguar, uint callsOther, uint sms, bool? tv)
         {
             Name = name;
             Price = price;
@@ -37,8 +37,8 @@ namespace JaguarPhone.Module
         {
             PrestigeTariffs rez = PrestigeTariffs.Silver;
 
-            if (gbInternet >= 20) rez = PrestigeTariffs.Gold;
-            if (gbInternet >= 100) rez = PrestigeTariffs.Platinum;
+            if (gbInternet >= 10) rez = PrestigeTariffs.Gold;
+            if (gbInternet >= 40) rez = PrestigeTariffs.Platinum;
 
             return rez;
         }
@@ -70,9 +70,10 @@ namespace JaguarPhone.Module
                 if (value < 0)
                     throw new Exception("Кількість гігабайт інтернету не може бути від'ємною");
                 SetField(ref gbInternet, value, "GbInternet");
+                prestigeTariff = SetPrestigeTariff();
             }
         }
-        public bool CallsJaguar
+        public bool? CallsJaguar
         {
             get => callsJaguar;
             set => SetField(ref callsJaguar, value, "CallsJaguar");
@@ -134,7 +135,7 @@ namespace JaguarPhone.Module
             string callsJags = "-";
             string tvs = "-";
 
-            if(callsJaguar)
+            if(callsJaguar == true)
                 callsJags = "∞";
             if (tv == true)
                 tvs = "∞";

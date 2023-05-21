@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,6 +28,7 @@ namespace JaguarPhone.Module
         private ObservableCollection<string> activities;
 
         private Tariff account;
+        private Tariff tariffCurrent;
         private DateOnly dateTariff;
         private SuperPower tSuperPower;
 
@@ -84,15 +86,16 @@ namespace JaguarPhone.Module
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == name))
             {
-                Account = el;
+                Account.Name = el.Name;
                 Account.CallsJaguar = el.CallsJaguar;
                 Account.CallsOther = el.CallsOther;
                 Account.ListSuperpower = el.ListSuperpower;
                 Account.Sms = el.Sms;
                 Account.Tv = el.Tv;
                 Account.GbInternet = el.GbInternet;
+                Account.Price = el.Price;
 
-                Activities.Add($"Нараховано пакет послуг: {name} - {DateTime.Now} - баланс: {balance}");
+                Activities.Add($"Нараховано пакет послуг: {name} - {DateTime.Now} - баланс: {Balance}");
                 
                 DateTariff = DateTariff.AddDays(28);
                 return true;
@@ -111,10 +114,6 @@ namespace JaguarPhone.Module
             return false;
         }
 
-        public override string ToString()
-        {
-            return $"Name: {name}, LastName: {lastName}, Balance: {balance}, Telephone: {telephone}, DateConnecing: {dateConnecing}, TelModel: {telModel}, EsimSupport: {esimSupport}, Tariff: {account}, ListServices: {listServices}";
-        }
         public string Name
         {
             get => name;
@@ -182,8 +181,12 @@ namespace JaguarPhone.Module
             set => SetField(ref tSuperPower, value, "TSuperPower");
 
         }
-        public SuperPower SuperPowerCurrent { get; set; }
-        public Tariff TariffCurrent { get; set; }
+        public SuperPower? SuperPowerCurrent { get; set; }
+        public Tariff TariffCurrent
+        {
+            get => tariffCurrent;
+            set => tariffCurrent = value;
+        }
         public Tariff Account
         {
             get => account;
@@ -206,6 +209,17 @@ namespace JaguarPhone.Module
         public override int GetHashCode()
         {
             return telephone;
+        }
+
+        public override string ToString()
+        {
+            return $"{Telephone}";
+        }
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public string GetInfo => GetInfoMethod();
+        string GetInfoMethod()
+        {
+            return $"Ім'я: {name}\n Прізвище: {lastName}\n Дата підключення: {DateConnecing}";
         }
 
         private bool availableTariffses;

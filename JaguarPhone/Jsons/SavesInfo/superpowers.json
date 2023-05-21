@@ -46,5 +46,11 @@
     "GbInternet": 1.5,
     "CallsOther": 0,
     "Tv": false
+  },
+  {
+    "Name": "\u002B2\u0413\u0411",
+    "GbInternet": 2,
+    "CallsOther": 0,
+    "Tv": true
   }
 ]

@@ -87,22 +87,12 @@
                     Grid.Row="1"
                     ItemsSource="{Binding SelectedItem.ListSuperpower, ElementName=listTariffView}"
                     ToolTip="{Binding SelectedItem.GetInfo, ElementName=listTariffSuperpower}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn />
-                        </GridView>
-                    </ListView.View>
                 </ListView>
                 <ListView x:Name="listAllSuperpower"
                     Grid.Row="1"
                     Grid.Column="2"
                     ItemsSource="{Binding AllSuperPower}"
                     ToolTip="{Binding SelectedItem.GetInfo, ElementName=listAllSuperpower}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn />
-                        </GridView>
-                    </ListView.View>
                 </ListView>
                 <Button Grid.Column="1" Content="☛" HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Padding="20,1,20,1" Grid.IsSharedSizeScope="True" Click="RemoveSuperpower_Click"/>
             </Grid>
@@ -230,11 +220,6 @@
             </Grid.RowDefinitions>
             <ListView x:Name="listCheckTariffsView" ItemsSource="{Binding CheckTariffs}"
                       Grid.RowSpan="2" ToolTip="{Binding SelectedItem.GetInfo, ElementName=listCheckTariffsView}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
             </ListView>
             <Button Content="Підтвердити й додати до тарифів" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Padding="20,5,20,5" Grid.IsSharedSizeScope="True" Click="ConfirmAddTariff_Click" Height="38" Width="352"/>
         </Grid>

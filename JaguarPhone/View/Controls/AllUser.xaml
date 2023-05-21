@@ -245,10 +245,58 @@
                                     x:Name="tariffItem_gd"
                                     Margin="20,20,20,20"
                                     VerticalAlignment="Top"
-                                    Background="#FFFFC69E"
                                     MouseEnter="tariffItem_gd_MouseEnter"
                                     ToolTip="{Binding Name, Mode=OneWay}">
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=prestigeTariff_lbl, Path=Content}" Value="Silver">
+                                                    <Setter Property="Grid.Background">
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FFADC8CA"/>
+                                                                <GradientStop Color="White" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=prestigeTariff_lbl, Path=Content}" Value="Gold">
+                                                    <Setter Property="Grid.Background">
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FFF3DF70"/>
+                                                                <GradientStop Color="White" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding ElementName=prestigeTariff_lbl, Path=Content}" Value="Platinum">
+                                                    <Setter Property="Grid.Background">
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="#FFCCF1E1"/>
+                                                                <GradientStop Color="White" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <!--<Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFADC8CA"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>-->
+                                    <!--<Grid.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFCCF1E1"/>
+                                            <GradientStop Color="White" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>-->
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
@@ -258,12 +306,17 @@
                                     <Label
                                         x:Name="currentTariffName_lbl"
                                         Grid.Row="0"
-                                        Grid.Column="1"
                                         Margin="0,0,0,25"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Bottom"
                                         Content="{Binding Name}" />
-                                    <Grid Grid.Row="1">
+                                    <Label x:Name="prestigeTariff_lbl"
+                                        Grid.Row="1"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Bottom"
+                                        Content="{Binding PrestigeTariff}" />
+
+                                    <Grid Grid.Row="2">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -292,7 +345,8 @@
                                             Grid.Column="0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            IsEnabled="{Binding CallsJaguar}" />
+                                            IsChecked="{Binding CallsJaguar}"
+                                            IsEnabled="False"/>
                                         <Label
                                             Grid.Row="4"
                                             Grid.Column="0"
@@ -303,7 +357,8 @@
                                             Grid.Column="0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            IsEnabled="{Binding Tv}" />
+                                            IsChecked="{Binding Tv}"
+                                            IsEnabled="False"/>
 
                                         <Label
                                             Grid.Row="1"
@@ -331,7 +386,7 @@
                                             HorizontalAlignment="Left"
                                             Content="Телебачення" />
                                     </Grid>
-                                    <Grid Grid.Row="2" Margin="0,25,0,0">
+                                    <Grid Grid.Row="3" Margin="0,25,0,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="1*" />
                                             <RowDefinition Height="1*" />
@@ -348,18 +403,15 @@
                                             ItemsSource="{Binding ListSuperpower, Mode=OneWay}" />
                                     </Grid>
                                     <Grid
-                                        Grid.Row="3"
+                                        Grid.Row="4"
                                         Margin="0,35,0,0"
-                                        HorizontalAlignment="Left">
+                                        HorizontalAlignment="Right">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="18*" />
-                                            <ColumnDefinition Width="31*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <Label
-                                            Width="32"
-                                            Height="36"
-                                            Margin="80,0,0,0"
-                                            HorizontalAlignment="Right"
+                                            Margin="0,0,0,0"
                                             VerticalAlignment="Center"
                                             Content="{Binding Price, Mode=OneWay}"
                                             FontSize="18" />
@@ -374,20 +426,17 @@
                                     </Grid>
                                     <Button
                                         x:Name="connectTariff_bn"
-                                        Grid.Row="4"
-                                        Margin="0,0,0,25"
+                                        Grid.Row="5"
                                         AutomationProperties.HelpText="{Binding Name, Mode=OneWay}"
                                         Click="ConnectTariff_Click"
-                                        Content="Підключити">
-                                        <Button.Triggers />
-                                    </Button>
+                                        Content="Підключити"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" />
+                                <StackPanel x:Name="stackPanel" HorizontalAlignment="Left" Orientation="Horizontal" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
 

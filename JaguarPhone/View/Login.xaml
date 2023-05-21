@@ -25,6 +25,6 @@
         <jaguarLibraryControls:TextBoxWater Name="telephoneLogin" HorizontalAlignment="Center" Grid.Row="1" Width="340" VerticalAlignment="Center" VerticalContentAlignment="Center" FontFamily="Times New Roman" FontSize="26" Height="45" Cursor="Hand" WaterMark="Введіть Логін" WaterMarkEnabled="True" Foreground="Black" />
         <Button Content="Вхід" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" FontFamily="Times New Roman" FontSize="26" Click="Login_Click" Height="40" Width="230" Padding="20,5,20,5" Grid.IsSharedSizeScope="True"/>
         <Button Content="Я не зареєстрований користувач" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Command="{Binding OpenRegist, Mode=OneWay}" Padding="20,5,20,5" Grid.IsSharedSizeScope="True"/>
-        <PasswordBox Name="passwordLogin" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="340" Height="42"/>
+        <PasswordBox Name="passwordLogin" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Width="340" Height="42" FontSize="26"/>
     </Grid>
 </Window>

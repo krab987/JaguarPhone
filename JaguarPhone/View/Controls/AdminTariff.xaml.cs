@@ -57,8 +57,8 @@ namespace JaguarPhone.View
                 tariff.Name = name_tb.Text;
                 tariff.GbInternet = Double.Parse(internet_tb.Text);
                 tariff.CallsOther = UInt32.Parse(callsOther_tb.Text);
-                tariff.CallsJaguar = callsJag_tb.IsEnabled;
-                tariff.Tv = tv_tb.IsEnabled;
+                tariff.CallsJaguar = callsJag_tb.IsChecked;
+                tariff.Tv = tv_tb.IsChecked;
                 tariff.Price = UInt32.Parse(price_tb.Text); 
                 tariff.Sms = UInt32.Parse(sms_tb.Text);
                 
@@ -73,8 +73,8 @@ namespace JaguarPhone.View
             try
             {
                 Jaguar.AllTariffs.Add(new Tariff(
-                    name_tb.Text, UInt32.Parse(price_tb.Text), UInt32.Parse(internet_tb.Text), callsJag_tb.IsEnabled, UInt32.Parse(callsOther_tb.Text),
-                    UInt32.Parse(sms_tb.Text), tv_tb.IsEnabled));
+                    name_tb.Text, UInt32.Parse(price_tb.Text), UInt32.Parse(internet_tb.Text), callsJag_tb.IsChecked, UInt32.Parse(callsOther_tb.Text),
+                    UInt32.Parse(sms_tb.Text), tv_tb.IsChecked));
             }
             catch (Exception ex)
             {

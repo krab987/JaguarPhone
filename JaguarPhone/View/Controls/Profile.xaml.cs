@@ -36,7 +36,6 @@ namespace JaguarPhone.View.Controls
 
                 Jaguar.CurUser.Name = firstNameRegist.Text;
                 Jaguar.CurUser.LastName = lastNameRegist.Text;
-                Jaguar.CurUser.Telephone = Int32.Parse(telephoneRegist.Text);
                 Jaguar.CurUser.TelModel = (TelModel)telModelRegist.SelectedItem;
                 Jaguar.CurUser.Password = passwordTwoRegist.Password;
             }

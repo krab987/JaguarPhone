@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DevExpress.Mvvm;
+using DevExpress.Mvvm.Native;
 using JaguarPhone.Module;
 using JaguarPhone.View;
 using JaguarPhone.View.Controls;
@@ -18,6 +20,7 @@ namespace JaguarPhone.ViewModel
 
             // delete this to show prog
             Jaguar.CurUser = Jaguar.AllUsers[0];
+            CurrentView = new AllUser();
 
             //Jaguar.AllServices.Add(new Service("30 хвилин на інші мережі", 25, "Отримайте 30 хвилин до вашого тарифу, щоб телефонувати на інші мережі та міські номери по Україні.\r\n\r\nВитрачайте додаткові хвилини для дзвінків на інші мобільні та міські номери по Україні. Термін дії: 4 тижні, невикористані хвилини анулюються.\r\n\r\nПакет продовжується автоматично.\r\n\r\nБудь ласка, зверніть увагу. Якщо у вашому тарифі передбачені нетарифіковані хвилини, у першу чергу використовуватимуться додаткові хвилини з пакета, потім діють умови вашого тарифу.\r\n\r\nЩоб підключити, треба мати на рахунку суму для першого платежу за послугу."));
             //Jaguar.AllServices.Add(new Service("День Онлайн 1000мб", 25, "Не шукайте Wi-Fi, якщо раптом закінчився мобільний інтернет. Підключайте додаткові 1000 МБ у пакеті День онлайн.\r\n\r\nЩоб підключити, треба мати на рахунку суму для першого платежу за послугу."));
@@ -74,8 +77,28 @@ namespace JaguarPhone.ViewModel
             //        AvailableTariffs.Remove(el);
 
         }
-        
 
+        ObservableCollection<Admin> admins = Jaguar.AllUsers.Where(el => el is Admin && el.Telephone != 960345222).Cast<Admin>().ToObservableCollection();
+        ObservableCollection<User> users = Jaguar.AllUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
+        public ObservableCollection<Admin> Admins
+        {
+            get => admins;
+            set
+            {
+                admins = value ?? throw new ArgumentNullException(nameof(value));
+                RaisePropertyChanged(() => Users); // обнова змінної при кожному set
+
+            }
+        }
+        public ObservableCollection<User> Users
+        {
+            get => users;
+            set
+            {
+                users = value ?? throw new ArgumentNullException(nameof(value));
+                RaisePropertyChanged(() => Users); // обнова змінної при кожному set
+            }
+        }
 
         #region Switch UserControls
         private object currentView;
