@@ -47,7 +47,7 @@ namespace JaguarPhone.Module
             get => name;
             set
             {
-                if (value.Length < 3)
+                if (value != null && value.Length < 3)
                     throw new Exception("Назва тарифу має бути більше 2 символів");
                 SetField(ref name, value, "Name");
             }

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 
 namespace JaguarPhone.Module
 {
@@ -141,11 +142,12 @@ namespace JaguarPhone.Module
             get => password;
             set
             {
-                //if (!Regex.IsMatch(value, @"^(?=.*[a-zA-Z])(?=.*\d)") || value.Length < 6 || value.Length > 256)
-                //{
-                //    throw new ArgumentException(
-                //        "Пароль повинен містити принаймні одну літеру і одну цифру, і бути від 6 до 256 символів.");
-                //}
+                if (value != null)
+                {
+                    if (!Regex.IsMatch(value, @"^(?=.*[a-zA-Z])(?=.*\d)") || value.Length < 6 || value.Length > 256)
+                        throw new ArgumentException(
+                            "Пароль повинен містити принаймні одну літеру і одну цифру, і бути від 6 до 256 символів."); 
+                }
                 password = value;
             }
         }

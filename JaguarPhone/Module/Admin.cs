@@ -83,6 +83,7 @@ namespace JaguarPhone.Module
             return true;
         }
 
+
         public bool AddService(Service service)
         {
             foreach (var el in Jaguar.AllServices.Where(el => el.Equals(service)))
@@ -111,6 +112,30 @@ namespace JaguarPhone.Module
 
             return false;
         }
+        public bool RemoveService(string name)
+        {
+            foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
+            {
+                Activities.Add($"Адмін: Видалено сервіс: {el.Name} - {DateTime.Now}");
+                Jaguar.AllServices.Remove(el);
+                return true;
+            }
+
+            return false;
+        }
+        public bool CorrectService(string name, string newName, uint newPrice, string newAbout)
+        {
+            foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
+            {
+                el.Name = newName;
+                el.Price = newPrice;
+                el.About = newAbout;
+                Activities.Add($"Адмін: Кореговано сервіс: {el.Name} - {DateTime.Now}");
+                return true;
+            }
+            return false;
+        }
+
 
         public bool AddSuperPower(SuperPower superPower)
         {
@@ -136,6 +161,30 @@ namespace JaguarPhone.Module
             Activities.Add($"Адмін: Кореговано суперсилу: {sp.Name} - {DateTime.Now}");
             return true;
         }
+        public bool RemoveSuperPower(string name)
+        {
+            foreach (var el in Jaguar.AllSuperPower.Where(el => el.Name == name))
+            {
+                Activities.Add($"Адмін: Видалено суперсилу: {el.Name} - {DateTime.Now}");
+                Jaguar.AllSuperPower.Remove(el);
+                return true;
+            }
+            return false;
+        }
+        public bool CorrectSuperPower(string name, string newName, double gbInternet, uint callsOther, bool tv)
+        {
+            foreach (var el in Jaguar.AllSuperPower.Where(el => el.Name == name))
+            {
+                el.Name = newName;
+                el.GbInternet = gbInternet;
+                el.CallsOther = callsOther;
+                el.Tv = tv;
+                Activities.Add($"Адмін: Кореговано суперсилу: {el.Name} - {DateTime.Now}");
+                return true;
+            }
+            return false;
+        }
+
 
         public bool AddUser(User user)
         {
@@ -147,11 +196,20 @@ namespace JaguarPhone.Module
             Jaguar.AllUsers[^1].Activities.Add($"Користувача {Jaguar.AllUsers[^1].Name} створено - {DateTime.Now}");
             return true;
         }
-        
         public bool RemoveUser(AllUSer allUSer)
         {
             return Jaguar.AllUsers.Remove(allUSer);
         }
+        public bool RemoveUser(string name)
+        {
+            foreach (var el in Jaguar.AllUsers.Where(el => el.Name == name))
+            {
+                Jaguar.AllUsers.Remove(el);
+                return true;
+            }
+            return false;
+        }
+
 
         public Admin(string name, string lastName, string telephone, string password, TelModel telModel) : base(name, lastName, telephone, password, telModel)
         {

@@ -1,10 +1,10 @@
 {
   "Name": "\u0412\u0456\u0442\u0430\u043B\u0456\u0439",
   "LastName": "\u041A\u0440\u0430\u0431\u043E\u0432\u0438\u0447",
-  "Balance": 300,
+  "Balance": 245,
   "Telephone": 880345322,
   "Password": "1234vv",
-  "DateConnecing": "0001-01-01",
+  "DateConnecing": "2023-05-12",
   "TelModel": 3,
   "EsimSupport": true,
   "ListServices": [
@@ -87,15 +87,11 @@
     "\u0410\u0434\u043C\u0456\u043D: \u0414\u043E\u0434\u0430\u043D\u043E \u0441\u0435\u0440\u0432\u0456\u0441: \u0414\u0456\u0434\u0436\u0438\u043D\u0433\u043B \u041E\u043B\u0435\u0433 \u0412\u0456\u043D\u043D\u0438\u043A - 23.05.2023 01:12:49",
     "\u0410\u0434\u043C\u0456\u043D: \u041A\u043E\u0440\u0435\u0433\u043E\u0432\u0430\u043D\u043E \u0441\u0435\u0440\u0432\u0456\u0441: \u0414\u0456\u0434\u0436\u0438\u043D\u0433\u043B \u041E\u043B\u0435\u0433 \u0412\u0438\u043D\u043D\u0438\u043A - 24.08.2023 03:40:36",
     "\u0410\u0434\u043C\u0456\u043D: \u0412\u0438\u0434\u0430\u043B\u0435\u043D\u043E \u0441\u0435\u0440\u0432\u0456\u0441: \u0414\u0456\u0434\u0436\u0438\u043D\u0433\u043B \u041E\u043B\u0435\u0433 \u0412\u0456\u043D\u043D\u0438\u043A - 24.08.2023 03:41:17",
-    "\u041F\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0441\u0435\u0440\u0432\u0456\u0441: \u0414\u0456\u0434\u0436\u0438\u043D\u0433\u043B \u041E\u043B\u0435\u0433 \u0412\u0438\u043D\u043D\u0438\u043A - 24.08.2023 03:41:23 - \u0431\u0430\u043B\u0430\u043D\u0441: 300"
+    "\u041F\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0441\u0435\u0440\u0432\u0456\u0441: \u0414\u0456\u0434\u0436\u0438\u043D\u0433\u043B \u041E\u043B\u0435\u0433 \u0412\u0438\u043D\u043D\u0438\u043A - 24.08.2023 03:41:23 - \u0431\u0430\u043B\u0430\u043D\u0441: 300",
+    "\u041F\u0456\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u0442\u0430\u0440\u0438\u0444: \u0422\u0432\u0456\u0439 \u041D\u043E\u0432\u0438\u0439 - 23.05.2023 16:59:23 - \u0431\u0430\u043B\u0430\u043D\u0441: 300"
   ],
-  "DateTariff": "2023-08-24",
-  "SuperPowerCurrent": {
-    "Name": "\u002B5\u0413\u0411",
-    "GbInternet": 5,
-    "CallsOther": 0,
-    "Tv": false
-  },
+  "DateTariff": "2023-06-26",
+  "SuperPowerCurrent": null,
   "TariffCurrent": {
     "Name": "\u041F\u043B\u0430\u043D\u0448\u0435\u0442",
     "Price": 140,
@@ -121,35 +117,35 @@
     "PrestigeTariff": 2
   },
   "Account": {
-    "Name": "\u041C\u0435\u0433\u0430",
-    "Price": 260,
-    "GbInternet": 0,
-    "CallsJaguar": false,
-    "CallsOther": 0,
+    "Name": "\u0422\u0432\u0456\u0439 \u041D\u043E\u0432\u0438\u0439",
+    "Price": 55,
+    "GbInternet": 4,
+    "CallsJaguar": true,
+    "CallsOther": 60,
     "Sms": 0,
     "Tv": false,
     "ListSuperpower": [
+      {
+        "Name": "\u002B1\u0413\u0411",
+        "GbInternet": 1.5,
+        "CallsOther": 0,
+        "Tv": false
+      },
+      {
+        "Name": "\u002B50\u0445\u0432",
+        "GbInternet": 0,
+        "CallsOther": 50,
+        "Tv": false
+      },
       {
         "Name": "\u0422\u0435\u043B\u0435\u0431\u0430\u0447\u0435\u043D\u043D\u044F",
         "GbInternet": 0,
         "CallsOther": 0,
         "Tv": false
-      },
-      {
-        "Name": "\u002B5\u0413\u0411",
-        "GbInternet": 5,
-        "CallsOther": 0,
-        "Tv": false
-      },
-      {
-        "Name": "\u002B2\u0413\u0411 \u002B40\u0445\u0432",
-        "GbInternet": 2,
-        "CallsOther": 40,
-        "Tv": false
       }
     ],
     "PrestigeTariff": 0
   },
-  "AvailableTariffs": true,
-  "AvailableSP": false
+  "AvailableTariffs": false,
+  "AvailableSP": true
 }

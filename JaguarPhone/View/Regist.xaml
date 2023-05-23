@@ -38,7 +38,7 @@
             <RowDefinition Height="275*"/>
         </Grid.RowDefinitions>
 
-        <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" WaterMark="Ім'я" Height="35" WaterMarkEnabled="True" Text="" Name="firstNameRegist"/>
+        <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" WaterMark="Ім'я" Height="35" WaterMarkEnabled="True" Name="firstNameRegist" Foreground="Black"/>
         <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" Height="34" WaterMark="По батькові" Name="lastNameRegist"/>
         <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" Height="35" WaterMark="Телефон" Name="telephoneRegist"/>
         <ComboBox HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Top" Width="230" Text="Модель телефону" SelectedIndex="0" Name="telModelRegist" ItemsSource="{Binding Source={jaguarLibraryControls:EnumBindingSource {x:Type Enums:TelModel}}}" Margin="0,53,0,0" />

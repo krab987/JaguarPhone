@@ -28,6 +28,11 @@ namespace JaguarPhone.View
             {
                 if (passwordOneRegist.Password != passwordTwoRegist.Password)
                     throw new Exception("Паролі не співпали");
+                foreach (AllUSer el in Jaguar.AllUsers)
+                {
+                    if(el.Telephone == Convert.ToInt32(telephoneRegist.Text))
+                        throw new Exception($"Користувач з телефоном {telephoneRegist.Text} вже існує");
+                }
 
                 Admin currentUser = new Admin();
                 currentUser.AddUser(new User(

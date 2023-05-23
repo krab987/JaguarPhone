@@ -149,7 +149,7 @@ namespace JaguarPhone.View.Controls
                 foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == currentTariffname)) 
                     priceCheck = el.Price;
 
-                if (Jaguar.CurUser.Balance < priceCheck)
+                if (Jaguar.CurUser.Balance < (priceCheck + curUser.PriceServices))
                     throw new Exception("Недостатньо коштів для нарахування нового пакету послуг");
                 foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == currentTariffname))
                 {
@@ -164,7 +164,8 @@ namespace JaguarPhone.View.Controls
 
                 Jaguar.CurUser.ConnectTariff(currentTariffname);
                 Jaguar.CurUser.Balance -= Jaguar.CurUser.Account.Price;
-                
+                Jaguar.CurUser.Balance -= curUser.PriceServices;
+
                 Jaguar.CurUser.SuperPowerCurrent = null;
                 Jaguar.CurUser.AvailableTariffs = false;
                 Jaguar.CurUser.AvailableSP = true;
