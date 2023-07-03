@@ -330,33 +330,63 @@
     "PrestigeTariff": 0
   },
   {
-    "Name": "\u041D\u0430 \u043F\u0027\u044F\u0442\u0456\u0440\u043A\u0443",
-    "Price": 55,
-    "GbInternet": 5,
+    "Name": "\u041D\u0430 \u0443\u043B\u044C\u0442\u0440\u0430",
+    "Price": 300,
+    "GbInternet": 65,
     "CallsJaguar": true,
-    "CallsOther": 55,
-    "Sms": 5,
+    "CallsOther": 400,
+    "Sms": 200,
     "Tv": false,
     "ListSuperpower": [
       {
         "Name": "\u0422\u0435\u043B\u0435\u0431\u0430\u0447\u0435\u043D\u043D\u044F",
         "GbInternet": 0,
         "CallsOther": 0,
-        "Tv": false
+        "Tv": true
       },
       {
-        "Name": "\u002B1\u0413\u0411",
-        "GbInternet": 1.5,
+        "Name": "\u002B5\u0413\u0411",
+        "GbInternet": 5,
         "CallsOther": 0,
         "Tv": false
       },
       {
-        "Name": "\u002B10\u0445\u0432",
-        "GbInternet": 0,
-        "CallsOther": 10,
+        "Name": "\u002B2\u0413\u0411 \u002B40\u0445\u0432",
+        "GbInternet": 2,
+        "CallsOther": 40,
         "Tv": false
       }
     ],
-    "PrestigeTariff": 0
+    "PrestigeTariff": 2
+  },
+  {
+    "Name": "\u041C\u0435\u0433\u0430 \u0423\u043B\u044C\u0442\u0440\u0430",
+    "Price": 150,
+    "GbInternet": 20,
+    "CallsJaguar": true,
+    "CallsOther": 150,
+    "Sms": 10,
+    "Tv": false,
+    "ListSuperpower": [
+      {
+        "Name": "\u0422\u0435\u043B\u0435\u0431\u0430\u0447\u0435\u043D\u043D\u044F",
+        "GbInternet": 0,
+        "CallsOther": 0,
+        "Tv": true
+      },
+      {
+        "Name": "\u002B2\u0413\u0411 \u002B40\u0445\u0432",
+        "GbInternet": 2,
+        "CallsOther": 40,
+        "Tv": false
+      },
+      {
+        "Name": "\u002B50\u0445\u0432",
+        "GbInternet": 0,
+        "CallsOther": 50,
+        "Tv": false
+      }
+    ],
+    "PrestigeTariff": 1
   }
 ]

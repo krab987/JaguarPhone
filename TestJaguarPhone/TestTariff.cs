@@ -11,7 +11,7 @@ namespace TestJaguarPhone
         public void SetPrestigeTariffSilver()
         {
             // Arrange
-            Tariff tariff = new Tariff("Test Tariff", 100, 15, true, 50, 100, true);
+            Tariff tariff = new Tariff("Test Tariff", 100, 9, true, 50, 100, true);
             // Act
             PrestigeTariffs actual = tariff.PrestigeTariff;
             // Exp

@@ -3,6 +3,6 @@
     public interface IUser
     {
         string Name { get; set; }
-        bool AddTariff(Tariff tariff);
+        public bool AddTariff(Tariff tariff);
     } 
 }

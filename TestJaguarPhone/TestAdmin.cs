@@ -1,3 +1,5 @@
+
+
 using JaguarPhone.Module;
 using JaguarPhone.Module.Enums;
 using JaguarPhone.ViewModel;
@@ -32,9 +34,10 @@ namespace TestJaguarPhone
         public void AddCustomerTariffFalse_Exist()
         {
             // arrange
-            user.AddTariff(new Tariff("Знайомтесь Jaguar!", 10, 20, false, 20, 0, false));
+            user.AddTariff(new Tariff("База", 10, 20, false, 20, 0, false));
             // act
-            bool actual = Jaguar.SuperAdmin.AddCustomerTariff("Знайомтесь Jaguar!");
+            Jaguar.SuperAdmin.AddTariff(new Tariff("База", 10, 20, false, 20, 0, false));
+            bool actual = Jaguar.SuperAdmin.AddCustomerTariff("База");
             // assert
             Assert.IsFalse(actual);
         }
@@ -90,9 +93,9 @@ namespace TestJaguarPhone
         public void AddServiceFalse()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fff", 10, "ffffffffffffffffff"));
             // act
-            bool actual = Jaguar.SuperAdmin.AddService(new Service("fff", 20, " dd"));
+            bool actual = Jaguar.SuperAdmin.AddService(new Service("fff", 20, "ffffffffffffffffff"));
             // assert
             Assert.IsFalse(actual);
         }
@@ -101,9 +104,9 @@ namespace TestJaguarPhone
         public void AddServiceTrue()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fffd", 10, "ffffffffffffffffff"));
             // act
-            bool actual = Jaguar.SuperAdmin.AddService(new Service("ddd", 20, " dd"));
+            bool actual = Jaguar.SuperAdmin.AddService(new Service("ddd", 20, "ffffffffffffffffff"));
             // assert
             Assert.IsTrue(actual);
         }
@@ -112,7 +115,7 @@ namespace TestJaguarPhone
         public void RemoveServiceFalse()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fff", 10, " ffffffffffffffffff"));
             // act
             bool actual = Jaguar.SuperAdmin.RemoveService("NNM");
             // assert
@@ -123,7 +126,7 @@ namespace TestJaguarPhone
         public void RemoveServiceTrue()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fff", 10, " ffffffffffffffffff"));
             // act
             bool actual = Jaguar.SuperAdmin.RemoveService("fff");
             // assert
@@ -134,9 +137,9 @@ namespace TestJaguarPhone
         public void CorrectServiceFalse()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fffjj", 10, " ffffffffffffffffff"));
             // act
-            bool actual = Jaguar.SuperAdmin.CorrectService("gff", "ff", 10, " ");
+            bool actual = Jaguar.SuperAdmin.CorrectService("fsdv", "fffd", 20, " ffffffffffdffffffff");
             // assert
             Assert.IsFalse(actual);
         }
@@ -145,9 +148,9 @@ namespace TestJaguarPhone
         public void CorrectServiceTrue()
         {
             // arrange
-            Jaguar.AllServices.Add(new Service("fff", 10, " "));
+            Jaguar.AllServices.Add(new Service("fff", 10, " ffffffffffffffffff"));
             // act
-            bool actual = Jaguar.SuperAdmin.CorrectService("fff", "ff", 10, " ");
+            bool actual = Jaguar.SuperAdmin.CorrectService("fff", "ffg", 10, "ffffffffffffffffff ");
             // assert
             Assert.IsTrue(actual);
         }

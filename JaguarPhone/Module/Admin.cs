@@ -8,9 +8,9 @@ using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.Module
 {
-    public class Admin: AllUSer, IUser
+    public class Admin: AllUSer
     {
-        public bool AddTariff(Tariff tariff)
+        public override bool AddTariff(Tariff tariff)
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Equals(tariff)))
             {

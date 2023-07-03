@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 using JaguarPhone.Module;
 using JaguarPhone.ViewModel;
 
@@ -27,17 +28,16 @@ namespace JaguarPhone.View.Controls
 
                 if (Jaguar.CurUser.Account != null)
                 {
-                    foreach (var tariff in Jaguar.AllTariffs)
-                        if (tariff.Name == curUser.Account.Name)
-                        {
-                            tempTariff = new Tariff();
-                            tempTariff.Name = tariff.Name;
-                            tempTariff.GbInternet = tariff.GbInternet;
-                            tempTariff.CallsJaguar = tariff.CallsJaguar;
-                            tempTariff.CallsOther = tariff.CallsOther;
-                            tempTariff.Sms = tariff.Sms;
-                            tempTariff.Tv = tariff.Tv;
-                        }
+                    foreach (var tariff in Jaguar.AllTariffs.Where(tariff => tariff.Name == curUser.Account.Name))
+                    {
+                        tempTariff = new Tariff();
+                        tempTariff.Name = tariff.Name;
+                        tempTariff.GbInternet = tariff.GbInternet;
+                        tempTariff.CallsJaguar = tariff.CallsJaguar;
+                        tempTariff.CallsOther = tariff.CallsOther;
+                        tempTariff.Sms = tariff.Sms;
+                        tempTariff.Tv = tariff.Tv;
+                    }
 
                     var clock = new Clock();
                     clock.NewDay += OnNewDay;

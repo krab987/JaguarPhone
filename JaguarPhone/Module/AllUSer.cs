@@ -42,10 +42,13 @@ namespace JaguarPhone.Module
             balance = 0;
             dateConnecing = DateOnly.FromDateTime(DateTime.Now);
             DateTariff = DateOnly.FromDateTime(DateTime.Now);
+
             esimSupport = telModel != TelModel.Інша;
             listServices = new ObservableCollection<Service>();
             activities = new ObservableCollection<string>();
             Account = new Tariff();
+            Account.CallsJaguar = false;
+            Account.Tv = false;
 
             AvailableSP = true;
             AvailableTariffs = true;
@@ -65,7 +68,7 @@ namespace JaguarPhone.Module
         }
         public AllUSer(){ }
 
-        public bool AddTariff(Tariff tariff)
+        public virtual bool AddTariff(Tariff tariff)
         {
             try
             {
@@ -104,12 +107,16 @@ namespace JaguarPhone.Module
             Service serv = null;
             foreach (var el in Jaguar.AllServices.Where(el => el.Name == name)) serv = el;
 
-            foreach (Service service in Jaguar.CurUser.ListServices)
-                if (service == serv)
-                {
-                    throw new Exception("Послуга вже підключена");
-                    return false;
-                }
+            if (serv == null)
+                return false;
+
+            if(Jaguar.CurUser.ListServices != null)
+                foreach (Service service in Jaguar.CurUser.ListServices)
+                    if (service == serv)
+                    {
+                        throw new Exception("Послуга вже підключена");
+                        return false;
+                    }
 
             ListServices.Add(serv);
             Activities.Add($"Підключено сервіс: {serv.Name} - {DateTime.Now} - баланс: {balance}");

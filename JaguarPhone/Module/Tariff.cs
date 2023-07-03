@@ -32,7 +32,7 @@ namespace JaguarPhone.Module
             prestigeTariff = SetPrestigeTariff();
         }
         public Tariff(){ }
-        PrestigeTariffs SetPrestigeTariff()
+        private PrestigeTariffs SetPrestigeTariff()
         {
             PrestigeTariffs rez = PrestigeTariffs.Silver;
 
