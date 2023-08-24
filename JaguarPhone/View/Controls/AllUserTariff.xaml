@@ -25,11 +25,11 @@
             Grid.Column="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Запропонувати тариф" />
+            Content="Запропонувати тариф" FontWeight="Bold" />
         <Label
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Тарифи-пропозиції користувачів" Height="36" Width="316" Margin="40,0,40,0" />
+            Content="Тарифи-пропозиції користувачів" Margin="40,0,40,0" FontWeight="Bold" />
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="69*" />
@@ -70,11 +70,6 @@
                           Grid.Column="2"
                           ItemsSource="{Binding AllSuperPower}"
                           ToolTip="{Binding SelectedItem.GetInfo, ElementName=listAllSuperpower}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn />
-                        </GridView>
-                    </ListView.View>
                 </ListView>
                 <Button Grid.Column="1" Content="☛" Click="RemoveSuperpower_Click" HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1"
                         VerticalAlignment="Top" FontSize="24" Padding="20,1,20,1" Grid.IsSharedSizeScope="True" />

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JaguarPhone.Module.Admin" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEEAEAAAAAIAAAAAAAAAAACAAAAAAAAgQAAAACQCAAQ=</HashCode>
+      <FileName>Module\Admin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JaguarPhone.Module.AllUSer" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAgAQgAAAEAAgAFoAgAAAQIhEEEAMQDYIAQSsCmAEg=</HashCode>
+      <FileName>Module\AllUSer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="JaguarPhone.Module.Service" Collapsed="true">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAQAAAAEEgAABAAQAAAAEAMAAAAAAAAAAAAA=</HashCode>
+      <FileName>Module\Service.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JaguarPhone.Module.SuperAdmin" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Module\SuperAdmin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JaguarPhone.Module.SuperPower" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAgAAAAAAAAEoAAAAgQAgAIEAMAIAAABCAAAAQA=</HashCode>
+      <FileName>Module\SuperPower.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="JaguarPhone.Module.Tariff" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAwAAQAEAAAEoQAQAgUAkAIEAMAIAAABCAABAQA=</HashCode>
+      <FileName>Module\Tariff.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="JaguarPhone.Module.User" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Module\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

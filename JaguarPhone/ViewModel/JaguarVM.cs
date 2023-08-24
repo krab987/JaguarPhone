@@ -3,15 +3,14 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using DevExpress.Mvvm;
 using DevExpress.Mvvm.Native;
 using JaguarPhone.Module;
-using JaguarPhone.Module.Enums;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace JaguarPhone.ViewModel
 {
-    public class Jaguar
+    public class Jaguar: ViewModelBase
     {
         private static ObservableCollection<Service> _allServices = new();
         private static ObservableCollection<SuperPower> _allSuperPower = new();
@@ -33,8 +32,10 @@ namespace JaguarPhone.ViewModel
         {
             //_allSuperPower.Add(new SuperPower("Немає", 0, 0, false));
             //_allTariffs.Add(new Tariff("Знайомтесь Jaguar!", 0, 0.1, false, 20, 0, false));
-            //_superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0960345222", "", TelModel.Motorola_Razr);
+            //_superAdmin = new SuperAdmin("Vitalii", "Krabovich", "0880345322", "", TelModel.Motorola_Razr);
             //_allUsers.Add(_superAdmin);
+            Users = AllUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
+            Admins = AllUsers.Where(el => el is Admin && el.Telephone != 880345322).Cast<Admin>().ToObservableCollection();
         }
 
         public static void SaveUser()
@@ -49,7 +50,7 @@ namespace JaguarPhone.ViewModel
         public static void Save()
         {
             var superadmin = _allUsers[0];
-            var admins = _allUsers.Where(el => el is Admin && el.Telephone != 960345222).Cast<Admin>().ToObservableCollection();
+            var admins = _allUsers.Where(el => el is Admin && el.Telephone != 880345322).Cast<Admin>().ToObservableCollection();
             var users = _allUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
 
             JsonSerializerOptions jsonOptions = new JsonSerializerOptions
@@ -173,8 +174,9 @@ namespace JaguarPhone.ViewModel
         public static ObservableCollection<AllUSer> AllUsers
         {
             get => _allUsers;
-            set => _allUsers = value ?? throw new ArgumentNullException(nameof(value));
+            set => _allUsers = value;
         }
+
         public static SuperAdmin SuperAdmin { get => _superAdmin; }
 
         public static AllUSer CurUser { get; set; } = null!;
@@ -184,5 +186,25 @@ namespace JaguarPhone.ViewModel
             set => _tempSuperPowers = value ?? throw new ArgumentNullException(nameof(value));
         }
 
+        private static ObservableCollection<User> users = AllUsers.Where(el => el is User).Cast<User>().ToObservableCollection();
+        private static ObservableCollection<Admin> admins = AllUsers.Where(el => el is Admin && el.Telephone != 880345322).Cast<Admin>().ToObservableCollection();
+        public static ObservableCollection<Admin> Admins
+        {
+            get => admins;
+            set
+            {
+                admins = value;
+                //RaisePropertyChanged(() => Admins); // обнова змінної при кожному set
+            }
+        }
+        public static ObservableCollection<User> Users
+        {
+            get => users;
+            set
+            {
+                users = value ?? throw new ArgumentNullException(nameof(value));
+                //RaisePropertyChanged(() => Users); // обнова змінної при кожному set
+            }
+        }
     }
 }

@@ -3,8 +3,6 @@ using System;
 using System.Windows;
 using JaguarPhone.Module.Enums;
 using System.ComponentModel;
-using System.IO.IsolatedStorage;
-using System.Runtime.Serialization.Formatters.Binary;
 using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.View
@@ -19,6 +17,11 @@ namespace JaguarPhone.View
             InitializeComponent();
         }
         private AllUSer currentUser;
+        /// <summary>
+        /// Реєструє користувача за введеними ним даними в поля форми коли користувача з таким же логіном не знайдено і два паролі співпали
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Regist_Click(object sender, RoutedEventArgs e)
         {
             try

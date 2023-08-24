@@ -26,49 +26,46 @@
         <Label
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Content="Сервіси" />
+                    Content="Послуги" FontWeight="Bold" />
         <Label
                     Grid.Column="1"
                     HorizontalAlignment="Center"
-                    Content="Редагування" Margin="0,22,0,0" VerticalAlignment="Top" />
+                    Content="Редагування" Margin="0,22,0,0" VerticalAlignment="Top" FontWeight="Bold" />
         <ListView
                     x:Name="listServisesView"
-                    HorizontalContentAlignment="Center"
-                    Background="{x:Null}"
-                    BorderBrush="{x:Null}"
-                    Foreground="#FF000000"
                     ItemsSource="{Binding AllServices}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     SelectionMode="Single" Margin="0,79,0,0" Grid.RowSpan="2"
-                    ToolTip="{Binding SelectedItem.GetInfo, ElementName=listServisesView}"/>
+                    ToolTip="{Binding SelectedItem.GetInfo, ElementName=listServisesView}">
+        </ListView>
         <Grid Grid.Column="1" Margin="0,78,0,1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="186*" />
-                <RowDefinition Height="75*" />
-                <RowDefinition Height="75*"/>
-                <RowDefinition Height="320*"/>
+                <RowDefinition Height="257*" />
+                <RowDefinition Height="70*" />
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="274*"/>
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="66*"/>
-                    <RowDefinition Height="66*"/>
-                    <RowDefinition Height="66*"/>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="105*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="30*"/>
                     <ColumnDefinition Width="77*"/>
                 </Grid.ColumnDefinitions>
                 <TextBox x:Name="name_tb"
-                    Width="218"
+                    Width="270"
                     Height="30"
-                    Margin="20,21,0,0"
+                    Margin="20,0,0,0"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     Foreground="Black"
                     Text="{Binding SelectedItem.Name, ElementName=listServisesView}"
-                    TextWrapping="Wrap" Grid.Column="1" />
+                     Grid.Column="1" />
                 <TextBox x:Name="price_tb"
-                    Width="218"
+                    Width="270"
                     Height="30"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -76,28 +73,28 @@
                     Text="{Binding SelectedItem.Price, ElementName=listServisesView}"
                     TextWrapping="Wrap" Grid.Column="1" Margin="20,0,0,0" Grid.Row="1"/>
                 <TextBox x:Name="about_tb"
-                    Width="218"
-                    Height="30"
+                    Width="270"
+                    Height="90"
                     Margin="20,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Text="{Binding SelectedItem.About, ElementName=listServisesView}"
                     TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" />
                 <Label
-                    Margin="75,0,0,0"
-                    HorizontalAlignment="Right"
+                    Margin="105,0,0,0"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Content="Ім'я" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    Content="Ім'я" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="36" Width="45" />
                 <Label
                     Margin="98,0,0,0"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Content="Ціна" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                    Content="Ціна" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="34" Width="52" />
                 <Label
-                    Margin="86,0,0,0"
-                    HorizontalAlignment="Right"
+                    Margin="91,0,0,0"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Content="Опис" Grid.Row="2" />
+                    Content="Опис" Grid.Row="2" Height="36" Width="59" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -105,11 +102,11 @@
                     <ColumnDefinition Width="57*"/>
                 </Grid.ColumnDefinitions>
                 <Button
-                    Content="Редагувати сервіс" HorizontalAlignment="Center" Click="ModifyService_Click" Padding="20,5,20,5" VerticalAlignment="Center" Height="38" Width="208"/>
+                    Content="Редагувати послугу" HorizontalAlignment="Center" Click="ModifyService_Click" Padding="20,5,20,5" VerticalAlignment="Center"/>
                 <Button
-                    Content="Додати сервіс" HorizontalAlignment="Center" Click="AddService_Click" Padding="20,5,20,5" VerticalAlignment="Center" Grid.Column="1" />
+                    Content="Додати послугу" HorizontalAlignment="Center" Click="AddService_Click" Padding="20,5,20,5" VerticalAlignment="Center" Grid.Column="1" />
             </Grid>
-            <Button Content="Видалити Сервіс" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Padding="20,5,20,5" Click="DeleteService_Click" Height="38" Width="201"/>
+            <Button Content="Видалити послугу" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Padding="20,5,20,5" Click="DeleteService_Click"/>
         </Grid>
         <Grid Grid.Column="3" Margin="0,79,0,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
@@ -197,8 +194,9 @@
         <Label
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Content="Суперсили" Grid.Column="2" />
+            Content="Суперсили" Grid.Column="2" FontWeight="Bold" />
         <ListView x:Name="listsuperpowerView" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding AllSuperPower}"
                   ToolTip="{Binding SelectedItem.GetInfo, ElementName=listsuperpowerView}"/>
+        <Label Grid.Column="3" Content="Редагування" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
     </Grid>
 </UserControl>

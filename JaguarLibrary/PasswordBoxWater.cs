@@ -1,9 +1,5 @@
-﻿using System;
-using System.Windows.Controls;
-using static System.Net.Mime.MediaTypeNames;
-using System.Windows.Media;
+﻿using System.Windows.Controls;
 using System.Windows;
-using static System.String;
 
 namespace JaguarLibraryControls
 {

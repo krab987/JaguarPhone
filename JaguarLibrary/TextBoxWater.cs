@@ -47,7 +47,8 @@ namespace JaguarLibraryControls
             {
                 Text = WaterMark;
                 tempForeground = this.Foreground.Clone();
-                Foreground = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
+                Foreground = new SolidColorBrush(Colors.SlateGray);
+                //Foreground = new SolidColorBrush(Color.FromArgb(50, 0, 0, 0));
             }
         }
 

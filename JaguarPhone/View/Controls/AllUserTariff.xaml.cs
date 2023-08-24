@@ -1,22 +1,8 @@
 ﻿using JaguarPhone.Module;
 using JaguarPhone.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace JaguarPhone.View.Controls
 {
@@ -32,6 +18,11 @@ namespace JaguarPhone.View.Controls
             Jaguar.TempSuperPowers.Clear();
         }
 
+        /// <summary>
+        /// Додає суперсилу до тарифу в список його суперсил
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddSuperPower_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -39,13 +30,17 @@ namespace JaguarPhone.View.Controls
                 if (listAllSuperpower.SelectedItem == null)
                     throw new Exception("Оберіть суперсилу");
                 Jaguar.TempSuperPowers.Add((SuperPower)listAllSuperpower.SelectedItem);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Прибирає суперсилу з списку суперсил тарифу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveSuperpower_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -59,6 +54,11 @@ namespace JaguarPhone.View.Controls
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Додає тариф до списку таристувацьких тарифів, які потребують підтвердження
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTariff_Click(object sender, RoutedEventArgs e)
         {
             try

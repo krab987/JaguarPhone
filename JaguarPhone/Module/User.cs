@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using JaguarPhone.Module.Enums;
 using JaguarPhone.Module.Interfaces;
 
@@ -19,6 +17,25 @@ namespace JaguarPhone.Module
 
         public User()
         {
+        }
+        public User(Admin adminUs)
+        {
+            Name = adminUs.Name;
+            LastName = adminUs.LastName;
+            Balance = adminUs.Balance;
+            Telephone = adminUs.Telephone;
+            Password = adminUs.Password;
+            DateConnecing = adminUs.DateConnecing;
+            TelModel = adminUs.TelModel;
+            ListServices = adminUs.ListServices;
+            Activities = adminUs.Activities;
+            DateTariff = adminUs.DateTariff;
+            TSuperPower = adminUs.TSuperPower;
+            SuperPowerCurrent = adminUs.SuperPowerCurrent;
+            TariffCurrent = adminUs.TariffCurrent;
+            Account = adminUs.Account;
+            AvailableTariffs = adminUs.AvailableTariffs;
+            AvailableSP = adminUs.AvailableSP;
         }
     }
 }

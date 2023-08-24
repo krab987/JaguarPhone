@@ -24,23 +24,25 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
-                <RowDefinition Height="84*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="96*"/>
+                <RowDefinition Height="96*"/>
             </Grid.RowDefinitions>
 
             <jaguarLibraryControls:TextBoxWater Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="230" WaterMark="Ім'я" Height="35" WaterMarkEnabled="True" Text="{Binding CurUser.Name}" x:Name="firstNameRegist" AutomationProperties.HelpText="Ім'я" Foreground="#FD000000"/>
             <jaguarLibraryControls:TextBoxWater HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="34" WaterMark="По батькові" x:Name="lastNameRegist" AutomationProperties.HelpText="По батькові" Text="{Binding CurUser.LastName}" Foreground="Black" Margin="0,25,0,0"/>
-            <ComboBox HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="230" Text="Модель телефону" x:Name="telModelRegist" ItemsSource="{Binding Source={jaguarLibraryControls:EnumBindingSource {x:Type Enums:TelModel}}}" Margin="0,52,0,0" SelectedItem="{Binding CurUser.TelModel}" />
-            <Label Content="Марка телефону" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="230" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
-            <PasswordBox HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" Width="230" x:Name="passwordOneRegist" PasswordChar="●" RenderTransformOrigin="0.5,0.5" Height="35"/>
-            <PasswordBox HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="230" x:Name="passwordTwoRegist" Height="35"/>
-            <Button Content="Редагувати" HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Click="ModifyProfile_Click"/>
-            <Label Content="Поле не потребує редагування? Лишіть його 😊" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ComboBox HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="230" Text="Модель телефону" x:Name="telModelRegist" ItemsSource="{Binding Source={jaguarLibraryControls:EnumBindingSource {x:Type Enums:TelModel}}}" Margin="0,52,0,0" SelectedItem="{Binding CurUser.TelModel}" Height="22" />
+            <Label Content="Марка телефону" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Top" Width="230" HorizontalContentAlignment="Center" Margin="0,10,0,0" Height="35"/>
+            <PasswordBox HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Width="230" x:Name="passwordOneRegist" PasswordChar="●" RenderTransformOrigin="0.5,0.5" Height="35"/>
+            <PasswordBox HorizontalAlignment="Center" Grid.Row="6" VerticalAlignment="Center" Width="230" x:Name="passwordTwoRegist" Height="35"/>
+            <Button Content="Редагувати" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Center" Click="ModifyProfile_Click" Height="38" Width="145"/>
+            <Label Content="Поле не потребує редагування? Лишіть його 😊" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <CheckBox Content="Підтримка eSim" HorizontalAlignment="Center" Grid.Row="4" VerticalAlignment="Center" IsEnabled="False" IsChecked="{Binding CurUser.EsimSupport, Mode=OneWay}"/>
 
 
         </Grid>

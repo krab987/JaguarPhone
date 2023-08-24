@@ -1,28 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using DevExpress.Mvvm.POCO;
 using JaguarPhone.Module.Enums;
-using JaguarPhone.Module.Interfaces;
 using JaguarPhone.ViewModel;
 
 namespace JaguarPhone.Module
 {
     public class SuperAdmin: Admin
     {
+        private AllUSer elem;
 
-        public void GrantAdmin(int telephone)
+        public void GrantAdmin(User? user)
         {
-            int id = 0;
-            for (int i = 0; i < Jaguar.AllUsers.Count; i++)
-            {
-                if (Jaguar.AllUsers[i].GetType() == typeof(User) && 
-                    Jaguar.AllUsers[i].Telephone == telephone)
-                {
-                    Jaguar.AllUsers[i] = (Admin)Jaguar.AllUsers[i];
-                }
-            }
+            Admin admin = new Admin(user);
+            Jaguar.AllUsers.Add(admin);
+            Jaguar.Admins.Add(admin);
+
+            Jaguar.Users.Remove(user);
+            RemoveUser(user);
+
+            Jaguar.AllUsers[^1].Activities.Add($"Вам надано права адміністратора - {DateTime.Now}");
+        }
+        public void UnGrantAdmin(Admin? admin)
+        {
+            User user = new User(admin);
+            Jaguar.AllUsers.Add(user);
+            Jaguar.Users.Add(user);
+
+            Jaguar.Admins.Remove(admin);
+            RemoveUser(admin);
+
+            Jaguar.AllUsers[^1].Activities.Add($"У вас забрали права адміністратора 😊 - {DateTime.Now}");
         }
 
         public SuperAdmin(string name, string lastName, string telephone, string password, TelModel telModel) : base(name, lastName, telephone, password, telModel)

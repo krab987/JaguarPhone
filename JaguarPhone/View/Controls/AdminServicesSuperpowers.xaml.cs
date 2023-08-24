@@ -1,19 +1,8 @@
 ﻿using JaguarPhone.Module;
 using JaguarPhone.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace JaguarPhone.View.Controls
 {
@@ -22,47 +11,66 @@ namespace JaguarPhone.View.Controls
     /// </summary>
     public partial class AdminServicesSuperpowers : UserControl
     {
+        private Admin curUser;
         public AdminServicesSuperpowers()
         {
             InitializeComponent();
+            curUser = Jaguar.CurUser as Admin;
         }
 
+        /// <summary>
+        /// Редагує властивості обраної послуги
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModifyService_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (listServisesView.SelectedItem == null)
-                    throw new Exception("Оберіть сервіс із наявних");
+                    throw new Exception("Оберіть послугу із наявних");
+                
+                curUser.CorrectService((listServisesView.SelectedItem as Service), name_tb.Text, UInt32.Parse(price_tb.Text), about_tb.Text);
 
-                Service serv = (((listServisesView.SelectedItem as Service)!));
-                serv.Name = name_tb.Text;
-                serv.Price = UInt32.Parse(price_tb.Text);
-                serv.About = about_tb.Text;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Додає послугу в список всіх послуг
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddService_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Jaguar.AllServices.Add(new Service(
-                    name_tb.Text, UInt32.Parse(price_tb.Text), about_tb.Text));
+                bool r = curUser.AddService(new Service(name_tb.Text, UInt32.Parse(price_tb.Text), about_tb.Text));
+                if (r == false)
+                    throw new Exception("Сервіс із таким ім'ям уже існує");
+                name_tb.Clear();
+                price_tb.Clear();
+                about_tb.Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Видаляє послугу зі списку всіх послуг
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteService_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (listServisesView.SelectedItem == null)
                     throw new Exception("Оберіть сервіс із наявних");
-                Jaguar.AllServices.Remove((Service)listServisesView.SelectedItem);
+                curUser.RemoveService((Service)listServisesView.SelectedItem);
             }
             catch (Exception ex)
             {
@@ -70,45 +78,61 @@ namespace JaguarPhone.View.Controls
             }
         }
 
+        /// <summary>
+        /// Редагує властивості обраної суперсили 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModifySuperpower_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (listsuperpowerView.SelectedItem == null)
                     throw new Exception("Оберіть суперсилу із наявних");
-
-                SuperPower superPower = ((listsuperpowerView.SelectedItem as SuperPower)!);
-                superPower.Name = nameSP_tb.Text;
-                superPower.CallsOther = UInt32.Parse(callsOther_tb.Text);
-                superPower.GbInternet = Double.Parse(internetSP_tb.Text);
-                if (tv_tb.IsEnabled) superPower.Tv = true;
-                else superPower.Tv = false;
-
+                curUser.CorrectSuperPower(((listsuperpowerView.SelectedItem as SuperPower)!), nameSP_tb.Text,
+                    Double.Parse(internetSP_tb.Text),
+                    UInt32.Parse(callsOther_tb.Text), tv_tb.IsChecked);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Додає суперсилу до списку всіх суперсил
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddSuperpower_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Jaguar.AllSuperPower.Add(new SuperPower(
-                    nameSP_tb.Text, Double.Parse(internetSP_tb.Text), UInt32.Parse(callsOther_tb.Text), tv_tb.IsEnabled));
+                bool r = curUser.AddSuperPower(new SuperPower(
+                    nameSP_tb.Text, Double.Parse(internetSP_tb.Text), UInt32.Parse(callsOther_tb.Text),
+                    tv_tb.IsEnabled));
+                if (r == false)
+                    throw new Exception("Суперсила із таким іменем вже існує");
+                nameSP_tb.Clear();
+                internetSP_tb.Clear();
+                callsOther_tb.Clear();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка: {ex.Message}", "Oops", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// Видаляє суперсилу зі списку всіх суперсил
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteSuperpower_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (listsuperpowerView.SelectedItem == null)
                     throw new Exception("Оберіть суперсилу із наявних");
-                Jaguar.AllSuperPower.Remove((SuperPower)listsuperpowerView.SelectedItem);
+                curUser.RemoveSuperPower((SuperPower)listsuperpowerView.SelectedItem);
             }
             catch (Exception ex)
             {

@@ -15,8 +15,8 @@
 
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*" />
-            <ColumnDefinition Width="39*" />
+            <ColumnDefinition Width="123*" />
+            <ColumnDefinition Width="197*" />
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -24,15 +24,15 @@
                 <RowDefinition Height="7*" />
                 <RowDefinition Height="17*" />
                 <RowDefinition Height="12*" />
-                <RowDefinition Height="84*" />
-                <RowDefinition Height="18*" />
+                <RowDefinition Height="77*" />
+                <RowDefinition Height="25*" />
             </Grid.RowDefinitions>
             <Label
                 Width="113"
                 Height="36"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Залишки" />
+                Content="Залишки" FontWeight="Bold" />
 
             <Grid
                 Grid.Row="4"
@@ -148,7 +148,7 @@
                 Grid.Row="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="{Binding CurUser.Account.Name, Mode=OneWay}" />
+                Content="{Binding CurUser.Account.Name, Mode=OneWay}" Height="35" Width="95" />
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="112*" />
@@ -208,32 +208,49 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     TextWrapping="Wrap" />
-                <Border
+                <Button
                     Grid.Column="3"
-                    Margin="5,0,0,0"
-                    Style="{StaticResource Shadow}">
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Click="TopUp_Click"
+                    Content="Поповнити" />
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*"/>
+                    <ColumnDefinition Width="58*"/>
+                </Grid.ColumnDefinitions>
+                <ListView Grid.Column="1"  HorizontalAlignment="Center" ItemsSource="{Binding CurUser.ListServices}" Margin="0,10,0,0"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Підключені послуги" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="87,0,0,0" Height="35" Width="201"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*"/>
+                            <ColumnDefinition Width="11*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Ціна" VerticalAlignment="Center" Height="36" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                        <Label Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding CurUser.PriceServices}"/>
+                    </Grid>
 
-                    <Button
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Click="TopUp_Click"
-                        Content="Поповнити" />
-                </Border>
+                </Grid>
             </Grid>
         </Grid>
-        <Grid Grid.ColumnSpan="2" Margin="615,10,10,-10">
+        <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="17*" />
-                <RowDefinition Height="133*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="47*" />
             </Grid.RowDefinitions>
             <Label
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="Доступні тарифи саме для вас" />
+                Content="Доступні тарифи саме для вас" FontWeight="Bold" />
             <Grid
-                Grid.Row="1"
-                Margin="50,50,50,50"
-                VerticalAlignment="Center">
+                Margin="50,30,50,0"
+                VerticalAlignment="Center" Height="574" Grid.RowSpan="2">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
                     <ItemsControl
                         x:Name="itemTariff_itemsControl"

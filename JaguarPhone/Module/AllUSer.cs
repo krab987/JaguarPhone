@@ -4,13 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace JaguarPhone.Module
 {
@@ -48,7 +44,7 @@ namespace JaguarPhone.Module
             esimSupport = telModel != TelModel.Інша;
             listServices = new ObservableCollection<Service>();
             activities = new ObservableCollection<string>();
-            Account = Jaguar.AllTariffs[0];
+            Account = new Tariff();
 
             AvailableSP = true;
             AvailableTariffs = true;
@@ -73,7 +69,7 @@ namespace JaguarPhone.Module
             try
             {
                 Jaguar.CheckTariffs.Add(tariff);
-                Activities.Add($"Створено тариф: {tariff.Name} - {DateTime.Now}");
+                Activities.Add($"Запропоновано тариф: {tariff.Name} - {DateTime.Now}");
             }
             catch (Exception)
             {
@@ -81,11 +77,11 @@ namespace JaguarPhone.Module
             }
             return true;
         }
-
         public bool ConnectTariff(string name)
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == name))
             {
+                Account ??= new Tariff();
                 Account.Name = el.Name;
                 Account.CallsJaguar = el.CallsJaguar;
                 Account.CallsOther = el.CallsOther;
@@ -95,24 +91,30 @@ namespace JaguarPhone.Module
                 Account.GbInternet = el.GbInternet;
                 Account.Price = el.Price;
 
-                Activities.Add($"Нараховано пакет послуг: {name} - {DateTime.Now} - баланс: {Balance}");
+                Activities.Add($"Підключено тариф: {name} - {DateTime.Now} - баланс: {Balance}");
                 
                 DateTariff = DateTariff.AddDays(28);
                 return true;
             }
             return false;
         }
-           
         public bool ConnectService(string name)
         {
-            foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
-            {
-                ListServices.Add(el);
-                Activities.Add($"Підключено сервіс: {name} - {DateTime.Now} - баланс: {balance}");
-                return true;
-            }
-            return false;
+            Service serv = null;
+            foreach (var el in Jaguar.AllServices.Where(el => el.Name == name)) serv = el;
+
+            foreach (Service service in Jaguar.CurUser.ListServices)
+                if (service == serv)
+                {
+                    throw new Exception("Послуга вже підключена");
+                    return false;
+                }
+
+            ListServices.Add(serv);
+            Activities.Add($"Підключено сервіс: {serv.Name} - {DateTime.Now} - баланс: {balance}");
+            return true;
         }
+        public bool RemoveService(Service serv) => ListServices.Remove(serv);
 
         public string Name
         {
@@ -129,7 +131,6 @@ namespace JaguarPhone.Module
             get => balance;
             set => SetField(ref balance, value, "Balance");
         }
-
         public int Telephone
         {
             get => telephone;
@@ -148,19 +149,30 @@ namespace JaguarPhone.Module
                 password = value;
             }
         }
-
-        public DateOnly DateConnecing => dateConnecing;
-
+        public DateOnly DateConnecing
+        {
+            get => dateConnecing;
+            set => dateConnecing = value;
+        }
         public TelModel TelModel
         {
             get => telModel;
-            set => telModel = value;
+            set
+            {
+                telModel = value;
+                EsimSupport = telModel != TelModel.Інша;
+            }
+        }
+        public bool EsimSupport
+        {
+            get => esimSupport;
+            set => SetField(ref esimSupport, value, "EsimSupport");
         }
 
         public ObservableCollection<Service> ListServices
         {
             get => listServices;
-            set => listServices = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref listServices, value, "ListServices");
         }
         public ObservableCollection<string> Activities
         {
@@ -192,6 +204,17 @@ namespace JaguarPhone.Module
             get => account;
             set => SetField(ref account, value, "Account");
 
+        }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        public uint PriceServices
+        {
+            get
+            {
+                uint price = 0;
+                foreach (Service service in ListServices) price += service.Price;
+                return price;
+            }
         }
 
 
@@ -234,6 +257,7 @@ namespace JaguarPhone.Module
             get => availableSP;
             set => SetField(ref availableSP, value, "AvailableSP");
         }
+        
 
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

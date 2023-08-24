@@ -17,39 +17,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <!--<RowDefinition Height="59*"/>-->
             <RowDefinition Height="59*"/>
             <RowDefinition Height="825*"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Content="{Binding CurrentView}" Grid.Row="1">
-            <!--<ContentControl.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" Value="{x:Null}">
-                    <Setter Property="Content" Value=""/>
-                </DataTrigger>
-            </ContentControl.Triggers>
+        <ContentControl Content="{Binding CurrentView}" Grid.Row="1" />
 
-            <ContentControl.Style>
-                <Style TargetType="ContentControl">
-                    <Setter Property="Content" Value="{Binding HurfView.EditedPart}" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" Value="{x:Null}">
-                            <Setter Property="ContentControl.Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <TextBlock>EMPTY!</TextBlock>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>-->
-        </ContentControl>
-
-        <Menu Name="MenuMain" Background="#FFF7E2D3" HorizontalAlignment="Center">
+        <Menu Name="MenuMain" Background="#FFF7E2D3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26">
             <MenuItem Header="Профіль">
 
                 <MenuItem Header="Редагувати" Command="{Binding OpenProfile, Mode=OneWay}"></MenuItem>
@@ -66,17 +40,24 @@
                     </ListView>
                 </MenuItem>
                 <MenuItem Header="Змінити каристувача" Click="LogOut_Click"></MenuItem>
+                <MenuItem Header="Витрачати залишки">
+                    <StackPanel ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox Content="Телефонувати" Checked="TelCheckBox_Checked" Unchecked="TelCheckBox_UnChecked"></CheckBox>
+                        <CheckBox Content="Інтернет використовувати" Checked="InternetCheckBox_Checked" Unchecked="InternetCheckBox_UnChecked"></CheckBox>
+                        <CheckBox Content="СМС використовувати" Checked="SMSCheckBox_Checked" Unchecked="SMSCheckBox_UnChecked"></CheckBox>
+                    </StackPanel>
+                </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Особистий Кабінет" Command="{Binding OpenAllUserControl, Mode=OneWay}"></MenuItem>
+            <MenuItem Header="Особистий Кабінет" Command="{Binding OpenAllUserControl, Mode=OneWay}"/>
+            <MenuItem Header="Послуги" Command="{Binding OpenAllUserServices, Mode=OneWay}"></MenuItem>
             <MenuItem Header="Запропонувати свій тариф" Command="{Binding OpenAllUserTariff, Mode=OneWay}"></MenuItem>
 
-            <MenuItem Header="Адміністратор" AutomationProperties.Name="AdminMenuItem">
+            <MenuItem Header="Адміністратор" Name="adminMenuItem" Visibility="Collapsed">
                 <MenuItem Header="Тарифи" Command="{Binding OpenAdminTariffControl, Mode=OneWay}"></MenuItem>
                 <MenuItem Header="Сервіси/Суперсили" Command="{Binding OpenAdminServSPControl, Mode=OneWay}"></MenuItem>
+                <MenuItem Header="Права адміністратора" Command="{Binding OpenSuperAdminGrant, Mode=OneWay}" Name="superAdminMenuItem" Visibility="Collapsed"></MenuItem>
             </MenuItem>
-
-            
 
         </Menu>
     </Grid>

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="750" d:DesignWidth="1600" Background="White" >
     <UserControl.DataContext>
-        <ViewModel:MainViewModel/>
+        <ViewModel:Jaguar/>
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="9*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -40,18 +40,20 @@
                     Grid.Column="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Content="☚" Margin="0,20,0,0" FontSize="22" Padding="20,5,20,1" />
+                    Content="☚" Margin="0,100,0,0" FontSize="36" Padding="20,5,20,1" 
+                    Click="UnGrantAdmin_Click" />
             <ListView x:Name="listUsers"
                     Grid.Row="1"
                     ToolTip="{Binding SelectedItem.GetInfo, ElementName=listUsers}" 
-                    ItemsSource="{Binding Users}"/>
+                    ItemsSource="{Binding Users}" Margin="30,0,0,30"/>
             <ListView x:Name="listAdmins"
                     Grid.Row="1"
                     Grid.Column="2"
-                    ItemsSource="{Binding All}"
-                    ToolTip="{Binding SelectedItem.GetInfo, ElementName=listAdmins}"/>
-            <Button Grid.Column="1" Content="☛" HorizontalAlignment="Center" Margin="0,68,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="24" Padding="20,1,20,1" Grid.IsSharedSizeScope="True"/>
+                    ItemsSource="{Binding Admins}"
+                    ToolTip="{Binding SelectedItem.GetInfo, ElementName=listAdmins}" Margin="0,0,30,30"/>
+            <Button Grid.Column="1" Content="☛" HorizontalAlignment="Center" Margin="0,35,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="36" Padding="20,1,20,1" Grid.IsSharedSizeScope="True" Click="GrantAdmin_Click"/>
         </Grid>
+        <Label Content="Надати або забрати права адміністратора у користувачів" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
 
     </Grid>
 </UserControl>
