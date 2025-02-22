@@ -101,7 +101,10 @@ namespace JaguarPhone.Module
             set => SetField(ref listSuperpower, value, "ListSuperpower");
         }
 
-        public PrestigeTariffs PrestigeTariff => prestigeTariff;
+        public PrestigeTariffs PrestigeTariff
+        {
+            get => prestigeTariff;
+        }
 
         protected bool Equals(Tariff other)
         {

@@ -17,13 +17,13 @@ namespace JaguarPhone.Module
     {
         private string name;
         private string lastName;
-        private int balance;
+        private uint balance;
         private int telephone;
         private string password;
         private DateOnly dateConnecing;
         private TelModel telModel;
         private bool esimSupport;
-        private Tariff _tariff;
+        private Tariff account;
         private ObservableCollection<Service> listServices;
         private ObservableCollection<string> activities;
 
@@ -46,9 +46,12 @@ namespace JaguarPhone.Module
             esimSupport = telModel != TelModel.Інша;
             listServices = new ObservableCollection<Service>();
             activities = new ObservableCollection<string>();
-            Tariff = Jaguar.AllTariffs[0];
+            Account = Jaguar.AllTariffs[0];
+
+            AvailableSP = true;
+            AvailableTariffs = true;
         }
-        public AllUSer(string name, string lastName, int balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff tariff, ObservableCollection<Service> listServices, ObservableCollection<string> activities)
+        public AllUSer(string name, string lastName, uint balance, int telephone, DateOnly dateConnecing, TelModel telModel, bool esimSupport, Tariff account, ObservableCollection<Service> listServices, ObservableCollection<string> activities)
         {
             this.name = name;
             this.lastName = lastName;
@@ -57,7 +60,7 @@ namespace JaguarPhone.Module
             this.dateConnecing = dateConnecing;
             this.telModel = telModel;
             this.esimSupport = esimSupport;
-            _tariff = tariff;
+            account = account;
             ListServices = listServices;
             Activities = activities;
         }
@@ -68,7 +71,7 @@ namespace JaguarPhone.Module
             try
             {
                 Jaguar.CheckTariffs.Add(tariff);
-                activities.Add($"Created Tariff: {tariff.Name} - {DateTime.Now}");
+                Activities.Add($"Created Tariff: {tariff.Name} - {DateTime.Now}");
             }
             catch (Exception)
             {
@@ -76,23 +79,33 @@ namespace JaguarPhone.Module
             }
             return true;
         }
+
         public bool ConnectTariff(string name)
         {
             foreach (var el in Jaguar.AllTariffs.Where(el => el.Name == name))
             {
-                _tariff = el;
-                activities.Add($"Connected Tariff: {name} - {DateTime.Now}");
+                Account = el;
+                Account.CallsJaguar = el.CallsJaguar;
+                Account.CallsOther = el.CallsOther;
+                Account.ListSuperpower = el.ListSuperpower;
+                Account.Sms = el.Sms;
+                Account.Tv = el.Tv;
+                Account.GbInternet = el.GbInternet;
+
+                Activities.Add($"Connected Tariff: {name} - {DateTime.Now}");
+                
+                DateTariff = DateTariff.AddDays(28);
                 return true;
             }
             return false;
-
         }
+           
         public bool ConnectService(string name)
         {
             foreach (var el in Jaguar.AllServices.Where(el => el.Name == name))
             {
-                listServices.Add(el);
-                activities.Add($"Connected Service: {name} - {DateTime.Now}");
+                ListServices.Add(el);
+                Activities.Add($"Connected Service: {name} - {DateTime.Now}");
                 return true;
             }
             return false;
@@ -100,7 +113,7 @@ namespace JaguarPhone.Module
 
         public override string ToString()
         {
-            return $"Name: {name}, LastName: {lastName}, Balance: {balance}, Telephone: {telephone}, DateConnecing: {dateConnecing}, TelModel: {telModel}, EsimSupport: {esimSupport}, Tariff: {_tariff}, ListServices: {listServices}";
+            return $"Name: {name}, LastName: {lastName}, Balance: {balance}, Telephone: {telephone}, DateConnecing: {dateConnecing}, TelModel: {telModel}, EsimSupport: {esimSupport}, Tariff: {account}, ListServices: {listServices}";
         }
         public string Name
         {
@@ -112,7 +125,7 @@ namespace JaguarPhone.Module
             get => lastName;
             set => SetField(ref lastName, value, "LastName");
         }
-        public int Balance
+        public uint Balance
         {
             get => balance;
             set => SetField(ref balance, value, "Balance");
@@ -137,20 +150,17 @@ namespace JaguarPhone.Module
             }
         }
 
-        public DateOnly DateConnecing
-        {
-            get => dateConnecing;
-            set => dateConnecing = value;
-        }
+        public DateOnly DateConnecing => dateConnecing;
+
         public TelModel TelModel
         {
             get => telModel;
             set => telModel = value;
         }
-        public Tariff Tariff
+        public Tariff Account
         {
-            get => _tariff;
-            set => SetField(ref _tariff, value, "Tariff");
+            get => account;
+            set => SetField(ref account, value, "Account");
 
         }
 
@@ -191,6 +201,19 @@ namespace JaguarPhone.Module
         public override int GetHashCode()
         {
             return telephone;
+        }
+
+        private bool availableTariffses;
+        public bool AvailableTariffs
+        {
+            get => availableTariffses;
+            set => SetField(ref availableTariffses, value, "AvailableTariffs");
+        }
+        private bool availableSP;
+        public bool AvailableSP
+        {
+            get => availableSP;
+            set => SetField(ref availableSP, value, "AvailableSP");
         }
 
 

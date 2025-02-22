@@ -28,9 +28,6 @@
             <Label Content="Залишки" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="113" />
 
             <Grid Grid.Row="4" Height="420" VerticalAlignment="Center">
-                <Grid.DataContext>
-                    <viewModel:MainViewModel />
-                </Grid.DataContext>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="51*" />
                     <ColumnDefinition Width="58*" />
@@ -45,28 +42,35 @@
                 </Grid.RowDefinitions>
                 <Label Content="Інтернет (ГБ)" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34"
                        Width="136" Margin="110,0,0,0" />
-                <Label Grid.Column="1" Content="{Binding Account.GbInternet}" HorizontalAlignment="Left"
-                       Margin="15,0,0,0" VerticalAlignment="Center" Height="34" Width="273" />
+                <Label Grid.Column="1"  HorizontalAlignment="Left"
+                       Margin="15,0,0,0" VerticalAlignment="Center" Content="{Binding CurUser.Account.GbInternet, Mode=OneWay}" />
                 <Label Content="Дзвінки Ягуар" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center"
-                       Height="36" Width="146" Margin="104,0,0,0" />
+                       Margin="104,0,0,0" />
                 <CheckBox Grid.Column="1" HorizontalAlignment="Left"
-                          Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Center" Height="14" Width="20" IsChecked="{Binding Account.CallsJaguar}" />
+                          Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Center" IsChecked="{Binding CurUser.Account.CallsJaguar}" />
                 <Label Content="Дзвінки на інші мобільні" HorizontalAlignment="Left" Grid.Row="2"
-                       VerticalAlignment="Center" Height="36" Width="246" Margin="3,0,0,0" />
-                <Label Grid.Column="1" Content="{Binding Account.CallsOther}" HorizontalAlignment="Left"
-                       Margin="15,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="36" Width="32" />
-                <Label Content="СМС" HorizontalAlignment="Left" Margin="187,6,0,0" Grid.Row="4"
-                       VerticalAlignment="Top" Height="35" Width="59" />
-                <Label Content="ТВ" HorizontalAlignment="Left" Margin="185,0,0,0" Grid.Row="5"
-                       VerticalAlignment="Center" Height="36" Width="38" />
-                <Label Grid.Column="1" Content="{Binding Account.Sms}" HorizontalAlignment="Left" Margin="15,6,0,0"
-                       Grid.Row="4" VerticalAlignment="Top" Height="35" Width="21" />
+                       VerticalAlignment="Center" Margin="3,0,0,0" />
+                <Label Grid.Column="1" Content="{Binding CurUser.Account.CallsOther}" HorizontalAlignment="Left"
+                       Margin="15,0,0,0" Grid.Row="2" VerticalAlignment="Center" />
+                <Label Content="СМС" HorizontalAlignment="Left" Margin="187,0,0,0" Grid.Row="4"
+                       VerticalAlignment="Center"/>
+                <Label Content="ТВ" HorizontalAlignment="Left" Margin="205,0,0,0" Grid.Row="5"
+                       VerticalAlignment="Center" />
+                <Label Grid.Column="1" Content="{Binding CurUser.Account.Sms}" HorizontalAlignment="Left" Margin="15,0,0,0"
+                       Grid.Row="4" VerticalAlignment="Center"/>
                 <CheckBox Grid.Column="1" HorizontalAlignment="Left" Margin="15,0,0,0"
-                       Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding Account.Tv}" Height="15" Width="16" />
+                       Grid.Row="5" VerticalAlignment="Center" IsChecked="{Binding CurUser.Account.Tv}" />
                 <Label Content="Суперсила" HorizontalAlignment="Left" Margin="128,0,0,0" Grid.Row="3" VerticalAlignment="Center"/>
-                <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="15,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="160" Height="35" ItemsSource="{Binding Account.ListSuperpower}"/>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="193*"/>
+                        <ColumnDefinition Width="140*"/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="superPower_cb" ItemsSource="{Binding CurUser.Account.ListSuperpower}" SelectedItem="{Binding CurUser.TSuperPower}" Margin="15,15,15,15" VerticalAlignment="Center" IsEnabled="{Binding CurUser.AvailableSP}"/>
+                    <Button Grid.Column="1" x:Name="selectSP_bn" Content="Змінити" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SelectSuperpower_Click" IsEnabled="{Binding CurUser.AvailableSP}"/>
+                </Grid>
             </Grid>
-            <Label Content="{Binding CurUser.Tariff.Name}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="35" Width="189"/>
+            <Label x:Name="nameTariff_lbl" Content="{Binding CurUser.Account.Name, Mode=OneWay}" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" />
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="112*"/>
@@ -74,17 +78,13 @@
                     <ColumnDefinition Width="317*"/>
                     <ColumnDefinition Width="123*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Ціна" Margin="49,0,0,0" VerticalAlignment="Center" Height="35" HorizontalAlignment="Left" Width="53" />
-                <Label Content="{Binding CurUser.Tariff.Price}" HorizontalAlignment="Center"
-                    VerticalAlignment="Center" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="35" Width="20" />
+                <Label Content="Ціна" Margin="49,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Label x:Name="price_lbl" Content="{Binding CurUser.Account.Price}" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  />
                 <Label Content="Наступна плата по тарифу"
-                    VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Right" Width="257" Height="35" Margin="0,0,10,0" />
-                <Label Content="{Binding DatePayTariff}"
-                    VerticalAlignment="Center" Grid.Column="3" HorizontalAlignment="Center" Height="35" Width="96">
-                    <Label.DataContext>
-                        <viewModel:MainViewModel />
-                    </Label.DataContext>
-                </Label>
+                    VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0" />
+                <Label Content="{Binding CurUser.DateTariff}"
+                    VerticalAlignment="Center" Grid.Column="3"/>
             </Grid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -93,13 +93,13 @@
                     <ColumnDefinition Width="229*"/>
                     <ColumnDefinition Width="207*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Баланс" Margin="35,0,0,0" VerticalAlignment="Center" Height="36" HorizontalAlignment="Left" Width="75"/>
-                <Label Content="{Binding CurUser.Balance}" HorizontalAlignment="Center"
+                <Label Content="Баланс" Margin="35,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Label x:Name="balance_lbl" Content="{Binding CurUser.Balance}" HorizontalAlignment="Center"
                        VerticalAlignment="Center" RenderTransformOrigin="1.333,0.567" Grid.Column="1" />
 
 
                 <TextBox x:Name="topUp_tb" Margin="0,0,10,0" TextWrapping="Wrap"
-                         VerticalAlignment="Center" Grid.Column="2" Height="36" Width="100" HorizontalAlignment="Right"/>
+                         VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Right"/>
                 <Border Style="{StaticResource Shadow}" Grid.Column="3" Margin="5,0,0,0">
 
                     <Button Content="Поповнити" Click="TopUp_Click" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -107,7 +107,7 @@
                 </Border>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.ColumnSpan="2" Margin="615,10,10,-10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="17*"/>
                 <RowDefinition Height="133*"/>
@@ -115,10 +115,7 @@
             <Label Content="Доступні тарифи саме для вас" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
             <Grid Grid.Row="1" Margin="50,50,50,50" VerticalAlignment="Center">
                 <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding AvailableTariffs, Mode=OneWay}">
-                        <ItemsControl.DataContext>
-                            <viewModel:MainViewModel/>
-                        </ItemsControl.DataContext>
+                    <ItemsControl x:Name="itemTariff_itemsControl"  ItemsSource="{Binding AllTariffs, Mode=OneWay}" IsEnabled="{Binding CurUser.AvailableTariffs}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid x:Name="tariffItem_gd" Margin="20,20,20,20" VerticalAlignment="Top" MouseEnter="tariffItem_gd_MouseEnter" ToolTip="{Binding Name, Mode=OneWay}">
@@ -184,11 +181,9 @@
                                         <Label Margin="80,0,0,0" HorizontalAlignment="Right" Content="{Binding Price, Mode=OneWay}" VerticalAlignment="Center" Height="36" Width="32" FontSize="18"/>
                                         <Label Grid.Column="1" Content="грн \ 4 місяці" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Width="133" FontSize="18"/>
                                     </Grid>
-                                    <Button x:Name="connect_bn" Content="Підключити" Grid.Row="4" Margin="0,0,0,25" Click="ConnectTariff_Click" AutomationProperties.HelpText="{Binding Name, Mode=OneWay}">
-                                        <Button.DataContext>
-                                            <viewModel:Jaguar/>
-                                        </Button.DataContext>
+                                    <Button x:Name="connectTariff_bn"  Content="Підключити" Grid.Row="4" Margin="0,0,0,25" Click="ConnectTariff_Click" AutomationProperties.HelpText="{Binding Name, Mode=OneWay}">
                                         <Button.Triggers>
+                                            
                                         </Button.Triggers>
                                     </Button>
                                 </Grid>

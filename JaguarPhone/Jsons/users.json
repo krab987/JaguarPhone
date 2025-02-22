@@ -5,23 +5,15 @@
     "Balance": 20,
     "Telephone": 999999999,
     "Password": "1234vv",
-    "DateConnecing": "2023-05-15",
+    "DateConnecing": "0001-01-01",
     "TelModel": 0,
-    "Tariff": {
-      "Name": "\u0417\u043D\u0430\u0439\u043E\u043C\u0442\u0435\u0441\u044C Jaguar!",
-      "Price": 0,
-      "GbInternet": 0.1,
-      "CallsJaguar": false,
-      "CallsOther": 20,
-      "Sms": 0,
-      "Tv": false,
-      "ListSuperpower": [],
-      "PrestigeTariff": 0
-    },
+    "Account": null,
     "ListServices": [],
     "Activities": [],
     "DateTariff": "2023-05-15",
-    "TSuperPower": null
+    "TSuperPower": null,
+    "AvailableTariffs": true,
+    "AvailableSP": true
   },
   {
     "Name": "Bober",
@@ -29,22 +21,14 @@
     "Balance": 0,
     "Telephone": 933333333,
     "Password": "1234vv",
-    "DateConnecing": "2023-05-16",
+    "DateConnecing": "0001-01-01",
     "TelModel": 3,
-    "Tariff": {
-      "Name": "\u0417\u043D\u0430\u0439\u043E\u043C\u0442\u0435\u0441\u044C Jaguar!",
-      "Price": 0,
-      "GbInternet": 0.1,
-      "CallsJaguar": false,
-      "CallsOther": 20,
-      "Sms": 0,
-      "Tv": false,
-      "ListSuperpower": [],
-      "PrestigeTariff": 0
-    },
+    "Account": null,
     "ListServices": [],
     "Activities": [],
     "DateTariff": "2023-05-16",
-    "TSuperPower": null
+    "TSuperPower": null,
+    "AvailableTariffs": true,
+    "AvailableSP": true
   }
 ]

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using DevExpress.Mvvm;
 using JaguarPhone.Module;
 using JaguarPhone.View;
@@ -32,12 +33,6 @@ namespace JaguarPhone.ViewModel
 
             //Task.Factory.StartNew(() =>
             //{
-            //    DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
-            //    if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
-            //        DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
-            //});
-            //Task.Factory.StartNew(() =>
-            //{
             //    Account = Jaguar.CurUser.Tariff;
             //    foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
             //    {
@@ -56,58 +51,30 @@ namespace JaguarPhone.ViewModel
             //    foreach (var el in Jaguar.AllTariffs)
             //        if (Equals(Jaguar.CurUser.Tariff, el))
             //            AvailableTariffs.Remove(el);
-            //});
-            DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
-            if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
-                DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
-            Account = Jaguar.CurUser.Tariff;
-            foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
-            {
-                if (Equals(Jaguar.CurUser.TSuperPower, el))
-                {
-                    Account.CallsOther += el.CallsOther;
-                    Account.GbInternet += el.GbInternet;
-                    if (el.Tv)
-                        Account.Tv = el.Tv;
-                }
-            }
-            AvailableTariffs = Jaguar.AllTariffs;
+            //})
+
+            //DatePayTariff = Jaguar.CurUser.DateTariff.AddDays(28);
+            //if (DatePayTariff < DateOnly.FromDateTime(DateTime.Now))
+            //    DatePayTariff = DateOnly.FromDateTime(DateTime.Now);
+
+            //Account = Jaguar.CurUser.Tariff;
+            //foreach (var el in Jaguar.CurUser.Tariff.ListSuperpower)
+            //{
+            //    if (Equals(Jaguar.CurUser.TSuperPower, el))
+            //    {
+            //        Account.CallsOther += el.CallsOther;
+            //        Account.GbInternet += el.GbInternet;
+            //        if (el.Tv)
+            //            Account.Tv = el.Tv;
+            //    }
+            //}
+
             //foreach (var el in Jaguar.AllTariffs)
-            //    if (Equals(Jaguar.CurUser.Tariff, el))
+            //    if (Equals(Jaguar.CurUser.Account, el))
             //        AvailableTariffs.Remove(el);
 
         }
-        private Tariff account;
-        private DateOnly datePayTariff;
-        private ObservableCollection<Tariff> availableTariffs;
-
-        public DateOnly DatePayTariff
-        {
-            get => datePayTariff;
-            set
-            {
-                datePayTariff = value;
-                RaisePropertyChanged(() => DatePayTariff); // обнова змінної при кожному set
-            }
-        }
-        public Tariff Account
-        {
-            get => account;
-            set
-            {
-                account = value;
-                RaisePropertyChanged(() => Account); // обнова змінної при кожному set
-            }
-        }
-        public ObservableCollection<Tariff> AvailableTariffs
-        {
-            get => availableTariffs;
-            set
-            {
-                availableTariffs = value;
-                RaisePropertyChanged(() => AvailableTariffs); // обнова змінної при кожному set
-            }
-        }
+        
 
 
         #region Switch UserControls
@@ -140,18 +107,8 @@ namespace JaguarPhone.ViewModel
                 });
             }
         }
-        
-        public ICommand RefreshData
-        {
-            get
-            {
-                return new DelegateCommand(() =>
-                {
-                    Jaguar.Save();
-                    Jaguar.Load();
-                });
-            }
-        }
+    }
+}
 
 
         //private int clicks;
@@ -185,5 +142,3 @@ namespace JaguarPhone.ViewModel
         //        });
         //    }
         //}
-    }
-}

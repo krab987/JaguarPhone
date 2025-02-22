@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace JaguarPhone.Module
 {
-    public class SuperPower
+    public class SuperPower: INotifyPropertyChanged
     {
         private string name;
         private double gbInternet;
@@ -18,22 +20,22 @@ namespace JaguarPhone.Module
         public string Name
         {
             get => name;
-            set => name = value ?? throw new ArgumentNullException(nameof(value));
+            set => SetField(ref name, value, "Name");
         }
         public double GbInternet
         {
             get => gbInternet;
-            set => gbInternet = value;
+            set => SetField(ref gbInternet, value, "GbInternet");
         }
         public uint CallsOther
         {
             get => callsOther;
-            set => callsOther = value;
+            set => SetField(ref callsOther, value, "CallsOther");
         }
         public bool Tv
         {
             get => tv;
-            set => tv = value;
+            set => SetField(ref tv, value, "Tv");
         }
 
         public SuperPower(string name, double gbInternet, uint callsOther, bool tv)
@@ -78,6 +80,20 @@ namespace JaguarPhone.Module
                 tvs = "∞";
 
             return $"Ім'я: {name}\n Інтернет(ГБ): {gbInternet}\n Дзвінки на інших операторів: {callsOther}\n ТВ: {tvs}";
+        }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }
